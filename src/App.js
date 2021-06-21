@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { HeaderBottom } from "./components/HeaderBottom";
+import { ShopDetail } from "./components/ShopDetail";
+import { Layout } from "./containers/Layout";
+import { ShopContainer } from "./containers/ShopContainer";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+  // eslint-disable-next-line react/jsx-no-comment-textnodes
+  //Aqui Cualquier provider
+
+  <BrowserRouter>
+    <Layout>
+      <Switch>
+        <Route exact={true} path="/" component={ShopContainer} />
+      </Switch>
+    </Layout>
+  </BrowserRouter>
+);
 
 export default App;
