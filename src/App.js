@@ -14,6 +14,7 @@ const App = () => (
     <Layout>
       <Switch>
         <Route exact={true} path="/" component={ShopContainer} />
+        <Route exact={true} path="/detail" component={ShopDetail} />
       </Switch>
     </Layout>
   </BrowserRouter>
