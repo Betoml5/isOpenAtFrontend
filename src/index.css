@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;500;800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -18,4 +20,10 @@
   backdrop-filter: blur(12px);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.45);
+}
+
+.centerBtnMenu {
+  width: 176px;
+  bottom: 154px;
+  left: calc(50% - 88px);
 }

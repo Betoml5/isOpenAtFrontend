@@ -20,7 +20,9 @@ export const Shop = () => {
           <img src={addressIcon} alt="" className={iconWithHeigth} />
         </picture>
       </div>
-      <h5 className="text-white text-right w-1/2 self-end">PAPAS'S GRILL</h5>
+      <h5 className="font-monse text-white text-right w-1/2 self-end">
+        PAPAS'S GRILL
+      </h5>
     </div>
   );
 };

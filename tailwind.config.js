@@ -7,12 +7,17 @@ module.exports = {
       colors: {
         headerRed: "#FF3D39",
         greenDot: "#00FF38",
-        trans: "background: rgba(255, 255, 255, 0.45)"
-        
+        lightGreen: "#5FF191",
+        lightRed: "#F26060",
+        lightDark: "#1C1D1C",
+        trans: "background: rgba(255, 255, 255, 0.45)",
       },
       backgroundImage: {
         restaurant: "url('static/restaurant.png')",
         app: "url('static/bg-image.png')",
+      },
+      fontFamily: {
+        monse: ["Montserrat", "sans-serif"],
       },
     },
   },
