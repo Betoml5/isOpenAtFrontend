@@ -4,6 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  position: relative;
+}
+
+body {
+  background-color: #444444;
+}
+
 @layer utilities {
   .scroll-snap-none {
     scroll-snap-type: none;

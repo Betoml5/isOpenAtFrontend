@@ -1,8 +1,7 @@
 import { Shop } from "../components/Shop";
-import arrowDownIcon from "../static/arrowDown.svg";
 export const ShopContainer = () => {
   return (
-    <div className="grid sm:grid-cols-3 h-5/6 overflow-y-scroll scroll-snap-x overscroll-contain	 relative shopContainer">
+    <div className="grid h-5/6 relative shopContainer sm:grid-cols-3 sm:gap-5">
       <Shop />
       <Shop />
       <Shop />

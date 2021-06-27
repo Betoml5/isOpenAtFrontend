@@ -3,13 +3,16 @@ import DadosIcon from "../static/dados.svg";
 import LocationIcon from "../static/location.svg";
 import UserIcon from "../static/user.svg";
 import LoveIcon from "../static/love.svg";
+import { useHistory } from "react-router-dom";
 
-const itemStyles = "w-6";
+const itemStyles = "w-6 cursor-pointer";
 
-export const HeaderBottom = (props) => {
+export const Header = (props) => {
+  const history = useHistory();
+
   return (
-    <div className="flex justify-around items-center bg-headerRed p-4 absolute bottom-0 w-full z-50">
-      <div>
+    <div className="flex justify-around items-center bg-headerRed p-4 w-full z-50">
+      <div onClick={() => history.push("/")}>
         <picture>
           <img src={HomeIcon} alt="home" className={itemStyles} />
         </picture>

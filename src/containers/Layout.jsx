@@ -1,9 +1,9 @@
-import { HeaderBottom } from "../components/HeaderBottom";
+import { Header } from "../components/Header";
 
 export const Layout = ({ children }) => {
   return (
-    <div className="bg-app bg-no-repeat bg-cover relative h-screen">
-      <HeaderBottom />
+    <div className="relative">
+      <Header />
       {children}
     </div>
   );

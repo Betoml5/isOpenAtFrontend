@@ -5,11 +5,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        headerRed: "#FF3D39",
+        headerRed: "#DA0037",
         greenDot: "#00FF38",
         lightGreen: "#5FF191",
         lightRed: "#F26060",
         lightDark: "#1C1D1C",
+        bodyBackground: "#444444",
+        lightWhite: "#EDEDED",
+        veryDark: "#171717",
         trans: "background: rgba(255, 255, 255, 0.45)",
       },
       backgroundImage: {

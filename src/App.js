@@ -1,10 +1,9 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { HeaderBottom } from "./components/HeaderBottom";
 import { ShopDetail } from "./components/ShopDetail";
 import { Layout } from "./containers/Layout";
 import { ShopContainer } from "./containers/ShopContainer";
+import { MenuImage } from "./components/MenuImage";
 
 const App = () => (
   // eslint-disable-next-line react/jsx-no-comment-textnodes
@@ -15,6 +14,7 @@ const App = () => (
       <Switch>
         <Route exact={true} path="/" component={ShopContainer} />
         <Route exact={true} path="/detail" component={ShopDetail} />
+        <Route exact={true} path="/detail/menu" component={MenuImage} />
       </Switch>
     </Layout>
   </BrowserRouter>
