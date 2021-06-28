@@ -1,6 +1,4 @@
 import { HighLightShop } from "../components/HighLightShop";
-import { Section } from "../components/Section";
-import { Shop } from "../components/Shop";
 import { ShopMobile } from "../components/ShopMobile";
 import { SectionContainer } from "./SectionContainer";
 export const ShopContainer = () => {
