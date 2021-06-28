@@ -1,13 +1,17 @@
 import { HighLightShop } from "../components/HighLightShop";
+import { Section } from "../components/Section";
 import { Shop } from "../components/Shop";
+import { ShopMobile } from "../components/ShopMobile";
+import { SectionContainer } from "./SectionContainer";
 export const ShopContainer = () => {
   return (
     <div className="grid p-4 h-5/6 relative shopContainer sm:grid-cols-3 sm:gap-5">
       <HighLightShop />
-      <Shop />
-      <Shop />
-      <Shop />
-      <Shop />
+      <SectionContainer />
+      <ShopMobile name="Papa's Grill" />
+      <ShopMobile name="Perolito" />
+      <ShopMobile name="Mr.Boneless" />
+      <ShopMobile name="La estaca" />
     </div>
   );
 };
