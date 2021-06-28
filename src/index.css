@@ -10,6 +10,7 @@ html {
 
 body {
   background-color: #444444;
+  font-family: "Montserrat";
 }
 
 @layer utilities {
@@ -34,4 +35,8 @@ body {
   width: 176px;
   bottom: 154px;
   left: calc(50% - 88px);
+}
+
+.highLight {
+  filter: drop-shadow(0px 0px 4px #20f167);
 }

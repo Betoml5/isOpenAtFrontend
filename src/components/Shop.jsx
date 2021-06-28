@@ -10,7 +10,7 @@ export const Shop = () => {
 
   return (
     <div
-      className="flex my-4 justify-between bg-restaurant bg-no-repeat  bg-cover relative rounded-2xl  p-4 h-44 cursor-pointer self-center justify-self-center"
+      className="flex my-4 justify-between bg-restaurant bg-no-repeat  bg-cover relative rounded-2xl  p-4 h-44 cursor-pointer self-center justify-self-center "
       onClick={() => history.push("/detail")}
     >
       <div className="bg-greenDot w-3 h-3 rounded-full absolute right-4 top-4"></div>

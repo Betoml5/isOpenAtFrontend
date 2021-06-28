@@ -10,10 +10,12 @@ module.exports = {
         lightGreen: "#5FF191",
         lightRed: "#F26060",
         lightDark: "#1C1D1C",
-        bodyBackground: "#444444",
         lightWhite: "#EDEDED",
         veryDark: "#171717",
+        bodyBackground: "#444444",
         trans: "background: rgba(255, 255, 255, 0.45)",
+        highLight: "#39EC84",
+        veryLightRed: "#F2573D",
       },
       backgroundImage: {
         restaurant: "url('static/restaurant.png')",
