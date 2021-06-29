@@ -16,6 +16,7 @@ module.exports = {
         trans: "background: rgba(255, 255, 255, 0.45)",
         highLight: "#39EC84",
         veryLightRed: "#F2573D",
+        veryLightWhite: "#EDEDED",
       },
       backgroundImage: {
         restaurant: "url('static/restaurant.png')",

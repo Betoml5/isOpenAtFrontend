@@ -3,7 +3,7 @@ import tarjetIcon from "../static/tarjeta.svg";
 import addressIcon from "../static/address.svg";
 import Swal from "sweetalert2";
 
-export const ShopMobile = (props) => {
+export const ShopMobile = ({ name, openNow, avgPrice }) => {
   const handleMoney = () => {
     Swal.fire(`Los metodos de pago son:
      Credito/Debito
@@ -32,12 +32,9 @@ export const ShopMobile = (props) => {
         lg:flex-col"
     >
       <div className="flex items-center justify-between w-full">
-        <h3 className="text-xl font-normal text-white lg:text-4xl">
-          {props.name}
-        </h3>
-        <span className="hidden lg:block lg:text-white lg:text-2xl lg:uppercase">
-          Abierto
-          {/* Esto vendra de props */}
+        <h3 className="text-xl font-normal text-white lg:text-2xl">{name}</h3>
+        <span className="hidden lg:block lg:text-white lg:text-xl lg:uppercase">
+          {openNow ? "Abierto" : "Cerrado"}
         </span>
       </div>
 
@@ -52,16 +49,19 @@ export const ShopMobile = (props) => {
       </div>
 
       <div className="flex justify-between items-center  lg:w-full">
-        <div className="flex items-center justify-between lg:w-full">
+        <div className="flex items-center justify-between lg:w-max">
           <picture onClick={handleMoney}>
-            <img src={moneyIcon} alt="" className="w-16 lg:w-14" />
+            <img src={moneyIcon} alt="" className="w-16 lg:w-8" />
           </picture>
           <picture className="mx-6">
-            <img src={tarjetIcon} alt="" className="w-16 lg:w-14" />
+            <img src={tarjetIcon} alt="" className="w-16 lg:w-8" />
           </picture>
           <picture>
-            <img src={addressIcon} alt="" className="w-16 lg:w-14" />
+            <img src={addressIcon} alt="" className="w-16 lg:w-8" />
           </picture>
+        </div>
+        <div className="hidden text-white text-lg lg:block">
+          AVG: $ {avgPrice}
         </div>
       </div>
     </div>
