@@ -5,6 +5,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        lightBlue: "#B6C1F2",
+        lightPink: "#F2B6CB",
+        lightOrange: "#E9E178",
+        highOrange: "#F5AB0C",
+        highGreen: "#18DE00",
+        highBlue: "#0083FF",
+
         headerRed: "#DA0037",
         greenDot: "#00FF38",
         lightGreen: "#5FF191",
@@ -21,6 +28,7 @@ module.exports = {
       backgroundImage: {
         restaurant: "url('static/restaurant.png')",
         app: "url('static/bg-image.png')",
+        hero: "url('static/bg-y.svg')",
       },
       fontFamily: {
         monse: ["Montserrat", "sans-serif"],

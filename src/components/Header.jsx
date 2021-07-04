@@ -11,7 +11,7 @@ export const Header = (props) => {
   const history = useHistory();
 
   return (
-    <div className="flex justify-around items-center bg-headerRed p-4 w-full z-50">
+    <div className="flex justify-around items-center bg-headerRed p-4 w-full z-50 sticky bottom-0">
       <div onClick={() => history.push("/")}>
         <picture>
           <img src={HomeIcon} alt="home" className={itemStyles} />

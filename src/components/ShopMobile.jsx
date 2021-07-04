@@ -1,3 +1,4 @@
+
 import moneyIcon from "../static/dinero.svg";
 import tarjetIcon from "../static/tarjeta.svg";
 import addressIcon from "../static/address.svg";
