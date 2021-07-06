@@ -11,7 +11,8 @@ module.exports = {
         highOrange: "#F5AB0C",
         highGreen: "#18DE00",
         highBlue: "#0083FF",
-
+        highGreen: "#037B58",
+        veryHighOrange: "#D6330C",
         headerRed: "#DA0037",
         greenDot: "#00FF38",
         lightGreen: "#5FF191",

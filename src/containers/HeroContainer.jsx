@@ -1,26 +1,30 @@
-import { HeroSection } from "../components/HeroSection";
-import avocadoImage from "../static/avocado.png";
+import avocadoImage from "../static/avocado.jpg";
 import breakFast from "../static/breakfast.jpg";
 import hamburgerFood from "../static/ham.jpg";
 import { HeroItemsContainer } from "./HeroItemsContainer";
+import { HeroSectionContainer } from "./HeroSectionContainer";
 
 export const HeroContainer = () => {
   return (
-    <div>
-      <div className="bg-highOrange relative ">
-        <div className="p-4">
+    <div className="">
+      <div className="bg-highOrange relative">
+        <div className="p-4 ">
           <div>
-            <h2 className="font-bold uppercase text-4xl md:text-6xl">
+            <h2 className="font-bold uppercase text-4xl md:text-6xl lg:text-8xl xl:w-3/4 2xl:w-2/4 ">
               Ofertas de la semana
             </h2>
           </div>
 
           <div className="flex items-center justify-between">
-            <a className="bg-lightOrange px-8 py-4 rounded-full text-xs shadow-xl drop-shadow-xl md:text-xl">
+            <a className="bg-lightOrange px-8 py-4 rounded-full text-xs shadow-xl drop-shadow-xl md:text-xl lg:text-3xl lg:px-24 lg:py-6">
               VER MÁS
             </a>
             <picture>
-              <img src={avocadoImage} alt="" className="md:w-56" />
+              <img
+                src={avocadoImage}
+                alt=""
+                className=" w-36 md:w-52 lg:w-72 xl:w-96 rounded-full"
+              />
             </picture>
           </div>
         </div>
@@ -36,7 +40,7 @@ export const HeroContainer = () => {
           ></path>
         </svg>
       </div>
-      
+      <HeroSectionContainer />
       <HeroItemsContainer />
     </div>
   );

@@ -20,7 +20,7 @@ export const HeroSectionContainer = () => {
     },
   ];
   return (
-    <div className="flex justify-around w-full gap-1">
+    <div className="flex justify-around w-full gap-1  bg-lightPink ">
       {items.map((item) => (
         <HeroSection pic={item.picture} />
       ))}
