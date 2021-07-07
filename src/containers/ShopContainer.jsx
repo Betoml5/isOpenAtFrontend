@@ -1,14 +1,12 @@
 import { Shop } from "../components/Shop";
+import shops from "../shops";
 
 export const ShopContainer = () => {
   return (
-    <div className="grid gap-2 justify-center md:grid-cols-2 lg:gap-8 lg:grid-cols-2 lg:w-11/12 lg:mx-auto xl:grid-cols-4">
-      <Shop highLight={true} />
-      <Shop highLight={true} />
-      <Shop />
-      <Shop />
-      <Shop />
-      <Shop />
+    <div className="grid mx-2 gap-2 md:grid-cols-2 lg:grid-cols-3">
+      {shops.map((shop) => (
+        <Shop {...shop} />
+      ))}
     </div>
   );
 };

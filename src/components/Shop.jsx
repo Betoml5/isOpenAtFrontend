@@ -7,14 +7,15 @@ import starIcon from "../static/star.svg";
 import timeIcon from "../static/time.svg";
 import dollarIcon from "../static/dollar.svg";
 
-export const Shop = (props) => {
+export const Shop = ({ name, highLight, avgTime, freeShipping, rating }) => {
   const history = useHistory();
+
+  console.log(highLight);
 
   return (
     <div
-      className={`flex flex-col max-w-md justify-self-center my-4 cursor-pointer ${
-        props.highLight &&
-        `md:col-span-2 md:max-w-xl lg:max-w-4xl lg:w-full lg:col-span-2 `
+      className={`flex flex-col max-w-md justify-self-center my-4 cursor-pointer  ${
+        highLight && `border-2 border-veryHighOrange rounded-2xl`
       }`}
       onClick={() => {
         history.push("/detail");
@@ -33,7 +34,7 @@ export const Shop = (props) => {
       <div className="bg-white p-4 rounded-2xl">
         <div className="flex justify-between">
           <div className="flex items-center">
-            <h4 className="mr-2">La estaca</h4>
+            <h4 className="mr-2">{name}</h4>
             <img src={verifyIcon} alt="" className="w-6" />
           </div>
           <div className="cursor-pointer">
@@ -59,19 +60,19 @@ export const Shop = (props) => {
             <picture>
               <img src={starIcon} alt="" className="w-6 h-5" />
             </picture>
-            <p className="text-white">4.5</p>
+            <p className="text-white">{rating}</p>
           </div>
           <div className="flex">
             <picture>
               <img src={timeIcon} alt="" />
             </picture>
-            <p>15 min</p>
+            <p>{avgTime} minutos</p>
           </div>
           <div className="flex">
             <picture>
               <img src={dollarIcon} alt="" />
             </picture>
-            <p>Envio gratis</p>
+            <p>{freeShipping ? "Envio gratis" : "Costo de envio"}</p>
           </div>
         </div>
       </div>
