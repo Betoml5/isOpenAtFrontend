@@ -60,8 +60,15 @@ body {
   cursor: pointer;
 }
 
-.sliderItem {
+.sliderProductItem {
   min-width: 200px;
+  max-width: 300px;
+  scroll-snap-align: center;
+  width: 80%;
+  margin: 0 6px;
+}
+.sliderReviewItem {
+  min-width: 300px;
   max-width: 300px;
   scroll-snap-align: center;
   width: 80%;
@@ -70,6 +77,7 @@ body {
 
 .slider {
   display: flex;
+
   align-items: center;
   overflow-x: scroll;
   overscroll-behavior: contain;
