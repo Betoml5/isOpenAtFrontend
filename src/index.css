@@ -60,3 +60,18 @@ body {
   cursor: pointer;
 }
 
+.sliderItem {
+  min-width: 200px;
+  max-width: 300px;
+  scroll-snap-align: center;
+  width: 80%;
+  margin: 0 6px;
+}
+
+.slider {
+  display: flex;
+  align-items: center;
+  overflow-x: scroll;
+  overscroll-behavior: contain;
+  scroll-snap-type: x proximity;
+}
