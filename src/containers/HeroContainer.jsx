@@ -1,12 +1,12 @@
 import avocadoImage from "../static/avocado.jpg";
-import breakFast from "../static/breakfast.jpg";
-import hamburgerFood from "../static/ham.jpg";
+
+import { Link } from "react-router-dom";
 import { HeroItemsContainer } from "./HeroItemsContainer";
 import { HeroSectionContainer } from "./HeroSectionContainer";
 
 export const HeroContainer = () => {
   return (
-    <div className="">
+    <div >
       <div className="bg-highOrange relative">
         <div className="p-4 ">
           <div>
@@ -16,9 +16,12 @@ export const HeroContainer = () => {
           </div>
 
           <div className="flex items-center justify-between">
-            <a className="bg-lightOrange px-8 py-4 rounded-full text-xs shadow-xl drop-shadow-xl md:text-xl lg:text-3xl lg:px-24 lg:py-6">
+            <Link
+              to="#"
+              className="bg-lightOrange px-8 py-4 rounded-full text-xs shadow-xl drop-shadow-xl md:text-xl lg:text-3xl lg:px-24 lg:py-6"
+            >
               VER MÁS
-            </a>
+            </Link>
             <picture>
               <img
                 src={avocadoImage}

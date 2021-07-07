@@ -12,7 +12,7 @@ export const ShopDetail = () => {
   const [enviosView, setEnviosView] = useState(true);
   const [resenasView, setResenasView] = useState(false);
   return (
-    <div>
+    <div className="flex flex-col lg:w-4/5 mx-auto">
       <div>
         <picture>
           <img src={restaurantCover} alt="" className="w-full" />

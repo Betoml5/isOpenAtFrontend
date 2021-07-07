@@ -1,35 +1,80 @@
-
-import moneyIcon from "../static/dinero.svg";
-import tarjetIcon from "../static/tarjeta.svg";
-import addressIcon from "../static/address.svg";
 import { useHistory } from "react-router-dom";
+import restaurantCover from "../static/restaurantCover.jpg";
+import verifyIcon from "../static/verify.svg";
+import favoriteIcon from "../static/favorite.svg";
+import percentIcon from "../static/percent.svg";
+import starIcon from "../static/star.svg";
+import timeIcon from "../static/time.svg";
+import dollarIcon from "../static/dollar.svg";
 
-const iconWithHeigth = "w-6 h-6";
-
-export const Shop = () => {
+export const Shop = (props) => {
   const history = useHistory();
 
   return (
     <div
-      className="flex my-4 justify-between bg-restaurant bg-no-repeat  bg-cover relative rounded-2xl  p-4 h-44 cursor-pointer self-center justify-self-center "
-      onClick={() => history.push("/detail")}
+      className={`flex flex-col max-w-md justify-self-center my-4 cursor-pointer ${
+        props.highLight &&
+        `md:col-span-2 md:max-w-xl lg:max-w-4xl lg:w-full lg:col-span-2 `
+      }`}
+      onClick={() => {
+        history.push("/detail");
+      }}
     >
-      <div className="bg-greenDot w-3 h-3 rounded-full absolute right-4 top-4"></div>
-
-      <div className="flex self-end items-center w-1/2">
+      <div className="w-full">
         <picture>
-          <img src={moneyIcon} alt="" className={iconWithHeigth} />
-        </picture>
-        <picture className="mx-8">
-          <img src={tarjetIcon} alt="" className={iconWithHeigth} />
-        </picture>
-        <picture>
-          <img src={addressIcon} alt="" className={iconWithHeigth} />
+          <img
+            src={restaurantCover}
+            alt=""
+            className="w-full rounded-tr-2xl rounded-tl-2xl"
+          />
         </picture>
       </div>
-      <h5 className="font-monse text-white text-right w-1/2 self-end">
-        PAPAS'S GRILL
-      </h5>
+
+      <div className="bg-white p-4 rounded-2xl">
+        <div className="flex justify-between">
+          <div className="flex items-center">
+            <h4 className="mr-2">La estaca</h4>
+            <img src={verifyIcon} alt="" className="w-6" />
+          </div>
+          <div className="cursor-pointer">
+            <img src={favoriteIcon} alt="" />
+          </div>
+        </div>
+
+        <div className="flex my-2">
+          <p className="text-highGreen font-semibold uppercase mr-2">Abierto</p>
+          <p>Sabinas, Coahuila</p>
+        </div>
+        <hr className="my-2" />
+
+        <div className="flex  items-center self-center shadow-2xl my-6 p-4 rounded-lg lg:justify-center">
+          <picture>
+            <img src={percentIcon} alt="" />
+          </picture>
+          <p className="lg:text-xs">Codigo "IsOpenAt" para un 5% off</p>
+        </div>
+
+        <div className="flex items-center justify-around py-4">
+          <div className="flex items-center bg-veryHighOrange w-max p-2 rounded-lg">
+            <picture>
+              <img src={starIcon} alt="" className="w-6 h-5" />
+            </picture>
+            <p className="text-white">4.5</p>
+          </div>
+          <div className="flex">
+            <picture>
+              <img src={timeIcon} alt="" />
+            </picture>
+            <p>15 min</p>
+          </div>
+          <div className="flex">
+            <picture>
+              <img src={dollarIcon} alt="" />
+            </picture>
+            <p>Envio gratis</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
