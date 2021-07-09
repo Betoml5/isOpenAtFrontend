@@ -10,8 +10,6 @@ import dollarIcon from "../static/dollar.svg";
 export const Shop = ({ name, highLight, avgTime, freeShipping, rating }) => {
   const history = useHistory();
 
-  console.log(highLight);
-
   return (
     <div
       className={`flex flex-col max-w-md justify-self-center my-4 cursor-pointer  ${

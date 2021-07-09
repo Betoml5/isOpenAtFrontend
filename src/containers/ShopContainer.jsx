@@ -1,3 +1,4 @@
+import { Filter } from "../components/Filter";
 import { Search } from "../components/Search";
 import { Shop } from "../components/Shop";
 import shops from "../shops";
@@ -7,6 +8,7 @@ export const ShopContainer = () => {
     <>
       <div className="grid mx-2 gap-2 md:grid-cols-2 lg:grid-cols-3">
         <Search />
+        <Filter />
         {shops.map((shop) => (
           <Shop {...shop} />
         ))}

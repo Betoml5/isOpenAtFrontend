@@ -12,10 +12,14 @@ export const ShopDetail = () => {
   const [enviosView, setEnviosView] = useState(true);
   const [resenasView, setResenasView] = useState(false);
   return (
-    <div className="flex flex-col lg:w-4/5 mx-auto">
-      <div>
+    <div className="flex flex-col lg:w-full mx-auto">
+      <div className="">
         <picture>
-          <img src={restaurantCover} alt="" className="w-full" />
+          <img
+            src={restaurantCover}
+            alt=""
+            className="w-full object-cover lg:h-96"
+          />
         </picture>
       </div>
 
