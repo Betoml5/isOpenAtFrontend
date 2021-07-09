@@ -5,6 +5,7 @@ import { HeroContainer } from "./containers/HeroContainer";
 import { ShopDetail } from "./components/ShopDetail";
 import { ShopContainer } from "./containers/ShopContainer";
 import { NotFound } from "./containers/NotFound";
+import { ShopForm } from "./components/ShopForm";
 
 const App = () => (
   //Aqui Cualquier provider
@@ -15,6 +16,7 @@ const App = () => (
         <Route exact={true} path="/" component={HeroContainer} />
         <Route exact={true} path="/shops" component={ShopContainer} />
         <Route exact path="/detail" component={ShopDetail} />
+        <Route exact path="/form" component={ShopForm} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

@@ -4,6 +4,13 @@
 @tailwind components;
 @tailwind utilities;
 
+.form-field {
+  @apply shadow p-4 my-2;
+}
+
+.btn {
+  @apply p-2 py-4 bg-veryHighOrange text-white rounded-lg border-none;
+}
 html {
   position: relative;
 }
