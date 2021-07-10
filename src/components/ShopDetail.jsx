@@ -1,5 +1,5 @@
 import restaurantCover from "../static/restaurantCover.jpg";
-import verify from "../static/verify.svg";
+import verifyIcon from "../static/verify.svg";
 import favoriteIcon from "../static/favorite.svg";
 import starIcon from "../static/star.svg";
 import timeIcon from "../static/time.svg";
@@ -33,37 +33,36 @@ export const ShopDetail = () => {
         <picture>
           <img
             src={restaurantCover}
-            alt=""
+            alt="shopCover"
             className="w-full object-cover lg:h-96"
           />
         </picture>
       </div>
 
-      <div className="bg-white rounded-tr-3xl rounded-tl-3xl flex flex-col relative z-20 -mt-5">
-        <div className="flex items-center justify-between p-6">
-          <div>
+      <div className="bg-white rounded-tr-3xl rounded-tl-3xl flex flex-col relative z-20 -mt-5 ">
+        <div className="p-6">
+          <div className="flex justify-between ">
             <div className="flex items-center">
-              <h3 className="font-medium mr-4">{shop.name}</h3>
-              <img src={verify} alt="" className="" />
+              <h4 className="mr-2">{shop.name}</h4>
+              <img src={verifyIcon} alt="verifyIcon" className="w-6" />
             </div>
-            <div className="flex items-center">
-              {shop?.openNow ? (
-                <p className="text-highGreen font-semibold uppercase mr-2">
-                  Abierto
-                </p>
-              ) : (
-                <p className="font-semibold uppercase mr-2 text-veryHighOrange">
-                  Cerrado
-                </p>
-              )}
-              <p className="">{shop.address}</p>
+            <div className="cursor-pointer">
+              <img src={favoriteIcon} alt="favoriteIcon" />
             </div>
           </div>
-          <div>
-            <picture>
-              <img src={favoriteIcon} alt="" />
-            </picture>
+
+          <div className="flex items-center my-2 ">
+            {shop.openNow?.openNow ? (
+              <p className="text-highGreen font-semibold uppercase mr-2">
+                Abierto
+              </p>
+            ) : (
+              <p className="font-semibold uppercase mr-2 text-veryHighOrange">
+                Cerrado
+              </p>
+            )}
           </div>
+          <p className="">{shop.address}</p>
         </div>
         <hr />
         <div className="flex items-center justify-around py-4">

@@ -1,8 +1,7 @@
 import { useCallback, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { signup, signin, getUser } from "../services/User";
-import Context from "../context/UserContext";
-import { setState } from "expect";
+import Context from "../context/userContext";
 
 export default function useUser() {
   const history = useHistory();
@@ -32,18 +31,40 @@ export default function useUser() {
     },
     [setJwt, setUser]
   );
+
+  const register = useCallback((username, email, password) => {
+    setState({ loading: true, error: false });
+    signup(username, email, password)
+      .then((res) => {
+        setState({ loading: false, error: false });
+        console.log(res);
+      })
+      .catch((error) => console.log(error));
+  });
+
+  const logout = useCallback(() => {
+    window.localStorage.removeItem("jwt");
+    window.localStorage.removeItem("user");
+    setUser(null);
+    setJwt(null);
+    history.push("/");
+  }, [setJwt, setUser]);
+
+  const getOneUser = useCallback((id) => {
+    getUser(id).then((res) => {
+      setUserFetched(res);
+    });
+  });
+
+  return {
+    isLogged: Boolean(jwt),
+    isLoginLoading: state.loading,
+    hasLoadingError: state.error,
+    login,
+    logout,
+    register,
+    user,
+    getOneUser,
+    userFetched,
+  };
 }
-
-const register = useCallback((username, email, password) => {
-  setState({ loading: true, error: false });
-  signup(username, email, password)
-    .then((res) => {
-      setState({ loading: false, error: false });
-      console.log(res);
-    })
-    .catch((error) => console.log(error));
-}); 
-
-
-
-

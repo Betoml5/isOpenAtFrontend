@@ -15,6 +15,7 @@ export const Shop = ({
   freeShipping,
   rating,
   address,
+  openNow,
 }) => {
   const history = useHistory();
 
@@ -46,10 +47,18 @@ export const Shop = ({
           </div>
         </div>
 
-        <div className="flex my-2">
-          <p className="text-highGreen font-semibold uppercase mr-2">Abierto</p>
-          <p>{address}</p>
+        <div className="flex items-center my-2">
+          {openNow?.openNow ? (
+            <p className="text-highGreen font-semibold uppercase mr-2">
+              Abierto
+            </p>
+          ) : (
+            <p className="font-semibold uppercase mr-2 text-veryHighOrange">
+              Cerrado
+            </p>
+          )}
         </div>
+        <p>{address}</p>
         <hr className="my-2" />
 
         <div className="flex justify-center  items-center self-center shadow-2xl my-6 p-4 rounded-lg lg:justify-center">

@@ -2,11 +2,12 @@ import avocadoImage from "../static/avocado.jpg";
 import { Link } from "react-router-dom";
 import { HeroItemsContainer } from "./HeroItemsContainer";
 import { HeroSectionContainer } from "./HeroSectionContainer";
-
+import useUser from "../hooks/useUser";
 
 export const HeroContainer = () => {
   // const [setData, data] = useState(null);
 
+  const { setUser, user } = useUser();
 
   return (
     <div>
