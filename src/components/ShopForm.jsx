@@ -25,11 +25,10 @@ export const ShopForm = () => {
       .then(() => {
         Swal.fire({
           title: "Comercio Registrado",
-          text: `Hey, ya quedo registrado ${watch("shopName")}`,
+          text: `Hey, ya quedo registrado ${watch("name")}`,
           confirmButtonText: "Ya quedo!",
         });
         form.current.reset();
-        history.push("/");
       })
       .catch(() =>
         Swal.fire({
@@ -45,7 +44,7 @@ export const ShopForm = () => {
     <form
       onSubmit={handleSubmit(onSubmit)}
       ref={form}
-      className="flex flex-col justify-center bg-white p-4 max-w-xl mx-auto"
+      className="flex flex-col justify-center bg-white p-4 max-w-xl lg:max-w-3xl mx-auto"
     >
       <h3 className="text-xl uppercase text-center my-4 bg-veryHighOrange p-4 text-white rounded-md">
         Afiliar nuevo comercio
@@ -55,9 +54,9 @@ export const ShopForm = () => {
         placeholder="Nombre del comercio"
         name="shopName"
         className="form-field"
-        {...register("shopName", { required: true })}
+        {...register("name", { required: true })}
       />
-      {errors.shopName && (
+      {errors.name && (
         <span className="field-required">Este campo es obligatorio</span>
       )}
       <label htmlFor="address">Direccion</label>

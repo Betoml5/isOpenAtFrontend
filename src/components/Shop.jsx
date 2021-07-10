@@ -7,7 +7,14 @@ import starIcon from "../static/star.svg";
 import timeIcon from "../static/time.svg";
 import dollarIcon from "../static/dollar.svg";
 
-export const Shop = ({ name, highLight, avgTime, freeShipping, rating }) => {
+export const Shop = ({
+  name,
+  highLight,
+  avgTime,
+  freeShipping,
+  rating,
+  address,
+}) => {
   const history = useHistory();
 
   return (
@@ -42,7 +49,7 @@ export const Shop = ({ name, highLight, avgTime, freeShipping, rating }) => {
 
         <div className="flex my-2">
           <p className="text-highGreen font-semibold uppercase mr-2">Abierto</p>
-          <p>Sabinas, Coahuila</p>
+          <p>{address}</p>
         </div>
         <hr className="my-2" />
 

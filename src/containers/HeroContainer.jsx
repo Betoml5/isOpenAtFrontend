@@ -2,27 +2,11 @@ import avocadoImage from "../static/avocado.jpg";
 import { Link } from "react-router-dom";
 import { HeroItemsContainer } from "./HeroItemsContainer";
 import { HeroSectionContainer } from "./HeroSectionContainer";
-import { useEffect, useState } from "react";
+
 
 export const HeroContainer = () => {
   // const [setData, data] = useState(null);
-  const [data, setData] = useState([]);
 
-  const getData = async () => {
-    const response = await fetch("http://localhost:3013/api/shops/all", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    });
-    const shops = await response.json();
-    setData(shops);
-  };
-
-  useEffect(() => {
-    getData();
-    console.log(data.body);
-  }, []);
 
   return (
     <div>
