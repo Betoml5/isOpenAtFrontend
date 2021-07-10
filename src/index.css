@@ -11,6 +11,11 @@
 .btn {
   @apply p-2 py-4 bg-veryHighOrange text-white rounded-lg border-none;
 }
+
+.field-required {
+  @apply my-2 text-veryHighOrange;
+}
+
 html {
   position: relative;
 }
