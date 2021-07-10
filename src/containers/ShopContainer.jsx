@@ -17,7 +17,7 @@ export const ShopContainer = () => {
         <Search />
         <Filter />
         {data.map((shop) => (
-          <Shop {...shop} />
+          <Shop {...shop} key={shop.id} />
         ))}
       </div>
     </>

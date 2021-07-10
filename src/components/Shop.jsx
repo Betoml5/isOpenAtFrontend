@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import restaurantCover from "../static/restaurantCover.jpg";
 import verifyIcon from "../static/verify.svg";
 import favoriteIcon from "../static/favorite.svg";
@@ -8,6 +8,7 @@ import timeIcon from "../static/time.svg";
 import dollarIcon from "../static/dollar.svg";
 
 export const Shop = ({
+  _id,
   name,
   highLight,
   avgTime,
@@ -18,13 +19,11 @@ export const Shop = ({
   const history = useHistory();
 
   return (
-    <div
+    <Link
+      to={`/detail/${_id}`}
       className={`flex flex-col max-w-md justify-self-center my-4 cursor-pointer  ${
         highLight && ``
       }`}
-      onClick={() => {
-        history.push("/detail");
-      }}
     >
       <div className="w-full">
         <picture>
@@ -85,6 +84,6 @@ export const Shop = ({
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };

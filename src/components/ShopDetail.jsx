@@ -6,11 +6,27 @@ import timeIcon from "../static/time.svg";
 import dollarIcon from "../static/dollar.svg";
 import percentIcon from "../static/percent.svg";
 import hamburgerPic from "../static/ham.jpg";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getShop } from "../services/Shop";
 export const ShopDetail = () => {
   const [enviosView, setEnviosView] = useState(true);
   const [resenasView, setResenasView] = useState(false);
+
+  const [shop, setShop] = useState({});
+
+  const { id } = useParams();
+  console.log(id);
+
+  useEffect(() => {
+    getShop(id).then((res) => {
+      console.log(res);
+      setShop(res);
+    });
+
+    console.log(`shop ${shop}`);
+  }, []);
+
   return (
     <div className="flex flex-col lg:w-full mx-auto">
       <div className="">
@@ -27,14 +43,20 @@ export const ShopDetail = () => {
         <div className="flex items-center justify-between p-6">
           <div>
             <div className="flex items-center">
-              <h3 className="font-medium mr-4">La estaca</h3>
+              <h3 className="font-medium mr-4">{shop.name}</h3>
               <img src={verify} alt="" className="" />
             </div>
             <div className="flex items-center">
-              <p className="text-highGreen font-semibold uppercase mr-2">
-                Abierto
-              </p>
-              <p className="">Sabinas, Coahuila</p>
+              {shop?.openNow ? (
+                <p className="text-highGreen font-semibold uppercase mr-2">
+                  Abierto
+                </p>
+              ) : (
+                <p className="font-semibold uppercase mr-2 text-veryHighOrange">
+                  Cerrado
+                </p>
+              )}
+              <p className="">{shop.address}</p>
             </div>
           </div>
           <div>
@@ -49,19 +71,19 @@ export const ShopDetail = () => {
             <picture>
               <img src={starIcon} alt="" className="w-6 h-5" />
             </picture>
-            <p className="text-white">4.5</p>
+            <p className="text-white">{shop.rating}</p>
           </div>
           <div className="flex">
             <picture>
               <img src={timeIcon} alt="" />
             </picture>
-            <p>15 min</p>
+            <p>{shop.avgTime}</p>
           </div>
           <div className="flex">
             <picture>
               <img src={dollarIcon} alt="" />
             </picture>
-            <p>Envio gratis</p>
+            {shop?.freeShipping ? <p>Envio gratis</p> : <p>Envio con costo</p>}
           </div>
         </div>
 

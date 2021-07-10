@@ -44,7 +44,7 @@ export const ShopForm = () => {
     <form
       onSubmit={handleSubmit(onSubmit)}
       ref={form}
-      className="flex flex-col justify-center bg-white p-4 max-w-xl lg:max-w-3xl mx-auto"
+      className="flex flex-col justify-center bg-white  p-4 max-w-xl lg:max-w-3xl mx-auto"
     >
       <h3 className="text-xl uppercase text-center my-4 bg-veryHighOrange p-4 text-white rounded-md">
         Afiliar nuevo comercio
