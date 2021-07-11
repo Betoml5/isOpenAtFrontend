@@ -5,13 +5,14 @@ export const signin = async (username, password) => {
   try {
     const response = await axios({
       method: "POST",
-      url: `${API}/singin`,
+      url: `${API}/signin`,
       data: {
         username,
         password,
       },
     });
-    return response.data.body;
+    console.log(response);
+    return response;
   } catch (error) {
     return error;
   }
@@ -28,6 +29,7 @@ export const signup = async (username, email, password) => {
         password,
       },
     });
+    console.log(response);
     return response.data.body;
   } catch (error) {
     return error;

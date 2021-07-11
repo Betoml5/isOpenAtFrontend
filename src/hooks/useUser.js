@@ -11,16 +11,17 @@ export default function useUser() {
 
   const [state, setState] = useState({ loading: false, error: false });
 
-  const login = useCallback(
+  const loginUser = useCallback(
     (username, password) => {
       setState({ loading: true, error: false });
       signin(username, password)
         .then((res) => {
-          window.localStorage.setItem("jwt", res.token);
-          window.localStorage.setItem("user", JSON.stringify(res.payload));
+          console.log(res.data.body);
+          window.localStorage.setItem("jwt", res.data.token);
+          window.localStorage.setItem("user", JSON.stringify(res.data.body));
           setState({ loading: false, error: false });
-          setJwt(res.token);
-          setUser(res.payload);
+          setJwt(res.data.token);
+          setUser(res.data.body);
         })
         .catch((err) => {
           window.localStorage.removeItem("jwt");
@@ -32,7 +33,7 @@ export default function useUser() {
     [setJwt, setUser]
   );
 
-  const register = useCallback((username, email, password) => {
+  const registerUser = useCallback((username, email, password) => {
     setState({ loading: true, error: false });
     signup(username, email, password)
       .then((res) => {
@@ -40,7 +41,7 @@ export default function useUser() {
         console.log(res);
       })
       .catch((error) => console.log(error));
-  });
+  }, []);
 
   const logout = useCallback(() => {
     window.localStorage.removeItem("jwt");
@@ -60,9 +61,9 @@ export default function useUser() {
     isLogged: Boolean(jwt),
     isLoginLoading: state.loading,
     hasLoadingError: state.error,
-    login,
+    loginUser,
     logout,
-    register,
+    registerUser,
     user,
     getOneUser,
     userFetched,

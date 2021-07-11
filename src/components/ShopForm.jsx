@@ -1,12 +1,9 @@
 import axios from "axios";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 
 export const ShopForm = () => {
-  const history = useHistory();
-
   const {
     register,
     handleSubmit,

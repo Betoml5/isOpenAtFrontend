@@ -7,6 +7,8 @@ import { ShopContainer } from "./containers/ShopContainer";
 import { NotFound } from "./containers/NotFound";
 import { ShopForm } from "./components/ShopForm";
 import { UserContextProvider } from "./context/userContext";
+import { RegisterUser } from "./components/RegisterUser";
+import { LoginUser } from "./components/LoginUser";
 
 const App = () => (
   //Aqui Cualquier provider
@@ -19,6 +21,9 @@ const App = () => (
           <Route exact={true} path="/shops" component={ShopContainer} />
           <Route exact path="/detail/:id" component={ShopDetail} />
           <Route exact path="/form" component={ShopForm} />
+          <Route exact path="/sign-up" component={RegisterUser} />
+          <Route exact path="/sign-in" component={LoginUser} />
+          <Route component={NotFound} />
           <Route component={NotFound} />
         </Switch>
       </Layout>

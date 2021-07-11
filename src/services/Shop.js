@@ -38,7 +38,7 @@ export const createUser = async (name, address, email, phone) => {
         phone,
       },
     });
-    return response.data.body;
+    return response.data.body
   } catch (error) {
     return error;
   }
@@ -231,7 +231,7 @@ export const setRating = async (shopId, rating) => {
         rating,
       },
     });
-    return response.data.body;
+    return response.data.body
   } catch (error) {
     return error;
   }
