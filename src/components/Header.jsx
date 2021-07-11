@@ -12,7 +12,7 @@ const itemStyles = "w-6 cursor-pointer";
 export const Header = (props) => {
   const history = useHistory();
   const { user, isLogged } = useUser();
-  console.log(user);
+  console.log("user", JSON.parse(user));
   const handleRandom = () => {
     if (!user) {
       Swal.fire({
@@ -51,13 +51,13 @@ export const Header = (props) => {
         </picture>
       </div>
       {isLogged ? (
-        <Link to={`/user/${user?._id}`}>
+        <Link to={`/user/${JSON.parse(user)._id}`}>
           <picture>
             <img src={UserIcon} alt="home" className={itemStyles} />
           </picture>
         </Link>
       ) : (
-        <Link to={`/sign-up`}>
+        <Link to={`/sign-in`}>
           <picture>
             <img src={addUser} alt="addUserIcon" className={itemStyles} />
           </picture>

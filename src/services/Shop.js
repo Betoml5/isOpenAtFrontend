@@ -1,5 +1,5 @@
 import axios from "axios";
-const API = "http://localhost:3013/api/shops";
+const API = "http://192.168.1.66:3013/api/shops";
 
 export const getShops = async (setState) => {
   try {
@@ -38,7 +38,7 @@ export const createUser = async (name, address, email, phone) => {
         phone,
       },
     });
-    return response.data.body
+    return response.data.body;
   } catch (error) {
     return error;
   }
@@ -231,7 +231,7 @@ export const setRating = async (shopId, rating) => {
         rating,
       },
     });
-    return response.data.body
+    return response.data.body;
   } catch (error) {
     return error;
   }

@@ -51,11 +51,14 @@ export default function useUser() {
     history.push("/");
   }, [setJwt, setUser]);
 
-  const getOneUser = useCallback((id) => {
-    getUser(id).then((res) => {
-      setUserFetched(res);
-    });
-  });
+  const getOneUser = useCallback(
+    (id) => {
+      getUser(id).then((res) => {
+        setUserFetched(res);
+      });
+    },
+    [setUserFetched]
+  );
 
   return {
     isLogged: Boolean(jwt),
