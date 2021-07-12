@@ -13,12 +13,12 @@ export const ShopContainer = () => {
   }, []);
   return (
     <>
-      <div className="grid mx-2 gap-2 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid h-screen mx-2 gap-2 md:grid-cols-2 lg:grid-cols-3">
         <Search />
         <Filter />
         {shops.length == 0 && (
           <div className="flex items-center justify-center bg-white text-center col-span-full h-96 rounded-md">
-            No hay items que mostrar 
+            No hay items que mostrar
           </div>
         )}
         {shops.map((shop) => (

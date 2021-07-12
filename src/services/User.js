@@ -5,7 +5,7 @@ export const signin = async (username, password) => {
   try {
     const response = await axios({
       method: "POST",
-      url: `${API}/signin`,
+      url: `${API}/login`,
       data: {
         username,
         password,
@@ -22,7 +22,7 @@ export const signup = async (username, email, password) => {
   try {
     const response = await axios({
       method: "POST",
-      url: `${API}/singup`,
+      url: `${API}/create`,
       data: {
         username,
         email,
@@ -102,6 +102,23 @@ export const getFavorite = async (id) => {
     });
 
     return response.data.body;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const setImage = async (id, imageurl) => {
+  try {
+    const response = await axios({
+      method: "PATCH",
+      url: `${API}/image/${id}`,
+      data: {
+        imageurl: imageurl,
+      },
+    });
+    console.log("imageURL", imageurl);
+    console.log(response);
+    return response;
   } catch (error) {
     return error;
   }

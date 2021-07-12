@@ -1,6 +1,6 @@
 import { useCallback, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { signup, signin, getUser } from "../services/User";
+import { signup, signin, getUser, setImage } from "../services/User";
 import Context from "../context/userContext";
 
 export default function useUser() {
@@ -21,7 +21,7 @@ export default function useUser() {
           window.localStorage.setItem("user", JSON.stringify(res.data.body));
           setState({ loading: false, error: false });
           setJwt(res.data.token);
-          setUser(res.data.body);
+          setUser(JSON.stringify(res.data.body));
         })
         .catch((err) => {
           window.localStorage.removeItem("jwt");
@@ -60,6 +60,10 @@ export default function useUser() {
     [setUserFetched]
   );
 
+  const setImageUser = useCallback((imageURL) => {
+    setImage(imageURL).then((res) => res);
+  }, []);
+
   return {
     isLogged: Boolean(jwt),
     isLoginLoading: state.loading,
@@ -70,5 +74,6 @@ export default function useUser() {
     user,
     getOneUser,
     userFetched,
+    setImageUser,
   };
 }
