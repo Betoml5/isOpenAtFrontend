@@ -10,7 +10,6 @@ import { Link, useHistory } from "react-router-dom";
 const itemStyles = "w-6 cursor-pointer";
 
 export const Header = (props) => {
-  const history = useHistory();
   const { user, isLogged } = useUser();
   console.log("user", JSON.parse(user));
   const handleRandom = () => {
