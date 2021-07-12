@@ -21,7 +21,7 @@ export default function useUser() {
           window.localStorage.setItem("user", JSON.stringify(res.data.body));
           setState({ loading: false, error: false });
           setJwt(res.data.token);
-          setUser(res.data.body);
+          setUser(JSON.stringify(res.data.body));
         })
         .catch((err) => {
           window.localStorage.removeItem("jwt");

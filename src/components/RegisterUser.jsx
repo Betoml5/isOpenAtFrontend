@@ -26,52 +26,55 @@ export const RegisterUser = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      ref={form}
-      className="flex flex-col h-screen justify-center bg-white  p-4 max-w-xl lg:max-w-3xl mx-auto"
-    >
-      <h3 className="text-xl uppercase text-center my-4 bg-veryHighOrange p-4 text-white rounded-md">
-        Registrate
-      </h3>
-      <label htmlFor="username">Nombre de usuario</label>
-      <input
-        placeholder="Nombre de usuario"
-        name="username"
-        className="form-field"
-        {...register("username", { required: true })}
-      />
-      {errors.username && (
-        <span className="field-required">Este campo es obligatorio</span>
-      )}
-      <label htmlFor="email">Email</label>
-      <input
-        placeholder="Email"
-        name="email"
-        className="form-field"
-        {...register("email", { required: true })}
-      />
-      {errors.email && (
-        <span className="field-required">Este campo es obligatorio</span>
-      )}
-      <label htmlFor="password">Contraseña</label>
-      <input
-        placeholder="Contraseña"
-        className="form-field"
-        name="password"
-        type="password"
-        {...register("password", { required: true })}
-      />
-      {errors.password && (
-        <span className="field-required">Este campo es obligatorio</span>
-      )}
-      <p className="text-center  my-2">
-        ¿Ya tienes cuenta?{" "}
-        <Link to="sign-in" className="text-veryHighOrange">
-          Inicia sesión
-        </Link>
-      </p>
-      <input type="submit" value="Registrarse" className="btn cursor-pointer" />
-    </form>
+    <div className="flex items-center justify-center h-screen">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        ref={form}
+        className="flex flex-col  justify-center rounded-md bg-white  p-6 w-11/12 max-w-xl lg:max-w-3xl mx-auto"
+      >
+        <label htmlFor="username">Nombre de usuario</label>
+        <input
+          placeholder="Nombre de usuario"
+          name="username"
+          className="form-field"
+          {...register("username", { required: true })}
+        />
+        {errors.username && (
+          <span className="field-required">Este campo es obligatorio</span>
+        )}
+        <label htmlFor="email">Email</label>
+        <input
+          placeholder="Email"
+          name="email"
+          className="form-field"
+          {...register("email", { required: true })}
+        />
+        {errors.email && (
+          <span className="field-required">Este campo es obligatorio</span>
+        )}
+        <label htmlFor="password">Contraseña</label>
+        <input
+          placeholder="Contraseña"
+          className="form-field"
+          name="password"
+          type="password"
+          {...register("password", { required: true })}
+        />
+        {errors.password && (
+          <span className="field-required">Este campo es obligatorio</span>
+        )}
+        <p className="text-center  my-6">
+          ¿Ya tienes cuenta?{" "}
+          <Link to="sign-in" className="text-veryHighOrange">
+            Inicia sesión
+          </Link>
+        </p>
+        <input
+          type="submit"
+          value="Registrarse"
+          className="btn cursor-pointer"
+        />
+      </form>
+    </div>
   );
 };
