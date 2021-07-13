@@ -2,6 +2,7 @@ import { useCallback, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { signup, signin, getUser, setImage } from "../services/User";
 import Context from "../context/userContext";
+import Swal from "sweetalert2";
 
 export default function useUser() {
   const history = useHistory();
@@ -22,11 +23,18 @@ export default function useUser() {
           setState({ loading: false, error: false });
           setJwt(res.data.token);
           setUser(JSON.stringify(res.data.body));
+          history.push("/");
         })
         .catch((err) => {
           window.localStorage.removeItem("jwt");
           window.localStorage.removeItem("user");
           setState({ loading: false, error: true });
+          Swal.fire({
+            title: "Ups",
+            text: `Credenciales incorrectas :( `,
+            confirmButtonText: "Ni pedo",
+            icon: "error",
+          });
           console.log(err);
         });
     },
@@ -75,5 +83,6 @@ export default function useUser() {
     getOneUser,
     userFetched,
     setImageUser,
+    state,
   };
 }

@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { Link, useHistory } from "react-router-dom";
 
 export const LoginUser = () => {
-  const { loginUser } = useUser();
+  const { loginUser, state } = useUser();
   const history = useHistory();
 
   const {
@@ -19,7 +19,6 @@ export const LoginUser = () => {
   const onSubmit = ({ username, password }) => {
     loginUser(username, password);
     form.current.reset();
-    history.push("/");
   };
 
   return (
