@@ -4,6 +4,8 @@ import { setImage } from "../services/User";
 import useUser from "../hooks/useUser";
 import storage from "../firebase";
 import { UploadImageForm } from "./UploadImageForm";
+import { PageLoader } from "./PageLoader";
+import { Spinner } from "./Spinner";
 
 export const User = (props) => {
   const { id } = useParams();
@@ -47,17 +49,25 @@ export const User = (props) => {
     getOneUser(id);
   }, []);
 
+  if (!userFetched) {
+    return <PageLoader />;
+  }
+
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="flex flex-col items-center bg-white rounded-md p-6 w-4/5 max-w-lg">
         <div className="w-60 mb-10">
-          <picture>
-            <img
-              src={userFetched?.image}
-              alt="userImage"
-              className="w-full rounded-xl"
-            />
-          </picture>
+          {!userFetched.image ? (
+            <Spinner />
+          ) : (
+            <picture>
+              <img
+                src={userFetched?.image}
+                alt="userImage"
+                className="w-full rounded-xl"
+              />
+            </picture>
+          )}
         </div>
 
         <div>
