@@ -1,6 +1,13 @@
 import { useCallback, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { signup, signin, getUser, setImage } from "../services/User";
+import {
+  signup,
+  signin,
+  getUser,
+  setImage,
+  getFavorites,
+  addFavorite,
+} from "../services/User";
 import Context from "../context/userContext";
 import Swal from "sweetalert2";
 
@@ -68,6 +75,10 @@ export default function useUser() {
     [setUserFetched]
   );
 
+  const addFavorites = useCallback((userId, shopId) => {
+    addFavorite(userId, shopId).then((res) => console.log(res));
+  }, []);
+
   const setImageUser = useCallback((imageURL) => {
     setImage(imageURL).then((res) => res);
   }, []);
@@ -83,6 +94,7 @@ export default function useUser() {
     getOneUser,
     userFetched,
     setImageUser,
-    state,
+    setUserFetched,
+    addFavorites,
   };
 }

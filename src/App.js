@@ -10,6 +10,7 @@ import { UserContextProvider } from "./context/userContext";
 import { RegisterUser } from "./components/RegisterUser";
 import { LoginUser } from "./components/LoginUser";
 import { User } from "./components/User";
+import { Favorites } from "./containers/Favorites";
 
 const App = () => (
   //Aqui Cualquier provider
@@ -25,6 +26,7 @@ const App = () => (
           <Route exact path="/sign-in" component={LoginUser} />
           <Route exact path="/user/:id" component={User} />
           <Route exact path="/admin/add-shop" component={ShopForm} />
+          <Route exact path="/favorites" component={Favorites} />
 
           <Route component={NotFound} />
         </Switch>

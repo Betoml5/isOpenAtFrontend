@@ -1,4 +1,4 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import restaurantCover from "../static/restaurantCover.jpg";
 import verifyIcon from "../static/verify.svg";
 import favoriteIcon from "../static/favorite.svg";
@@ -6,6 +6,11 @@ import percentIcon from "../static/percent.svg";
 import starIcon from "../static/star.svg";
 import timeIcon from "../static/time.svg";
 import dollarIcon from "../static/dollar.svg";
+import notFavorite from "../static/carbon_favorite.svg";
+import { useEffect, useState } from "react";
+import useUser from "../hooks/useUser";
+import Swal from "sweetalert2";
+import { addFavorite, getUser, removeFavorite } from "../services/User";
 
 export const Shop = ({
   _id,
@@ -17,24 +22,52 @@ export const Shop = ({
   address,
   openNow,
 }) => {
-  const history = useHistory();
+  const { isLogged, addFavorites, user } = useUser();
+
+  const [userFetched, setUserFetched] = useState(null);
+  const userParsed = JSON.parse(user);
+
+  const handleFavorite = () => {
+    if (isLogged) {
+      addFavorite(userParsed._id, _id).then((res) => console.log(res));
+    } else {
+      Swal.fire({
+        title: "Inicia sesion",
+        text: "Hey! Inicia sesion primero",
+        confirmButtonText: "Yasta",
+      });
+    }
+  };
+
+  const deleteFavorite = () => {
+    if (isLogged) {
+      removeFavorite(userParsed?._id, _id).then((res) => console.log(res));
+    } else {
+      Swal.fire({
+        title: "Inicia sesion",
+        text: "Hey! Inicia sesion primero",
+        confirmButtonText: "Yasta",
+      });
+    }
+  };
+
+  useEffect(() => {
+    getUser(userParsed?._id).then((res) => setUserFetched(res));
+  }, [handleFavorite, deleteFavorite]);
 
   return (
-    <Link
-      to={`/detail/${_id}`}
-      className={`flex flex-col max-w-md justify-self-center my-4 cursor-pointer  ${
-        highLight && ``
-      }`}
-    >
-      <div className="w-full">
-        <picture>
-          <img
-            src={restaurantCover}
-            alt="restaurantCover"
-            className="w-full rounded-tr-2xl rounded-tl-2xl"
-          />
-        </picture>
-      </div>
+    <div className="flex flex-col max-w-md justify-self-center my-4 cursor-pointer">
+      <Link to={`/detail/${_id}`}>
+        <div className="w-full">
+          <picture>
+            <img
+              src={restaurantCover}
+              alt="restaurantCover"
+              className="w-full rounded-tr-2xl rounded-tl-2xl "
+            />
+          </picture>
+        </div>
+      </Link>
 
       <div className="bg-white p-4 rounded-2xl">
         <div className="flex justify-between">
@@ -42,8 +75,17 @@ export const Shop = ({
             <h4 className="mr-2">{name}</h4>
             <img src={verifyIcon} alt="verifyIcon" className="w-6" />
           </div>
+
           <div className="cursor-pointer">
-            <img src={favoriteIcon} alt="favoriteIcon" />
+            {userFetched?.favorites?.includes(_id) ? (
+              <div className="cursor-pointer" onClick={deleteFavorite}>
+                <img src={favoriteIcon} alt="favoriteIcon" />
+              </div>
+            ) : (
+              <div className="cursor-pointer " onClick={handleFavorite}>
+                <img src={notFavorite} alt="favoriteIcon" />
+              </div>
+            )}
           </div>
         </div>
 
@@ -93,6 +135,6 @@ export const Shop = ({
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };

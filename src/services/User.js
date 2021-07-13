@@ -82,11 +82,11 @@ export const addFavorite = async (userId, shopId) => {
   }
 };
 
-export const removeFavorite = async (userId, shopIndex) => {
+export const removeFavorite = async (userId, shopId) => {
   try {
     const response = await axios({
       method: "DELETE",
-      url: `${API}/favorites/delete/${userId}/${shopIndex}`,
+      url: `${API}/favorites/delete/${userId}/${shopId}`,
     });
     return response.data.body;
   } catch (error) {
@@ -94,7 +94,7 @@ export const removeFavorite = async (userId, shopIndex) => {
   }
 };
 
-export const getFavorite = async (id) => {
+export const getFavorites = async (id) => {
   try {
     const response = await axios({
       method: "GET",

@@ -16,10 +16,6 @@
   @apply my-2 text-veryHighOrange;
 }
 
-html {
-  position: relative;
-}
-
 body {
   background-color: #444444;
   font-family: "Montserrat";
@@ -89,7 +85,6 @@ body {
 
 .slider {
   display: flex;
-
   align-items: center;
   overflow-x: scroll;
   overscroll-behavior: contain;

@@ -6,17 +6,18 @@ import timeIcon from "../static/time.svg";
 import dollarIcon from "../static/dollar.svg";
 import percentIcon from "../static/percent.svg";
 import hamburgerPic from "../static/ham.jpg";
+import notFavorite from "../static/carbon_favorite.svg";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getShop } from "../services/Shop";
+
 export const ShopDetail = () => {
   const [enviosView, setEnviosView] = useState(true);
   const [resenasView, setResenasView] = useState(false);
 
   const [shop, setShop] = useState({});
-
+  const [like, setLike] = useState(false);
   const { id } = useParams();
-  console.log(id);
 
   useEffect(() => {
     getShop(id).then((res) => {
@@ -46,8 +47,16 @@ export const ShopDetail = () => {
               <h4 className="mr-2">{shop.name}</h4>
               <img src={verifyIcon} alt="verifyIcon" className="w-6" />
             </div>
-            <div className="cursor-pointer">
-              <img src={favoriteIcon} alt="favoriteIcon" />
+            <div onClick={() => setLike(!like)} className="cursor-pointer">
+              {like ? (
+                <div className="cursor-pointer">
+                  <img src={favoriteIcon} alt="favoriteIcon" />
+                </div>
+              ) : (
+                <div className="cursor-pointer ">
+                  <img src={notFavorite} alt="favoriteIcon" />
+                </div>
+              )}
             </div>
           </div>
 
