@@ -1,5 +1,5 @@
 import axios from "axios";
-const API = "http://192.168.1.66:3013/api/shops";
+const API = "https://isopenatapi.herokuapp.com/api/shops";
 
 export const getShops = async (setState) => {
   try {

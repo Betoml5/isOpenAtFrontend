@@ -1,5 +1,5 @@
 import axios from "axios";
-const API = "http://localhost:3013/api/users";
+const API = "https://isopenatapi.herokuapp.com/api/users";
 
 export const signin = async (username, password) => {
   try {
