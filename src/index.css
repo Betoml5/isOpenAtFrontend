@@ -63,7 +63,6 @@ body {
 
 .sectionItem:hover {
   filter: brightness(50%) blur(3px);
-  /* filter: blur(4px); */
   opacity: 0.9;
   cursor: pointer;
 }
