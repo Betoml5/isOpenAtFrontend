@@ -65,6 +65,7 @@ export const User = (props) => {
                 src={userFetched?.image}
                 alt="userImage"
                 className="w-full rounded-xl"
+                loading="lazy"
               />
             </picture>
           )}

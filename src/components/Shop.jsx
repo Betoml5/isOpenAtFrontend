@@ -57,13 +57,14 @@ export const Shop = ({
 
   return (
     <div className="flex flex-col max-w-md justify-self-center my-4 cursor-pointer">
-      <Link to={`/detail/${_id}`}>
+      <Link to={`/shops/detail/${_id}`}>
         <div className="w-full">
           <picture>
             <img
               src={restaurantCover}
               alt="restaurantCover"
-              className="w-full rounded-tr-2xl rounded-tl-2xl "
+              className="w-full rounded-tr-2xl rounded-tl-2xl"
+              loading="lazy"
             />
           </picture>
         </div>

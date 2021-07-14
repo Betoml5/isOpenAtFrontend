@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import useUser from "../hooks/useUser";
-import Swal from "sweetalert2";
 import { Link, useHistory } from "react-router-dom";
 
 export const LoginUser = () => {

@@ -57,7 +57,7 @@ body {
   left: calc(50% - 80px);
 }
 
-.sectionItem {
+/* .sectionItem {
   transition: 140ms all ease;
 }
 
@@ -65,7 +65,7 @@ body {
   filter: brightness(50%) blur(3px);
   opacity: 0.9;
   cursor: pointer;
-}
+} */
 
 .sliderProductItem {
   min-width: 200px;

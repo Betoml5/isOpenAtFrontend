@@ -6,7 +6,7 @@ import LoveIcon from "../static/love.svg";
 import loginUser from "../static/loginuser.svg";
 import Swal from "sweetalert2";
 import useUser from "../hooks/useUser";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 const itemStyles = "w-6 cursor-pointer";
 
 export const Header = (props) => {

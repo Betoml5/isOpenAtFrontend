@@ -1,22 +1,19 @@
 import restaurantCover from "../static/restaurantCover.jpg";
 import verifyIcon from "../static/verify.svg";
-import favoriteIcon from "../static/favorite.svg";
 import starIcon from "../static/star.svg";
 import timeIcon from "../static/time.svg";
 import dollarIcon from "../static/dollar.svg";
 import percentIcon from "../static/percent.svg";
 import hamburgerPic from "../static/ham.jpg";
-import notFavorite from "../static/carbon_favorite.svg";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getShop } from "../services/Shop";
 
 export const ShopDetail = () => {
   const [enviosView, setEnviosView] = useState(true);
   const [resenasView, setResenasView] = useState(false);
-
   const [shop, setShop] = useState({});
-  const [like, setLike] = useState(false);
+  // const [like, setLike] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -36,6 +33,7 @@ export const ShopDetail = () => {
             src={restaurantCover}
             alt="shopCover"
             className="w-full object-cover lg:h-96"
+            loading="lazy"
           />
         </picture>
       </div>
@@ -47,7 +45,7 @@ export const ShopDetail = () => {
               <h4 className="mr-2">{shop.name}</h4>
               <img src={verifyIcon} alt="verifyIcon" className="w-6" />
             </div>
-            <div onClick={() => setLike(!like)} className="cursor-pointer">
+            {/* <div onClick={() => setLike(!like)} className="cursor-pointer">
               {like ? (
                 <div className="cursor-pointer">
                   <img src={favoriteIcon} alt="favoriteIcon" />
@@ -57,7 +55,7 @@ export const ShopDetail = () => {
                   <img src={notFavorite} alt="favoriteIcon" />
                 </div>
               )}
-            </div>
+            </div> */}
           </div>
 
           <div className="flex items-center my-2 ">
@@ -100,6 +98,10 @@ export const ShopDetail = () => {
             <img src={percentIcon} alt="" />
           </picture>
           <p>Codigo "IsOpenAt" para un 5% off</p>
+        </div>
+
+        <div className="bg-veryHighOrange p-4 self-center text-white rounded-lg">
+          <Link to={`/shops/review/${id}`}>Hacer reseña</Link>
         </div>
 
         <div className="flex self-center justify-between my-4 w-3/4">
@@ -225,70 +227,6 @@ export const ShopDetail = () => {
             <img src={hamburgerPic} alt="" className=" rounded-2xl" />
           </div>
         </div>
-
-        {/* <div className="flex  self-center w-6/7 my-2 mx-2">
-          <div className="mr-2 w-1/2">
-            <div>
-              <p className="text-center border-b-2 border-veryHighOrange mb-2">
-                Envios
-              </p>
-            </div>
-            <div className={`flex overflow-x-scroll gap-2 `}>
-              <div className="">
-                <picture>
-                  <img src={hamburgerPic} alt="" className="my-2 rounded-2xl" />
-                </picture>
-              </div>
-              <div className="">
-                <picture>
-                  <img src={hamburgerPic} alt="" className="my-2 rounded-2xl" />
-                </picture>
-              </div>
-              <div className="">
-                <picture>
-                  <img src={hamburgerPic} alt="" className="my-2 rounded-2xl" />
-                </picture>
-              </div>
-            </div>
-          </div>
-
-          <div className="w-1/2">
-            <div>
-              <p className="text-center border-b-2 border-veryHighOrange mb-2">
-                Resenas
-              </p>
-            </div>
-            <div className={`hidden`}>
-              <div className="">
-                <picture>
-                  <img
-                    src={hamburgerPic}
-                    alt=""
-                    className="w-92 my-2 rounded-2xl"
-                  />
-                </picture>
-              </div>
-              <div>
-                <picture>
-                  <img
-                    src={hamburgerPic}
-                    alt=""
-                    className="w-92 my-2 rounded-2xl"
-                  />
-                </picture>
-              </div>
-              <div>
-                <picture>
-                  <img
-                    src={hamburgerPic}
-                    alt=""
-                    className="w-92 my-2 rounded-2xl"
-                  />
-                </picture>
-              </div>
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   );
