@@ -20,42 +20,42 @@ export default function useUser() {
   const [state, setState] = useState({ loading: false, error: false });
 
   const loginUser = useCallback(
-    (username, password) => {
-      setState({ loading: true, error: false });
-      signin(username, password)
-        .then((res) => {
-          console.log(res.data.body);
-          window.localStorage.setItem("jwt", res.data.token);
-          window.localStorage.setItem("user", JSON.stringify(res.data.body));
-          setState({ loading: false, error: false });
-          setJwt(res.data.token);
-          setUser(JSON.stringify(res.data.body));
-          history.push("/");
-        })
-        .catch((err) => {
-          window.localStorage.removeItem("jwt");
-          window.localStorage.removeItem("user");
-          setState({ loading: false, error: true });
-          Swal.fire({
-            title: "Ups",
-            text: `Credenciales incorrectas :( `,
-            confirmButtonText: "Ni pedo",
-            icon: "error",
-          });
-          console.log(err);
+    async (username, password) => {
+      try {
+        setState({ loading: true, error: false });
+        const res = await signin(username, password);
+        window.localStorage.setItem("jwt", res.data.token);
+        window.localStorage.setItem("user", JSON.stringify(res.data.body));
+        setState({ loading: false, error: false });
+        setJwt(res.data.token);
+        setUser(JSON.stringify(res.data.body));
+        history.push("/");
+        console.log(res.data.body);
+      } catch (error) {
+        window.localStorage.removeItem("jwt");
+        window.localStorage.removeItem("user");
+        setState({ loading: false, error: true });
+        Swal.fire({
+          title: "Ups",
+          text: `Credenciales incorrectas :( `,
+          confirmButtonText: "Ni pedo",
+          icon: "error",
         });
+        console.log(err);
+      }
     },
     [setJwt, setUser]
   );
 
-  const registerUser = useCallback((username, email, password) => {
-    setState({ loading: true, error: false });
-    signup(username, email, password)
-      .then((res) => {
-        setState({ loading: false, error: false });
-        console.log(res);
-      })
-      .catch((error) => console.log(error));
+  const registerUser = useCallback(async (username, email, password) => {
+    try {
+      setState({ loading: true, error: false });
+      const res = await signup(username, email, password);
+      setState({ loading: false, error: false });
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   const logout = useCallback(() => {
@@ -67,20 +67,33 @@ export default function useUser() {
   }, [setJwt, setUser]);
 
   const getOneUser = useCallback(
-    (id) => {
-      getUser(id).then((res) => {
+    async (id) => {
+      try {
+        const res = await getUser(id);
         setUserFetched(res);
-      });
+      } catch (error) {
+        console.log(error);
+      }
     },
     [setUserFetched]
   );
 
   const addFavorites = useCallback((userId, shopId) => {
-    addFavorite(userId, shopId).then((res) => console.log(res));
+    try {
+      const res = await addFavorite(userId, shopId);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   const setImageUser = useCallback((imageURL) => {
-    setImage(imageURL).then((res) => res);
+    try {
+      const res = await setImage(imageURL);
+      return res;
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   return {
