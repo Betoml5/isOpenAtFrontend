@@ -22,14 +22,19 @@ export const Shop = ({
   address,
   openNow,
 }) => {
-  const { isLogged, addFavorites, user } = useUser();
+  const { isLogged, user } = useUser();
 
   const [userFetched, setUserFetched] = useState(null);
   const userParsed = JSON.parse(user);
 
-  const handleFavorite = () => {
+  const handleFavorite = async () => {
     if (isLogged) {
-      addFavorite(userParsed._id, _id).then((res) => console.log(res));
+      try {
+        const res = await addFavorite(userParsed._id, _id);
+        console.log(res);
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       Swal.fire({
         title: "Inicia sesion",

@@ -41,7 +41,7 @@ export default function useUser() {
           confirmButtonText: "Ni pedo",
           icon: "error",
         });
-        console.log(err);
+        console.log(error);
       }
     },
     [setJwt, setUser]
@@ -78,7 +78,7 @@ export default function useUser() {
     [setUserFetched]
   );
 
-  const addFavorites = useCallback((userId, shopId) => {
+  const addFavorites = useCallback(async (userId, shopId) => {
     try {
       const res = await addFavorite(userId, shopId);
       console.log(res);
@@ -87,7 +87,7 @@ export default function useUser() {
     }
   }, []);
 
-  const setImageUser = useCallback((imageURL) => {
+  const setImageUser = useCallback(async (imageURL) => {
     try {
       const res = await setImage(imageURL);
       return res;

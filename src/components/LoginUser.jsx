@@ -4,13 +4,11 @@ import useUser from "../hooks/useUser";
 import { Link, useHistory } from "react-router-dom";
 
 export const LoginUser = () => {
-  const { loginUser, state } = useUser();
-  const history = useHistory();
+  const { loginUser } = useUser();
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
