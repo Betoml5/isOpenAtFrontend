@@ -13,6 +13,16 @@ export const getShops = async (setState) => {
     return error;
   }
 };
+export const getShopByName = async (name) => {
+  try {
+    const response = await axios({
+      method: "GET",
+      url: `${API}/name?name=${name}`,
+    });
+    console.log(response.data.body);
+    return response.data.body;
+  } catch (error) {}
+};
 
 export const getShop = async (id) => {
   try {

@@ -40,7 +40,7 @@ export const getUser = async (id) => {
   try {
     const response = await axios({
       method: "GET",
-      url: `${API}/user/${id}`,
+      url: `${API}/profile/${id}`,
     });
     return response.data.body;
   } catch (error) {

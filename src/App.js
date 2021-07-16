@@ -12,7 +12,9 @@ import { LoginUser } from "./components/LoginUser";
 import { User } from "./components/User";
 import { Favorites } from "./containers/Favorites";
 import { ShopReview } from "./components/ShopReview";
-
+import { initAxiosInterceptors } from "./services/auth-helpers";
+// Obtenemos el bearer token.
+initAxiosInterceptors();
 const App = () => (
   //Aqui Cualquier provider
 
