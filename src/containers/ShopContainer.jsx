@@ -15,6 +15,10 @@ export const ShopContainer = () => {
   useEffect(() => {
     getShops(setShops);
     console.log(shops);
+    return () => {
+      setShops([]);
+      setFilterShops([]);
+    };
   }, []);
 
   return (
@@ -24,8 +28,8 @@ export const ShopContainer = () => {
         <Filter />
         {shops?.length == 0 && <PageLoader />}
         {filterShops?.length > 0
-          ? filterShops.map((shop) => <Shop {...shop} key={shop.id} />)
-          : shops?.map((shop) => <Shop {...shop} key={shop.id} />)}
+          ? filterShops.map((shop) => <Shop {...shop} key={shop._id} />)
+          : shops?.map((shop) => <Shop {...shop} key={shop._id} />)}
       </div>
     </>
   );
