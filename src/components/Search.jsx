@@ -15,7 +15,6 @@ export const Search = ({ setFilterShops, filterShops }) => {
         className="rounded-md p-4 w-full"
         placeholder="Buscar..."
         onKeyDown={handleSearch}
-        onChange={onChange}
       />
     </div>
   );
