@@ -30,9 +30,7 @@ const App = () => (
           <Route exact={true} path="/sign-in" component={LoginUser} />
           <Route exact={true} path="/user/favorites" component={Favorites} />
           <Route exact={true} path="/user/:id" component={User} />
-
           <Route exact path="/admin/add-shop" component={ShopForm} />
-
           <Route component={NotFound} />
         </Switch>
       </Layout>
