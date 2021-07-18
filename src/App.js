@@ -3,16 +3,6 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Layout from "./containers/Layout";
 import NotFound from "./containers/NotFound";
 import { UserContextProvider } from "./context/userContext";
-<<<<<<< HEAD
-import { RegisterUser } from "./components/RegisterUser";
-import { LoginUser } from "./components/LoginUser";
-import { User } from "./components/User";
-import { Favorites } from "./containers/Favorites";
-import { ShopReview } from "./components/ShopReview";
-import { initAxiosInterceptors } from "./services/auth-helpers";
-// Obtenemos el bearer token.
-initAxiosInterceptors();
-=======
 import { lazy } from "react";
 // import { HeroContainer } from "./containers/HeroContainer";
 // import { ShopDetail } from "./components/ShopDetail";
@@ -34,7 +24,6 @@ const User = lazy(() => import("./components/User"));
 const Favorites = lazy(() => import("./containers/Favorites"));
 const ShopReview = lazy(() => import("./components/ShopReview"));
 
->>>>>>> development
 const App = () => (
   //Aqui Cualquier provider
 
