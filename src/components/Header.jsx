@@ -23,7 +23,7 @@ const Header = (props) => {
     } else {
       Swal.fire({
         title: "Hey!",
-        text: `Te recomendamos ir a ${shop.name}`,
+        text: `Te recomendamos ir a Mr.Taco`,
         confirmButtonText: "Ya quedo!",
       });
     }
