@@ -11,6 +11,7 @@ export function UserContextProvider({ children }) {
   const [user, setUser] = useState(() => window.localStorage.getItem("user"));
   const [userFetched, setUserFetched] = useState(() => {});
   const [shops, setShops] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   return (
     <Context.Provider
@@ -23,6 +24,8 @@ export function UserContextProvider({ children }) {
         setUserFetched,
         shops,
         setShops,
+        favorites,
+        setFavorites,
       }}
     >
       {children}

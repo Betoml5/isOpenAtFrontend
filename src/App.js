@@ -1,17 +1,28 @@
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { Layout } from "./containers/Layout";
-import { HeroContainer } from "./containers/HeroContainer";
-import { ShopDetail } from "./components/ShopDetail";
-import { ShopContainer } from "./containers/ShopContainer";
-import { NotFound } from "./containers/NotFound";
-import { ShopForm } from "./components/ShopForm";
+import Layout from "./containers/Layout";
+import NotFound from "./containers/NotFound";
 import { UserContextProvider } from "./context/userContext";
-import { RegisterUser } from "./components/RegisterUser";
-import { LoginUser } from "./components/LoginUser";
-import { User } from "./components/User";
-import { Favorites } from "./containers/Favorites";
-import { ShopReview } from "./components/ShopReview";
+import { lazy } from "react";
+// import { HeroContainer } from "./containers/HeroContainer";
+// import { ShopDetail } from "./components/ShopDetail";
+// import { ShopContainer } from "./containers/ShopContainer";
+// import { ShopForm } from "./components/ShopForm";
+// import { RegisterUser } from "./components/RegisterUser";
+// import { LoginUser } from "./components/LoginUser";
+// import { User } from "./components/User";
+// import { Favorites } from "./containers/Favorites";
+// import { ShopReview } from "./components/ShopReview";
+
+const HeroContainer = lazy(() => import("./containers/HeroContainer"));
+const ShopDetail = lazy(() => import("./components/ShopDetail"));
+const ShopContainer = lazy(() => import("./containers/ShopContainer"));
+const ShopForm = lazy(() => import("./components/ShopForm"));
+const RegisterUser = lazy(() => import("./components/RegisterUser"));
+const LoginUser = lazy(() => import("./components/LoginUser"));
+const User = lazy(() => import("./components/User"));
+const Favorites = lazy(() => import("./containers/Favorites"));
+const ShopReview = lazy(() => import("./components/ShopReview"));
 
 const App = () => (
   //Aqui Cualquier provider

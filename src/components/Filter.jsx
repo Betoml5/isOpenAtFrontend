@@ -1,6 +1,4 @@
-export const Filter = () => {
- 
-
+const Filter = () => {
   return (
     <div className="col-span-full w-full md:w-2/3  md:justify-self-center lg:w-1/2">
       <select name="Filter" id="filter" className="p-4 w-full ">
@@ -12,3 +10,5 @@ export const Filter = () => {
     </div>
   );
 };
+
+export default Filter;

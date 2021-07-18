@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-export const ShopForm = () => {
+const ShopForm = () => {
   const {
     register,
     handleSubmit,
@@ -90,3 +90,5 @@ export const ShopForm = () => {
     </form>
   );
 };
+
+export default ShopForm;

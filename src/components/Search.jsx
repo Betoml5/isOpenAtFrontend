@@ -1,4 +1,4 @@
-export const Search = () => {
+const Search = () => {
   return (
     <div className="col-span-full mt-4 md:w-2/3 md:justify-self-center">
       <input
@@ -9,3 +9,5 @@ export const Search = () => {
     </div>
   );
 };
+
+export default Search;

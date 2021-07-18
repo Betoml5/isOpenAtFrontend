@@ -1,4 +1,4 @@
-export const HeroSection = (props) => {
+const HeroSection = (props) => {
   return (
     <div className="w-56 z-20">
       <picture className="">
@@ -7,3 +7,5 @@ export const HeroSection = (props) => {
     </div>
   );
 };
+
+export default HeroSection;

@@ -9,7 +9,7 @@ import useUser from "../hooks/useUser";
 import { Link } from "react-router-dom";
 const itemStyles = "w-6 cursor-pointer";
 
-export const Header = (props) => {
+const Header = (props) => {
   const { user, isLogged } = useUser();
   const userParsed = JSON.parse(user);
   console.log("user", user);
@@ -71,3 +71,5 @@ export const Header = (props) => {
     </div>
   );
 };
+
+export default Header;

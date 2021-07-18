@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import useUser from "../hooks/useUser";
 import { Link, useHistory } from "react-router-dom";
 
-export const LoginUser = () => {
+const LoginUser = () => {
   const { loginUser } = useUser();
 
   const {
@@ -58,3 +58,5 @@ export const LoginUser = () => {
     </div>
   );
 };
+
+export default LoginUser;

@@ -14,8 +14,15 @@ import Swal from "sweetalert2";
 export default function useUser() {
   const history = useHistory();
 
-  const { jwt, setJwt, user, setUser, userFetched, setUserFetched } =
-    useContext(Context);
+  const {
+    jwt,
+    setJwt,
+    user,
+    setUser,
+    userFetched,
+    setUserFetched,
+    setFavorites,
+  } = useContext(Context);
 
   const [state, setState] = useState({ loading: false, error: false });
 
@@ -29,6 +36,7 @@ export default function useUser() {
         setState({ loading: false, error: false });
         setJwt(res.data.token);
         setUser(JSON.stringify(res.data.body));
+        console.log(res.data.body);
         history.push("/");
         console.log(res.data.body);
       } catch (error) {
@@ -109,5 +117,6 @@ export default function useUser() {
     setImageUser,
     setUserFetched,
     addFavorites,
+    setFavorites,
   };
 }

@@ -1,4 +1,4 @@
-export const UploadImageForm = ({
+ const UploadImageForm = ({
   handleUpload,
   file,
   handleChange,
@@ -29,3 +29,6 @@ export const UploadImageForm = ({
     </form>
   );
 };
+
+
+export default UploadImageForm
