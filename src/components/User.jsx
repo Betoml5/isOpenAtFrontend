@@ -9,7 +9,7 @@ import Spinner from "./Spinner";
 
 const User = (props) => {
   const { id } = useParams();
-  const { getOneUser, userFetched, logout } = useUser();
+  const { getOneUser, userFetched, logout, getProfile } = useUser();
   const [view, setView] = useState(false);
   const [file, setFile] = useState(null);
   const [url, setURL] = useState("");
@@ -46,7 +46,7 @@ const User = (props) => {
     );
   }
   useEffect(() => {
-    getOneUser(id);
+    getProfile();
   }, []);
 
   if (!userFetched) {

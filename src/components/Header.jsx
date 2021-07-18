@@ -7,15 +7,12 @@ import loginUser from "../static/loginuser.svg";
 import Swal from "sweetalert2";
 import useUser from "../hooks/useUser";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import { getUser } from "../services/User";
 const itemStyles = "w-6 cursor-pointer";
 
 const Header = (props) => {
   const { user, isLogged } = useUser();
-  const userParsed = JSON.parse(user);
-  console.log("user", user);
-  const handleRandom = () => {
+
+  const handleRandom = async () => {
     if (!user) {
       Swal.fire({
         title: "No hay usuario!",
@@ -26,15 +23,11 @@ const Header = (props) => {
     } else {
       Swal.fire({
         title: "Hey!",
-        text: `Te recomendamos ir a Mr.Boneless`,
+        text: `Te recomendamos ir a ${shop.name}`,
         confirmButtonText: "Ya quedo!",
       });
     }
   };
-
-  useEffect(async () => {
-    const res = await getUser(JSON.parse(user)._id);
-  }, []);
 
   return (
     <div className="flex justify-around items-center bg-headerRed p-4 w-full z-50 sticky bottom-0">

@@ -7,6 +7,7 @@ import {
   setImage,
   getFavorites,
   addFavorite,
+  profile,
 } from "../services/User";
 import Context from "../context/userContext";
 import Swal from "sweetalert2";
@@ -86,6 +87,15 @@ export default function useUser() {
     [setUserFetched]
   );
 
+  const getProfile = useCallback(async (id) => {
+    try {
+      const res = await profile(id);
+      setUserFetched(res);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
   const addFavorites = useCallback(async (userId, shopId) => {
     try {
       const res = await addFavorite(userId, shopId);
@@ -118,5 +128,6 @@ export default function useUser() {
     setUserFetched,
     addFavorites,
     setFavorites,
+    getProfile,
   };
 }
