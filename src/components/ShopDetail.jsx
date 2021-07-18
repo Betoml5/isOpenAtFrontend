@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getShop } from "../services/Shop";
 
-export const ShopDetail = () => {
+const ShopDetail = () => {
   const [enviosView, setEnviosView] = useState(true);
   const [resenasView, setResenasView] = useState(false);
   const [shop, setShop] = useState({});
@@ -231,3 +231,5 @@ export const ShopDetail = () => {
     </div>
   );
 };
+
+export default ShopDetail;

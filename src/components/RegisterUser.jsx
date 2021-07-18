@@ -4,7 +4,7 @@ import useUser from "../hooks/useUser";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 
-export const RegisterUser = () => {
+const RegisterUser = () => {
   const { registerUser } = useUser();
 
   const {
@@ -77,3 +77,5 @@ export const RegisterUser = () => {
     </div>
   );
 };
+
+export default RegisterUser;

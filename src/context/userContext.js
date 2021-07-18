@@ -10,10 +10,23 @@ export function UserContextProvider({ children }) {
   const [jwt, setJwt] = useState(() => window.localStorage.getItem("jwt"));
   const [user, setUser] = useState(() => window.localStorage.getItem("user"));
   const [userFetched, setUserFetched] = useState(() => {});
+  const [shops, setShops] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   return (
     <Context.Provider
-      value={{ jwt, setJwt, user, setUser, userFetched, setUserFetched }}
+      value={{
+        jwt,
+        setJwt,
+        user,
+        setUser,
+        userFetched,
+        setUserFetched,
+        shops,
+        setShops,
+        favorites,
+        setFavorites,
+      }}
     >
       {children}
     </Context.Provider>

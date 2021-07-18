@@ -3,11 +3,11 @@ import { useParams } from "react-router-dom";
 import { setImage } from "../services/User";
 import useUser from "../hooks/useUser";
 import storage from "../firebase";
-import { UploadImageForm } from "./UploadImageForm";
-import { PageLoader } from "./PageLoader";
-import { Spinner } from "./Spinner";
+import UploadImageForm from "./UploadImageForm";
+import PageLoader from "./PageLoader";
+import Spinner from "./Spinner";
 
-export const User = (props) => {
+const User = (props) => {
   const { id } = useParams();
   const { getOneUser, userFetched, logout } = useUser();
   const [view, setView] = useState(false);
@@ -76,7 +76,7 @@ export const User = (props) => {
         </div>
 
         <div className="my-2">
-          <p>Te gustan {userFetched?.favorites.length} comercios</p>
+          <p>Te gustan {userFetched?.favorites?.length} comercios</p>
         </div>
         <button
           className="btn  w-full my-2 hover:bg-veryLightRed transition-all"
@@ -102,3 +102,5 @@ export const User = (props) => {
     </div>
   );
 };
+
+export default User;

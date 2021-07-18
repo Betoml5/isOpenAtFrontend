@@ -1,10 +1,10 @@
-import { HeroSection } from "../components/HeroSection";
+import HeroSection from "../components/HeroSection";
 import eggPicture from "../static/egg.png";
 import foodPicture from "../static/food1.png";
 import food2Picture from "../static/food2.png";
 import food3Picture from "../static/food3.png";
 
-export const HeroSectionContainer = () => {
+const HeroSectionContainer = () => {
   const items = [
     {
       picture: eggPicture,
@@ -22,8 +22,10 @@ export const HeroSectionContainer = () => {
   return (
     <div className="flex justify-around w-full gap-1  bg-lightPink ">
       {items.map((item) => (
-        <HeroSection pic={item.picture} key={item.name} />
+        <HeroSection pic={item.picture} key={item.picture} />
       ))}
     </div>
   );
 };
+
+export default HeroSectionContainer;

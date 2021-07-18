@@ -1,5 +1,5 @@
 import hamburgerFood from "../static/ham.jpg";
-export const HeroItem = () => {
+const HeroItem = () => {
   return (
     <div className="relative w-2/3 md:w-1/3 max-w-xs">
       <picture className="">
@@ -11,3 +11,5 @@ export const HeroItem = () => {
     </div>
   );
 };
+
+export default HeroItem;

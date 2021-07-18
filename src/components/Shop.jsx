@@ -7,12 +7,13 @@ import starIcon from "../static/star.svg";
 import timeIcon from "../static/time.svg";
 import dollarIcon from "../static/dollar.svg";
 import notFavorite from "../static/carbon_favorite.svg";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useUser from "../hooks/useUser";
 import Swal from "sweetalert2";
 import { addFavorite, getUser, removeFavorite } from "../services/User";
+import Context from "../context/userContext";
 
-export const Shop = ({
+const Shop = ({
   _id,
   name,
   highLight,
@@ -22,14 +23,18 @@ export const Shop = ({
   address,
   openNow,
 }) => {
-  const { isLogged, addFavorites, user } = useUser();
-
+  const { isLogged, user } = useUser();
   const [userFetched, setUserFetched] = useState(null);
   const userParsed = JSON.parse(user);
 
-  const handleFavorite = () => {
+  const handleFavorite = async () => {
     if (isLogged) {
-      addFavorite(userParsed._id, _id).then((res) => console.log(res));
+      try {
+        const res = await addFavorite(userParsed._id, _id);
+        setUserFetched(res);
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       Swal.fire({
         title: "Inicia sesion",
@@ -41,7 +46,7 @@ export const Shop = ({
 
   const deleteFavorite = () => {
     if (isLogged) {
-      removeFavorite(userParsed?._id, _id).then((res) => console.log(res));
+      removeFavorite(userParsed?._id, _id).then((res) => setUserFetched(res));
     } else {
       Swal.fire({
         title: "Inicia sesion",
@@ -51,10 +56,12 @@ export const Shop = ({
     }
   };
 
-  useEffect(() => {
-    getUser(userParsed?._id).then((res) => setUserFetched(res));
-  }, [handleFavorite, deleteFavorite]);
-
+  useEffect(async () => {
+    const user = await getUser(userParsed?._id);
+    console.log(user);
+    setUserFetched(user);
+    console.log(userFetched);
+  }, []);
   return (
     <div className="flex flex-col max-w-md justify-self-center my-4 cursor-pointer">
       <Link to={`/shops/detail/${_id}`}>
@@ -139,3 +146,5 @@ export const Shop = ({
     </div>
   );
 };
+
+export default Shop;

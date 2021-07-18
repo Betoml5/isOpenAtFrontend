@@ -3,10 +3,17 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+<<<<<<< HEAD
+=======
+import { Suspense } from "react";
+import Spinner from "./components/Spinner";
+>>>>>>> development
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Suspense fallback={<Spinner />}>
+      <App />
+    </Suspense>
   </React.StrictMode>,
   document.getElementById("root")
 );

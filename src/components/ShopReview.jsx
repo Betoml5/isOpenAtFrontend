@@ -4,7 +4,7 @@ import Rating from "react-rating";
 import { useParams } from "react-router-dom";
 import { getShop } from "../services/Shop";
 
-export const ShopReview = () => {
+const ShopReview = () => {
   const [shop, setShop] = useState();
   const [rating, setRating] = useState(0);
   const { id } = useParams();
@@ -80,3 +80,5 @@ export const ShopReview = () => {
     </div>
   );
 };
+
+export default ShopReview;

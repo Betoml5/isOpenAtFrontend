@@ -1,14 +1,16 @@
-import { Filter } from "../components/Filter";
-import { Search } from "../components/Search";
-import { Shop } from "../components/Shop";
+import Filter from "../components/Filter";
+import Search from "../components/Search";
+import Shop from "../components/Shop";
 import { useEffect, useState } from "react";
 import { getShops, getShopByName } from "../services/Shop";
 
-import { PageLoader } from "../components/PageLoader";
+import PageLoader from "../components/PageLoader";
+import { useContext } from "react";
+import Context from "../context/userContext";
 
 // import shops from "../shops";
 
-export const ShopContainer = () => {
+const ShopContainer = () => {
   const [shops, setShops] = useState([]);
   const [filterShops, setFilterShops] = useState([]);
 
@@ -34,3 +36,5 @@ export const ShopContainer = () => {
     </>
   );
 };
+
+export default ShopContainer;
