@@ -7,6 +7,8 @@ import loginUser from "../static/loginuser.svg";
 import Swal from "sweetalert2";
 import useUser from "../hooks/useUser";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { getUser } from "../services/User";
 const itemStyles = "w-6 cursor-pointer";
 
 const Header = (props) => {
@@ -29,6 +31,10 @@ const Header = (props) => {
       });
     }
   };
+
+  useEffect(async () => {
+    const res = await getUser(JSON.parse(user)._id);
+  }, []);
 
   return (
     <div className="flex justify-around items-center bg-headerRed p-4 w-full z-50 sticky bottom-0">
