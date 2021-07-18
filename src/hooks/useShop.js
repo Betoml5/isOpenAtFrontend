@@ -3,14 +3,15 @@ import Context from "../context/userContext";
 import { getShop, getShops } from "../services/Shop";
 
 export default useShop = () => {
-  const { shops, setShops } = useContext(Context);
-
-  const getAllShops = async () => {
-    try {
-      const response = await getShops();
-      setShops(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { shops, setShops, favorites, setFavorites } = useContext(Context);
 };
+
+let favoritesArray = ["Mr.boneless", "Mr.taco"];
+
+function addFavorite(payload) {
+  favoritesArray = [...favoritesArray, payload];
+}
+
+addFavorite("Mr.Bone");
+
+console.log(favoritesArray);

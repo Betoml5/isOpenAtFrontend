@@ -30,16 +30,18 @@ export default function useUser() {
   const loginUser = useCallback(
     async (username, password) => {
       try {
-        setState({ loading: true, error: false });
         const res = await signin(username, password);
-        window.localStorage.setItem("jwt", res.data.token);
-        window.localStorage.setItem("user", JSON.stringify(res.data.body));
+        setState({ loading: true, error: false });
         setState({ loading: false, error: false });
         setJwt(res.data.token);
         setUser(JSON.stringify(res.data.body));
-        console.log(res.data.body);
+        const id = res.data.body._id;
+        const user = await getUser(id);
+        setUserFetched(user);
+        console.log(userFetched);
+        window.localStorage.setItem("user", JSON.stringify(res.data.body));
+        window.localStorage.setItem("jwt", res.data.token);
         history.push("/");
-        console.log(res.data.body);
       } catch (error) {
         window.localStorage.removeItem("jwt");
         window.localStorage.removeItem("user");
@@ -90,7 +92,6 @@ export default function useUser() {
   const getProfile = useCallback(async (id) => {
     try {
       const res = await profile(id);
-      setUserFetched(res);
     } catch (error) {
       console.log(error);
     }

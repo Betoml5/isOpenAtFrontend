@@ -7,12 +7,17 @@ import loginUser from "../static/loginuser.svg";
 import Swal from "sweetalert2";
 import useUser from "../hooks/useUser";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { getUser } from "../services/User";
 const itemStyles = "w-6 cursor-pointer";
 
 const Header = (props) => {
-  const { user, isLogged } = useUser();
+  const { user, isLogged, userFetched } = useUser();
+  const userParsed = JSON.parse(user);
 
-  const handleRandom = async () => {
+  console.log("userFetched", userFetched);
+
+  const handleRandom = () => {
     if (!user) {
       Swal.fire({
         title: "No hay usuario!",
@@ -23,7 +28,7 @@ const Header = (props) => {
     } else {
       Swal.fire({
         title: "Hey!",
-        text: `Te recomendamos ir a Mr.Taco`,
+        text: `Te recomendamos ir a Mr.Boneless`,
         confirmButtonText: "Ya quedo!",
       });
     }

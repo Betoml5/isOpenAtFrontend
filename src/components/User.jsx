@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { setImage } from "../services/User";
 import useUser from "../hooks/useUser";
 import storage from "../firebase";
@@ -9,11 +9,12 @@ import Spinner from "./Spinner";
 
 const User = (props) => {
   const { id } = useParams();
-  const { getOneUser, userFetched, logout, getProfile } = useUser();
+  const { getOneUser, userFetched, logout, getProfile, isLogged } = useUser();
   const [view, setView] = useState(false);
   const [file, setFile] = useState(null);
   const [url, setURL] = useState("");
   const [progress, setProgress] = useState(0);
+  const history = useHistory();
   console.log(userFetched);
 
   function handleChange(e) {
@@ -48,6 +49,10 @@ const User = (props) => {
   useEffect(() => {
     getProfile();
   }, []);
+
+  if (!isLogged) {
+    history.push("/");
+  }
 
   if (!userFetched) {
     return <PageLoader />;
