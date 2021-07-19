@@ -9,15 +9,15 @@ import useUser from "../hooks/useUser";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { getUser } from "../services/User";
+import { getShop } from "../services/Shop";
 const itemStyles = "w-6 cursor-pointer";
 
 const Header = (props) => {
   const { user, isLogged, userFetched } = useUser();
   const userParsed = JSON.parse(user);
+  console.log("user fetched", userFetched?.favorites);
 
-  console.log("userFetched", userFetched);
-
-  const handleRandom = () => {
+  const handleRandom = async () => {
     if (!user) {
       Swal.fire({
         title: "No hay usuario!",
@@ -26,9 +26,14 @@ const Header = (props) => {
         icon: "info",
       });
     } else {
+      const randomPlace =
+        userFetched?.favorites[
+          Math.floor(Math.random() * userFetched?.favorites?.length)
+        ];
+      const shop = await getShop(randomPlace);
       Swal.fire({
         title: "Hey!",
-        text: `Te recomendamos ir a Mr.Boneless`,
+        text: `Te recomendamos ir a ${shop.name}`,
         confirmButtonText: "Ya quedo!",
       });
     }

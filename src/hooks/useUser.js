@@ -38,10 +38,10 @@ export default function useUser() {
         const id = res.data.body._id;
         const user = await getUser(id);
         setUserFetched(user);
-        console.log(userFetched);
+        console.log("user fetched", user);
         window.localStorage.setItem("user", JSON.stringify(res.data.body));
         window.localStorage.setItem("jwt", res.data.token);
-        history.push("/");
+        // history.push("/");
       } catch (error) {
         window.localStorage.removeItem("jwt");
         window.localStorage.removeItem("user");
@@ -77,17 +77,17 @@ export default function useUser() {
     history.push("/");
   }, [setJwt, setUser]);
 
-  const getOneUser = useCallback(
-    async (id) => {
-      try {
-        const res = await getUser(id);
-        setUserFetched(res);
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    [setUserFetched]
-  );
+  // const getOneUser = useCallback(
+  //   async (id) => {
+  //     try {
+  //       const res = await getUser(id);
+  //       setUserFetched(res);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   },
+  //   [setUserFetched]
+  // );
 
   const getProfile = useCallback(async (id) => {
     try {
@@ -123,7 +123,7 @@ export default function useUser() {
     logout,
     registerUser,
     user,
-    getOneUser,
+    // getOneUser,
     userFetched,
     setImageUser,
     setUserFetched,

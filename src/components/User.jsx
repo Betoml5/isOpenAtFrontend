@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { setImage } from "../services/User";
+import {  setImage } from "../services/User";
 import useUser from "../hooks/useUser";
 import storage from "../firebase";
 import UploadImageForm from "./UploadImageForm";
@@ -9,7 +9,7 @@ import Spinner from "./Spinner";
 
 const User = (props) => {
   const { id } = useParams();
-  const { getOneUser, userFetched, logout, getProfile, isLogged } = useUser();
+  const { userFetched, logout, isLogged } = useUser();
   const [view, setView] = useState(false);
   const [file, setFile] = useState(null);
   const [url, setURL] = useState("");
@@ -39,16 +39,15 @@ const User = (props) => {
           setURL(url);
           setImage(id, url).then((res) => console.log(res));
           setTimeout(() => {
-            getOneUser(id);
             setView(!view);
           }, 100);
         });
       }
     );
   }
-  useEffect(() => {
-    getProfile();
-  }, []);
+  // useEffect(() => {
+  //   getProfile();
+  // }, []);
 
   if (!isLogged) {
     history.push("/");
