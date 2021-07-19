@@ -2,8 +2,9 @@ import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Layout from "./containers/Layout";
 import NotFound from "./containers/NotFound";
-import Context, { UserContextProvider } from "./context/userContext";
-import { lazy, useContext } from "react";
+import { UserContextProvider } from "./context/userContext";
+import { lazy } from "react";
+import ShopReview from "./components/ShopReview";
 import { initAxiosInterceptors } from "./services/auth-helpers";
 // import { HeroContainer } from "./containers/HeroContainer";
 // import { ShopDetail } from "./components/ShopDetail";
@@ -14,6 +15,7 @@ import { initAxiosInterceptors } from "./services/auth-helpers";
 // import { User } from "./components/User";
 // import { Favorites } from "./containers/Favorites";
 // import { ShopReview } from "./components/ShopReview";
+// const ShopReview = lazy(() => import("./components/ShopReview"));
 
 const HeroContainer = lazy(() => import("./containers/HeroContainer"));
 const ShopDetail = lazy(() => import("./components/ShopDetail"));
@@ -23,8 +25,6 @@ const RegisterUser = lazy(() => import("./components/RegisterUser"));
 const LoginUser = lazy(() => import("./components/LoginUser"));
 const User = lazy(() => import("./components/User"));
 const Favorites = lazy(() => import("./containers/Favorites"));
-const ShopReview = lazy(() => import("./components/ShopReview"));
-
 
 initAxiosInterceptors();
 const App = () => {

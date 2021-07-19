@@ -282,3 +282,17 @@ export const setHighLight = async (shopId) => {
     return error;
   }
 };
+
+export const createReview = async (shopId, email, name, text) => {
+  try {
+    const response = await axios({
+      method: "patch",
+      url: `${API}/review/${shopId}?name=${name}&text=${text}`,
+      data: email,
+    });
+
+    return response.data.body;
+  } catch (error) {
+    return error;
+  }
+};
