@@ -2,13 +2,8 @@ import Filter from "../components/Filter";
 import Search from "../components/Search";
 import Shop from "../components/Shop";
 import { useEffect, useState } from "react";
-import { getShops, getShopByName } from "../services/Shop";
-
+import { getShops } from "../services/Shop";
 import PageLoader from "../components/PageLoader";
-import { useContext } from "react";
-import Context from "../context/userContext";
-
-// import shops from "../shops";
 
 const ShopContainer = () => {
   const [shops, setShops] = useState([]);

@@ -11,7 +11,6 @@ import {
 } from "../services/Shop";
 
 const ShopReview = () => {
-  const [shop, setShop] = useState();
   const [ratingValue, setRatingValue] = useState(0);
   const { id } = useParams();
   const history = useHistory();
@@ -59,8 +58,6 @@ const ShopReview = () => {
           onSubmit={handleSubmit(onSubmit)}
           ref={form}
         >
-          <h3 className="text-3xl self-center mb-6 font-bold ">{shop?.name}</h3>
-
           <label htmlFor="name" className=" font-normal text-2xl my-2">
             Nombre
           </label>

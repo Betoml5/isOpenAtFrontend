@@ -1,13 +1,6 @@
 import { useCallback, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import {
-  signup,
-  signin,
-  getUser,
-  setImage,
-  addFavorite,
-  profile,
-} from "../services/User";
+import { signup, signin, setImage, addFavorite } from "../services/User";
 import Context from "../context/userContext";
 import Swal from "sweetalert2";
 
@@ -34,10 +27,6 @@ export default function useUser() {
         setState({ loading: false, error: false });
         setJwt(res.data.token);
         setUser(JSON.stringify(res.data.body));
-        const id = res.data.body._id;
-        const user = await getUser(id);
-        setUserFetched(user);
-        console.log("user fetched", user);
         window.localStorage.setItem("user", JSON.stringify(res.data.body));
         window.localStorage.setItem("jwt", res.data.token);
         // history.push("/");
@@ -74,7 +63,7 @@ export default function useUser() {
     setUser(null);
     setJwt(null);
     history.push("/");
-  }, [setJwt, setUser]);
+  }, [history, setJwt, setUser]);
 
   // const getOneUser = useCallback(
   //   async (id) => {
@@ -88,13 +77,13 @@ export default function useUser() {
   //   [setUserFetched]
   // );
 
-  const getProfile = useCallback(async (id) => {
-    try {
-      const res = await profile(id);
-    } catch (error) {
-      console.log(error);
-    }
-  });
+  // const getProfile = useCallback(async (id) => {
+  //   try {
+  //     const res = await profile(id);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // });
 
   const addFavorites = useCallback(async (userId, shopId) => {
     try {
@@ -128,6 +117,6 @@ export default function useUser() {
     setUserFetched,
     addFavorites,
     setFavorites,
-    getProfile,
+    // getProfile,
   };
 }

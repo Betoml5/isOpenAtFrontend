@@ -4,7 +4,6 @@ import LocationIcon from "../static/location.svg";
 import UserIcon from "../static/user.svg";
 import LoveIcon from "../static/love.svg";
 import loginUser from "../static/loginuser.svg";
-import Swal from "sweetalert2";
 import useUser from "../hooks/useUser";
 import { Link } from "react-router-dom";
 const itemStyles = "w-6 cursor-pointer";

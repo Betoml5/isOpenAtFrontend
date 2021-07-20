@@ -22,7 +22,9 @@ const Shop = ({
   rating,
   address,
   openNow,
+  reviews,
 }) => {
+  console.log(reviews);
   const { isLogged, user } = useUser();
   const [userFetched, setUserFetched] = useState(null);
   const userParsed = JSON.parse(user);
@@ -124,13 +126,17 @@ const Shop = ({
             <picture>
               <img src={starIcon} alt="starIcon" className="w-6 h-5" />
             </picture>
-            <p className="text-white">{rating}</p>
+            <p className="text-white">
+              {rating <= 0 ? 0 : (rating / reviews?.length).toFixed(2)}
+            </p>
           </div>
           <div className="flex items-center">
             <picture>
               <img src={timeIcon} alt="timeIcon" />
             </picture>
-            <p className="lg:text-sm">{avgTime} minutos</p>
+            <p className="lg:text-sm">
+              {avgTime <= 0 ? 0 : Math.floor(avgTime / reviews?.length)} Min
+            </p>
           </div>
           <div className="flex items-center">
             <picture>

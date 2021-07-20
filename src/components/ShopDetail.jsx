@@ -16,12 +16,10 @@ const ShopDetail = () => {
   // const [like, setLike] = useState(false);
   const { id } = useParams();
 
-  useEffect(() => {
-    getShop(id).then((res) => {
-      console.log(res);
-
-      setShop(res);
-    });
+  useEffect(async () => {
+    const res = await getShop(id);
+    console.log(res);
+    setShop(res);
     console.log("shop reviews", shop?.reviews);
   }, []);
 
@@ -67,14 +65,22 @@ const ShopDetail = () => {
               <img src={starIcon} alt="" className="w-6 h-5" />
             </picture>
             <p className="text-white">
-              {(shop?.rating / shop?.reviews?.length).toFixed(2)}
+              {shop?.rating <= 0
+                ? 0
+                : (shop?.rating / shop?.reviews?.length).toFixed(2)}
             </p>
           </div>
           <div className="flex">
             <picture>
               <img src={timeIcon} alt="" />
             </picture>
-            <p>{Math.floor(shop?.avgTime / shop?.reviews?.length)} Min</p>
+            <p>
+              {" "}
+              {shop?.avgTime <= 0
+                ? 0
+                : Math.floor(shop?.avgTime / shop?.reviews?.length)}{" "}
+              Min
+            </p>
           </div>
           <div className="flex">
             <picture>
