@@ -5,7 +5,6 @@ import {
   signin,
   getUser,
   setImage,
-  getFavorites,
   addFavorite,
   profile,
 } from "../services/User";

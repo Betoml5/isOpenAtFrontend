@@ -67,7 +67,9 @@ export const profile = async (id) => {
       url: `${API}/profile/${id}`,
     });
     return response.data.body;
-  } catch (error) {}
+  } catch (error) {
+    return error;
+  }
 };
 
 export const addFavorite = async (userId, shopId) => {

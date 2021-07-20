@@ -23,8 +23,8 @@ const Shop = ({
   address,
   openNow,
 }) => {
-  const { isLogged, user, userFetched, setUserFetched } = useUser();
-  // const [userFetched, setUserFetched] = useState(null);
+  const { isLogged, user } = useUser();
+  const [userFetched, setUserFetched] = useState(null);
   const userParsed = JSON.parse(user);
 
   const handleFavorite = async () => {

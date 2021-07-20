@@ -30,8 +30,10 @@ export const getShop = async (id) => {
       method: "GET",
       url: `${API}/shop/${id}`,
     });
+    console.log("getshop", response.data.body);
     return response.data.body;
   } catch (error) {
+    console.log(error);
     return error;
   }
 };
@@ -165,6 +167,22 @@ export const getAvgPrice = async (shopId) => {
     });
     return response.data.body;
   } catch (error) {
+    return error;
+  }
+};
+
+export const setAvgPrice = async (shopId, avgPrice) => {
+  try {
+    const response = await axios({
+      method: "PATCH",
+      url: `${API}/avgprice/${shopId}`,
+      data: {
+        avgPrice: avgPrice,
+      },
+    });
+    return response.data.body;
+  } catch (error) {
+    console.log(error);
     return error;
   }
 };

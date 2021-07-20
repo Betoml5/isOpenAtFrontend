@@ -3,11 +3,16 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Rating from "react-rating";
 import { useHistory, useParams } from "react-router-dom";
-import { createReview, getShop } from "../services/Shop";
+import {
+  createReview,
+  setRating,
+  setAvgTime,
+  setAvgPrice,
+} from "../services/Shop";
 
 const ShopReview = () => {
   const [shop, setShop] = useState();
-  const [rating, setRating] = useState(0);
+  const [ratingValue, setRatingValue] = useState(0);
   const { id } = useParams();
   const history = useHistory();
 
@@ -18,20 +23,33 @@ const ShopReview = () => {
     formState: { errors },
   } = useForm();
 
+  console.log(watch("avgprice"));
+  console.log(watch("holdingtime"));
+
   const form = useRef("");
 
   const onSubmit = async (data) => {
-    const response = await createReview(
-      id,
-      data.email,
-      data.name,
-      data.comments
-    );
-    form.current.reset();
-    history.goBack();
-    console.log(response);
-  };
+    try {
+      const createdReview = await createReview(
+        id,
+        data.email,
+        data.name,
+        data.comments
+      );
+      const ratingResponse = await setRating(id, ratingValue);
+      const avgTimeResponse = await setAvgTime(id, data.holdingtime);
+      const avgPriceResponse = await setAvgPrice(id, parseInt(data.avgprice));
 
+      form.current.reset();
+      history.goBack();
+      console.log(avgPriceResponse);
+      console.log(avgTimeResponse);
+      console.log(ratingResponse);
+      console.log(createdReview);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="w-full ">
@@ -69,6 +87,33 @@ const ShopReview = () => {
           {errors.email && (
             <span className="field-required">Este campo es obligatorio</span>
           )}
+
+          <label htmlFor="shopName" className=" text-2xl font-normal my-2">
+            Tiempo de espera (Minutos)
+          </label>
+          <input
+            type="number"
+            className="form-field"
+            name="email"
+            placeholder="Tiempo de espera en minutos"
+            {...register("holdingtime", { required: true })}
+          />
+          {errors.holdingtime && (
+            <span className="field-required">Este campo es obligatorio</span>
+          )}
+          <label htmlFor="shopName" className=" text-2xl font-normal my-2">
+            Precio promedio
+          </label>
+          <input
+            type="number"
+            className="form-field"
+            name="email"
+            placeholder="Precio promedio"
+            {...register("avgprice", { required: true })}
+          />
+          {errors.holdingtime && (
+            <span className="field-required">Este campo es obligatorio</span>
+          )}
           <label htmlFor="comment" className=" font-normal text-2xl my-2">
             Cometarios
           </label>
@@ -84,7 +129,6 @@ const ShopReview = () => {
           {errors.comments && (
             <span className="field-required">Este campo es obligatorio</span>
           )}
-
           <label htmlFor="shopName" className=" text-2xl font-normal my-2">
             Rating
           </label>
@@ -93,10 +137,10 @@ const ShopReview = () => {
             emptySymbol="fa fa-star-o fa-2x"
             fullSymbol="fa fa-star fa-2x"
             className="text-yellow-400 my-4"
-            initialRating={rating}
-            onChange={(value) => setRating(value)}
+            initialRating={ratingValue}
+            onChange={(value) => setRatingValue(value)}
           />
-          {rating <= 0 && (
+          {ratingValue <= 0 && (
             <span className="field-required">Este campo es obligatorio</span>
           )}
           <button type="submit" className="btn ">

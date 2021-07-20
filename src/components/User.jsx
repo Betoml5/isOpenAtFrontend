@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import {  setImage } from "../services/User";
+import { getUser, setImage } from "../services/User";
 import useUser from "../hooks/useUser";
 import storage from "../firebase";
 import UploadImageForm from "./UploadImageForm";
@@ -9,13 +9,14 @@ import Spinner from "./Spinner";
 
 const User = (props) => {
   const { id } = useParams();
-  const { userFetched, logout, isLogged } = useUser();
+  const { logout, isLogged, user } = useUser();
   const [view, setView] = useState(false);
   const [file, setFile] = useState(null);
   const [url, setURL] = useState("");
   const [progress, setProgress] = useState(0);
+  const [userFetched, setUserFetched] = useState({});
   const history = useHistory();
-  console.log(userFetched);
+  const userParsed = JSON.parse(user);
 
   function handleChange(e) {
     setFile(e.target.files[0]);
@@ -45,9 +46,10 @@ const User = (props) => {
       }
     );
   }
-  // useEffect(() => {
-  //   getProfile();
-  // }, []);
+  useEffect(async () => {
+    const response = await getUser(userParsed._id);
+    setUserFetched(response);
+  }, []);
 
   if (!isLogged) {
     history.push("/");
