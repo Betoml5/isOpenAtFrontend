@@ -11,23 +11,7 @@ const itemStyles = "w-6 cursor-pointer";
 
 const Header = (props) => {
   const { user, isLogged } = useUser();
-
-  const handleRandom = async () => {
-    if (!user) {
-      Swal.fire({
-        title: "No hay usuario!",
-        text: `Inicia Sesion primero :)`,
-        confirmButtonText: "OK",
-        icon: "info",
-      });
-    } else {
-      Swal.fire({
-        title: "Hey!",
-        text: `Te recomendamos ir a Mr.Taco`,
-        confirmButtonText: "Ya quedo!",
-      });
-    }
-  };
+  const userParsed = JSON.parse(user);
 
   return (
     <div className="flex justify-around items-center bg-headerRed p-4 w-full z-50 sticky bottom-0">
@@ -36,15 +20,12 @@ const Header = (props) => {
           <img src={HomeIcon} alt="home" className={itemStyles} />
         </picture>
       </Link>
-      <Link to="/favorites">
+      <Link to="/user/favorites">
         <picture>
           <img src={LoveIcon} alt="LoveIcon" className={itemStyles} />
         </picture>
       </Link>
-      <div
-        className="bg-white p-2 rounded-full cursor-pointer"
-        onClick={handleRandom}
-      >
+      <div className="bg-white p-2 rounded-full cursor-pointer">
         <picture>
           <img src={DadosIcon} alt="randomPic" className="w-8" />
         </picture>

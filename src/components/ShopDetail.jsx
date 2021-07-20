@@ -19,10 +19,10 @@ const ShopDetail = () => {
   useEffect(() => {
     getShop(id).then((res) => {
       console.log(res);
+
       setShop(res);
     });
-
-    console.log(`shop ${shop}`);
+    console.log("shop reviews", shop?.reviews);
   }, []);
 
   return (
@@ -42,20 +42,9 @@ const ShopDetail = () => {
         <div className="p-6">
           <div className="flex justify-between ">
             <div className="flex items-center">
-              <h4 className="mr-2">{shop.name}</h4>
+              <h4 className="mr-2">{shop?.name}</h4>
               <img src={verifyIcon} alt="verifyIcon" className="w-6" />
             </div>
-            {/* <div onClick={() => setLike(!like)} className="cursor-pointer">
-              {like ? (
-                <div className="cursor-pointer">
-                  <img src={favoriteIcon} alt="favoriteIcon" />
-                </div>
-              ) : (
-                <div className="cursor-pointer ">
-                  <img src={notFavorite} alt="favoriteIcon" />
-                </div>
-              )}
-            </div> */}
           </div>
 
           <div className="flex items-center my-2 ">
@@ -69,7 +58,7 @@ const ShopDetail = () => {
               </p>
             )}
           </div>
-          <p className="">{shop.address}</p>
+          <p className="">{shop?.address}</p>
         </div>
         <hr />
         <div className="flex items-center justify-around py-4">
@@ -77,13 +66,15 @@ const ShopDetail = () => {
             <picture>
               <img src={starIcon} alt="" className="w-6 h-5" />
             </picture>
-            <p className="text-white">{shop.rating}</p>
+            <p className="text-white">
+              {(shop?.rating / shop?.reviews?.length).toFixed(2)}
+            </p>
           </div>
           <div className="flex">
             <picture>
               <img src={timeIcon} alt="" />
             </picture>
-            <p>{shop.avgTime}</p>
+            <p>{Math.floor(shop?.avgTime / shop?.reviews?.length)} Min</p>
           </div>
           <div className="flex">
             <picture>
@@ -138,75 +129,12 @@ const ShopDetail = () => {
             resenasView ? `flex p-4 lg:justify-evenly slider` : `hidden`
           }`}
         >
-          <div className="bg-white rounded-lg shadow-2xl sliderReviewItem p-4 max-h-96 overflow-y-scroll">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-              expedita perferendis voluptatum, optio iure delectus eos! Esse
-              excepturi, aliquam illo doloremque temporibus autem ipsam. Ipsam
-              eius natus unde beatae nulla! Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Beatae expedita perferendis
-              voluptatum, optio iure delectus eos! Esse excepturi, aliquam illo
-              doloremque temporibus autem ipsam. Ipsam eius natus unde beatae
-              nulla! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Beatae expedita perferendis voluptatum, optio iure delectus eos!
-              Esse excepturi, aliquam illo doloremque temporibus autem ipsam.
-              Ipsam eius natus unde beatae nulla! Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Beatae expedita perferendis
-              voluptatum, optio iure delectus eos! Esse excepturi, aliquam illo
-              doloremque temporibus autem ipsam. Ipsam eius natus unde beatae
-              nulla! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Beatae expedita perferendis voluptatum, optio iure delectus eos!
-              Esse excepturi, aliquam illo doloremque temporibus autem ipsam.
-              Ipsam eius natus unde beatae nulla!
-            </p>
-            <p className="my-2">De: Alberto Martinez</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-2xl sliderReviewItem p-4 max-h-96 overflow-y-scroll">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-              expedita perferendis voluptatum, optio iure delectus eos! Esse
-              excepturi, aliquam illo doloremque temporibus autem ipsam. Ipsam
-              eius natus unde beatae nulla! Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Beatae expedita perferendis
-              voluptatum, optio iure delectus eos! Esse excepturi, aliquam illo
-              doloremque temporibus autem ipsam. Ipsam eius natus unde beatae
-              nulla! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Beatae expedita perferendis voluptatum, optio iure delectus eos!
-              Esse excepturi, aliquam illo doloremque temporibus autem ipsam.
-              Ipsam eius natus unde beatae nulla! Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Beatae expedita perferendis
-              voluptatum, optio iure delectus eos! Esse excepturi, aliquam illo
-              doloremque temporibus autem ipsam. Ipsam eius natus unde beatae
-              nulla! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Beatae expedita perferendis voluptatum, optio iure delectus eos!
-              Esse excepturi, aliquam illo doloremque temporibus autem ipsam.
-              Ipsam eius natus unde beatae nulla!
-            </p>
-            <p className="my-2">De: Alberto Martinez</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-2xl sliderReviewItem p-4 max-h-96 overflow-y-scroll">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-              expedita perferendis voluptatum, optio iure delectus eos! Esse
-              excepturi, aliquam illo doloremque temporibus autem ipsam. Ipsam
-              eius natus unde beatae nulla! Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Beatae expedita perferendis
-              voluptatum, optio iure delectus eos! Esse excepturi, aliquam illo
-              doloremque temporibus autem ipsam. Ipsam eius natus unde beatae
-              nulla! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Beatae expedita perferendis voluptatum, optio iure delectus eos!
-              Esse excepturi, aliquam illo doloremque temporibus autem ipsam.
-              Ipsam eius natus unde beatae nulla! Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Beatae expedita perferendis
-              voluptatum, optio iure delectus eos! Esse excepturi, aliquam illo
-              doloremque temporibus autem ipsam. Ipsam eius natus unde beatae
-              nulla! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Beatae expedita perferendis voluptatum, optio iure delectus eos!
-              Esse excepturi, aliquam illo doloremque temporibus autem ipsam.
-              Ipsam eius natus unde beatae nulla!
-            </p>
-            <p className="my-2">De: Alberto Martinez</p>
-          </div>
+          {shop?.reviews?.map((review) => (
+            <div className="bg-white rounded-lg shadow-2xl sliderReviewItem p-4 max-h-96 overflow-y-scroll">
+              <p>{review?.text}</p>
+              <p className="my-2 italic font-bold">{review?.name}</p>
+            </div>
+          ))}
         </div>
 
         <div

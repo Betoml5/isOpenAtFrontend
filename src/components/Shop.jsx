@@ -7,7 +7,7 @@ import starIcon from "../static/star.svg";
 import timeIcon from "../static/time.svg";
 import dollarIcon from "../static/dollar.svg";
 import notFavorite from "../static/carbon_favorite.svg";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useUser from "../hooks/useUser";
 import Swal from "sweetalert2";
 import { addFavorite, getUser, removeFavorite } from "../services/User";
@@ -44,9 +44,10 @@ const Shop = ({
     }
   };
 
-  const deleteFavorite = () => {
+  const deleteFavorite = async () => {
     if (isLogged) {
-      removeFavorite(userParsed?._id, _id).then((res) => setUserFetched(res));
+      const res = await removeFavorite(userParsed?._id, _id);
+      setUserFetched(res);
     } else {
       Swal.fire({
         title: "Inicia sesion",
@@ -58,9 +59,7 @@ const Shop = ({
 
   useEffect(async () => {
     const user = await getUser(userParsed?._id);
-    console.log(user);
     setUserFetched(user);
-    console.log(userFetched);
   }, []);
   return (
     <div className="flex flex-col max-w-md justify-self-center my-4 cursor-pointer">

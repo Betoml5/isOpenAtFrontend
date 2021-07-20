@@ -5,7 +5,6 @@ import {
   signin,
   getUser,
   setImage,
-  getFavorites,
   addFavorite,
   profile,
 } from "../services/User";
@@ -30,16 +29,18 @@ export default function useUser() {
   const loginUser = useCallback(
     async (username, password) => {
       try {
-        setState({ loading: true, error: false });
         const res = await signin(username, password);
-        window.localStorage.setItem("jwt", res.data.token);
-        window.localStorage.setItem("user", JSON.stringify(res.data.body));
+        setState({ loading: true, error: false });
         setState({ loading: false, error: false });
         setJwt(res.data.token);
         setUser(JSON.stringify(res.data.body));
-        console.log(res.data.body);
-        history.push("/");
-        console.log(res.data.body);
+        const id = res.data.body._id;
+        const user = await getUser(id);
+        setUserFetched(user);
+        console.log("user fetched", user);
+        window.localStorage.setItem("user", JSON.stringify(res.data.body));
+        window.localStorage.setItem("jwt", res.data.token);
+        // history.push("/");
       } catch (error) {
         window.localStorage.removeItem("jwt");
         window.localStorage.removeItem("user");
@@ -75,22 +76,21 @@ export default function useUser() {
     history.push("/");
   }, [setJwt, setUser]);
 
-  const getOneUser = useCallback(
-    async (id) => {
-      try {
-        const res = await getUser(id);
-        setUserFetched(res);
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    [setUserFetched]
-  );
+  // const getOneUser = useCallback(
+  //   async (id) => {
+  //     try {
+  //       const res = await getUser(id);
+  //       setUserFetched(res);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   },
+  //   [setUserFetched]
+  // );
 
   const getProfile = useCallback(async (id) => {
     try {
       const res = await profile(id);
-      setUserFetched(res);
     } catch (error) {
       console.log(error);
     }
@@ -122,7 +122,7 @@ export default function useUser() {
     logout,
     registerUser,
     user,
-    getOneUser,
+    // getOneUser,
     userFetched,
     setImageUser,
     setUserFetched,

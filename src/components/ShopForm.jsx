@@ -16,7 +16,7 @@ const ShopForm = () => {
     console.log(data);
     axios({
       method: "POST",
-      url: "http://localhost:3013/api/shops/create",
+      url: "https://isopenatapi.herokuapp.com/api/shops/create",
       data,
     })
       .then(() => {
