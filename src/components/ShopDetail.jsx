@@ -8,19 +8,24 @@ import hamburgerPic from "../static/ham.jpg";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getShop } from "../services/Shop";
+import useUser from "../hooks/useUser";
+import { getUser } from "../services/User";
 
 const ShopDetail = () => {
   const [enviosView, setEnviosView] = useState(true);
   const [resenasView, setResenasView] = useState(false);
   const [shop, setShop] = useState({});
+  const [userFetched, setUserFetched] = useState({});
+  const { user } = useUser();
+  const userParsed = JSON.parse(user);
   // const [like, setLike] = useState(false);
   const { id } = useParams();
 
   useEffect(async () => {
     const res = await getShop(id);
-    console.log(res);
     setShop(res);
-    console.log("shop reviews", shop?.reviews);
+    const response = await getUser(userParsed?._id);
+    setUserFetched(response);
   }, []);
 
   return (
@@ -62,7 +67,7 @@ const ShopDetail = () => {
         <div className="flex items-center justify-around py-4">
           <div className="flex items-center bg-veryHighOrange w-max p-2 rounded-lg">
             <picture>
-              <img src={starIcon} alt="" className="w-6 h-5" />
+              <img src={starIcon} alt="starIcon" className="w-6 h-5" />
             </picture>
             <p className="text-white">
               {shop?.rating <= 0
@@ -72,7 +77,7 @@ const ShopDetail = () => {
           </div>
           <div className="flex">
             <picture>
-              <img src={timeIcon} alt="" />
+              <img src={timeIcon} alt="timeIcon" loading="lazy" />
             </picture>
             <p>
               {" "}
@@ -84,7 +89,7 @@ const ShopDetail = () => {
           </div>
           <div className="flex">
             <picture>
-              <img src={dollarIcon} alt="" />
+              <img src={dollarIcon} alt="dollarIcon" loading="lazy" />
             </picture>
             {shop?.freeShipping ? <p>Envio gratis</p> : <p>Envio con costo</p>}
           </div>
@@ -92,14 +97,20 @@ const ShopDetail = () => {
 
         <div className="flex items-center self-center shadow-2xl my-6 p-4 rounded-lg">
           <picture>
-            <img src={percentIcon} alt="" />
+            <img src={percentIcon} alt="percentIcon" loading="lazy" />
           </picture>
           <p>Codigo "IsOpenAt" para un 5% off</p>
         </div>
 
-        <div className="bg-veryHighOrange p-4 self-center text-white rounded-lg">
+        <div className=" bg-veryHighOrange p-4 self-center text-white rounded-lg">
           <Link to={`/shops/review/${id}`}>Hacer reseña</Link>
         </div>
+
+        {userFetched?.admin && (
+          <div className="bg-veryHighOrange p-4 self-center text-white rounded-lg my-4">
+            <Link to={`/shops/review/${id}`}>Editar</Link>
+          </div>
+        )}
 
         <div className="flex self-center justify-between my-4 w-3/4">
           <div
