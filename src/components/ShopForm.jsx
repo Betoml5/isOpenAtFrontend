@@ -1,7 +1,8 @@
-import axios from "axios";
+import { useState } from "react";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
-import Swal from "sweetalert2";
+import { createShop, setImageCover } from "../services/Shop";
+import storage from "../firebase";
 
 const ShopForm = () => {
   const {
@@ -11,30 +12,46 @@ const ShopForm = () => {
     formState: { errors },
   } = useForm();
 
+  const [view, setView] = useState(false);
+  const [file, setFile] = useState(null);
+  const [url, setURL] = useState("");
+  const [progress, setProgress] = useState(0);
+
+  function handleChange(e) {
+    console.log(e.target.files[0].name);
+    setFile(e.target.files[0]);
+  }
+
+  // console.log(watch("name"));
+
   const form = useRef("");
   const onSubmit = (data) => {
-    console.log(data);
-    axios({
-      method: "POST",
-      url: "https://isopenatapi.herokuapp.com/api/shops/create",
-      data,
-    })
-      .then(() => {
-        Swal.fire({
-          title: "Comercio Registrado",
-          text: `Hey, ya quedo registrado ${watch("name")}`,
-          confirmButtonText: "Ya quedo!",
-        });
+    createShop(data.name, data.address, data.email, data.phone)
+      .then((response) => {
+        const ref = storage.ref(`/images/${file?.name}`);
+        const uploadTask = ref.put(file);
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progressData =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            setProgress(progressData);
+          },
+          console.error,
+          () => {
+            ref.getDownloadURL().then((url) => {
+              setFile(null);
+              setURL(url);
+              setImageCover(response?._id, url);
+              setTimeout(() => {
+                setView(!view);
+              }, 100);
+            });
+          }
+        );
         form.current.reset();
       })
-      .catch(() =>
-        Swal.fire({
-          title: "Error",
-          text: "Uy! Hubo un error al registrar el comercio",
-          icon: "error",
-          confirmButtonText: "Ni pedo",
-        })
-      );
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -86,7 +103,24 @@ const ShopForm = () => {
       {errors.phone && (
         <span className="field-required">Este campo es obligatorio</span>
       )}
-      <input type="submit" value="Registrar" className="btn cursor-pointer" />
+      <label htmlFor="imageCover" className="my-4">
+        Imagen de portada
+      </label>
+      <label class="self-center w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer  hover:text-veryHighOrange text-black ease-linear transition-all duration-150">
+        <i class="fas fa-cloud-upload-alt fa-3x"></i>
+        <span class="mt-2 text-base leading-normal">Select a file</span>
+        <input type="file" class="hidden" onChange={handleChange} />
+      </label>
+      <progress
+        className="self-center my-4"
+        value={progress}
+        max={100}
+      ></progress>
+      <input
+        type="submit"
+        value="Registrar"
+        className="btn cursor-pointer my-4"
+      />
     </form>
   );
 };

@@ -38,7 +38,7 @@ export const getShop = async (id) => {
   }
 };
 
-export const createUser = async (name, address, email, phone) => {
+export const createShop = async (name, address, email, phone) => {
   try {
     const response = await axios({
       method: "POST",
