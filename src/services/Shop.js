@@ -61,6 +61,7 @@ export const deleteShop = async (id) => {
     const response = await axios({
       method: "DELETE",
       url: `${API}/remove/${id}`,
+      headers: { "X-Request-With": "XMLHttpRequest" },
     });
     return response.data.body;
   } catch (error) {
@@ -69,14 +70,14 @@ export const deleteShop = async (id) => {
 };
 
 export const updateShop = async (id, update) => {
+  console.log("update", update);
   try {
     const response = await axios({
       method: "PATCH",
       url: `${API}/update/${id}`,
-      data: {
-        update: update,
-      },
+      data: update,
     });
+    console.log("response from service", response);
     return response.data.body;
   } catch (error) {
     return error;
