@@ -24,7 +24,6 @@ const Shop = ({
   openNow,
   reviews,
 }) => {
-  console.log(reviews);
   const { isLogged, user } = useUser();
   const [userFetched, setUserFetched] = useState(null);
   const userParsed = JSON.parse(user);
