@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { createShop, setImageCover } from "../services/Shop";
 import storage from "../firebase";
+import useUser from "../hooks/useUser";
+import { useHistory } from "react-router-dom";
+import { getUser } from "../services/User";
 
 const ShopForm = () => {
+  const history = useHistory();
   const {
     register,
     handleSubmit,
@@ -12,10 +16,15 @@ const ShopForm = () => {
     formState: { errors },
   } = useForm();
 
+  const { isLogged, user } = useUser();
+
   const [view, setView] = useState(false);
   const [file, setFile] = useState(null);
   const [url, setURL] = useState("");
   const [progress, setProgress] = useState(0);
+  const [userFetched, setUserFetched] = useState({});
+
+  const userParsed = JSON.parse(user);
 
   function handleChange(e) {
     console.log(e.target.files[0].name);
@@ -53,6 +62,21 @@ const ShopForm = () => {
       })
       .catch((err) => console.log(err));
   };
+
+  useEffect(() => {
+    const getUserFetched = async () => {
+      const response = await getUser(userParsed?._id);
+      setUserFetched(response);
+    };
+    getUserFetched();
+    return () => {
+      setUserFetched(null);
+    };
+  }, [userParsed?._id]);
+
+  if (!isLogged) {
+    history.push("/");
+  }
 
   return (
     <form

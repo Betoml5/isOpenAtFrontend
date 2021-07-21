@@ -108,7 +108,7 @@ const ShopDetail = () => {
 
         {userFetched?.admin && (
           <div className="bg-veryHighOrange p-4 self-center text-white rounded-lg my-4">
-            <Link to={`/shops/review/${id}`}>Editar</Link>
+            <Link to={`/admin/edit-shop/${id}`}>Editar</Link>
           </div>
         )}
 

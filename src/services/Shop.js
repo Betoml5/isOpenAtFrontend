@@ -56,7 +56,7 @@ export const createShop = async (name, address, email, phone) => {
   }
 };
 
-export const deleteUser = async (id) => {
+export const deleteShop = async (id) => {
   try {
     const response = await axios({
       method: "DELETE",
@@ -68,15 +68,13 @@ export const deleteUser = async (id) => {
   }
 };
 
-export const updateUser = async (id, name, email, address) => {
+export const updateShop = async (id, update) => {
   try {
     const response = await axios({
       method: "PATCH",
       url: `${API}/update/${id}`,
       data: {
-        name,
-        email,
-        address,
+        update: update,
       },
     });
     return response.data.body;
