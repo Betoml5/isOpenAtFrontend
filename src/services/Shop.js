@@ -38,7 +38,7 @@ export const getShop = async (id) => {
   }
 };
 
-export const createUser = async (name, address, email, phone) => {
+export const createShop = async (name, address, email, phone) => {
   try {
     const response = await axios({
       method: "POST",
@@ -56,11 +56,12 @@ export const createUser = async (name, address, email, phone) => {
   }
 };
 
-export const deleteUser = async (id) => {
+export const deleteShop = async (id) => {
   try {
     const response = await axios({
       method: "DELETE",
       url: `${API}/remove/${id}`,
+      headers: { "X-Request-With": "XMLHttpRequest" },
     });
     return response.data.body;
   } catch (error) {
@@ -68,29 +69,15 @@ export const deleteUser = async (id) => {
   }
 };
 
-export const updateUser = async (id, name, email, address) => {
+export const updateShop = async (id, update) => {
+  console.log("update", update);
   try {
     const response = await axios({
       method: "PATCH",
       url: `${API}/update/${id}`,
-      data: {
-        name,
-        email,
-        address,
-      },
+      data: update,
     });
-    return response.data.body;
-  } catch (error) {
-    return error;
-  }
-};
-
-export const isPromo = async (shopId) => {
-  try {
-    const response = await axios({
-      method: "PATCH",
-      url: `${API}/ispromo/${shopId}`,
-    });
+    console.log("response from service", response);
     return response.data.body;
   } catch (error) {
     return error;
@@ -110,18 +97,6 @@ export const setPromo = async (shopId) => {
   }
 };
 
-export const isHot = async (shopId) => {
-  try {
-    const response = await axios({
-      method: "PATCH",
-      url: `${API}/ishot/${shopId}`,
-    });
-    return response.data.body;
-  } catch (error) {
-    return error;
-  }
-};
-
 export const setHot = async (shopId) => {
   try {
     const response = await axios({
@@ -135,35 +110,11 @@ export const setHot = async (shopId) => {
   }
 };
 
-export const isOpen = async (shopId) => {
-  try {
-    const response = await axios({
-      method: "PATCH",
-      url: `${API}/isopen/${shopId}`,
-    });
-    return response.data.body;
-  } catch (error) {
-    return error;
-  }
-};
-
 export const setOpen = async (shopId) => {
   try {
     const response = await axios({
       method: "PATCH",
       url: `${API}/setopen/${shopId}`,
-    });
-    return response.data.body;
-  } catch (error) {
-    return error;
-  }
-};
-
-export const getAvgPrice = async (shopId) => {
-  try {
-    const response = await axios({
-      method: "GET",
-      url: `${API}/avgprice/${shopId}`,
     });
     return response.data.body;
   } catch (error) {
@@ -211,18 +162,6 @@ export const setCode = async (shopId) => {
   }
 };
 
-export const getCode = async (shopId) => {
-  try {
-    const response = await axios({
-      method: "get",
-      url: `${API}/code/${shopId}`,
-    });
-    return response.data.body;
-  } catch (error) {
-    return error;
-  }
-};
-
 export const setAvgTime = async (shopId, avgTime) => {
   try {
     const response = await axios({
@@ -238,18 +177,6 @@ export const setAvgTime = async (shopId, avgTime) => {
   }
 };
 
-export const getAvgTime = async (shopId) => {
-  try {
-    const response = await axios({
-      method: "get",
-      url: `${API}/avgtime/${shopId}`,
-    });
-    return response.data.body;
-  } catch (error) {
-    return error;
-  }
-};
-
 export const setRating = async (shopId, rating) => {
   try {
     const response = await axios({
@@ -258,18 +185,6 @@ export const setRating = async (shopId, rating) => {
       data: {
         rating,
       },
-    });
-    return response.data.body;
-  } catch (error) {
-    return error;
-  }
-};
-
-export const getRating = async (shopId) => {
-  try {
-    const response = await axios({
-      method: "get",
-      url: `${API}/rating/${shopId}`,
     });
     return response.data.body;
   } catch (error) {
@@ -309,6 +224,36 @@ export const createReview = async (shopId, email, name, text) => {
       data: email,
     });
 
+    return response.data.body;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const setImageCover = async (shopId, imageURL) => {
+  try {
+    const response = await axios({
+      method: "PATCH",
+      url: `${API}/image-cover/${shopId}`,
+      data: {
+        imageURL: imageURL,
+      },
+    });
+    return response.data.body;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const pushImageMenu = async (shopId, imageURL) => {
+  try {
+    const response = await axios({
+      method: "PATCH",
+      url: `${API}/image-menu/${shopId}`,
+      data: {
+        imageURL: imageURL,
+      },
+    });
     return response.data.body;
   } catch (error) {
     return error;

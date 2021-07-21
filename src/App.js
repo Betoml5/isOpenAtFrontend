@@ -6,6 +6,7 @@ import { UserContextProvider } from "./context/userContext";
 import { lazy } from "react";
 import ShopReview from "./components/ShopReview";
 import { initAxiosInterceptors } from "./services/auth-helpers";
+import EditShop from "./components/EditShop";
 // import { HeroContainer } from "./containers/HeroContainer";
 // import { ShopDetail } from "./components/ShopDetail";
 // import { ShopContainer } from "./containers/ShopContainer";
@@ -51,6 +52,7 @@ const App = () => {
             <Route exact={true} path="/user/favorites" component={Favorites} />
             <Route exact={true} path="/user/:id" component={User} />
             <Route exact path="/admin/add-shop" component={ShopForm} />
+            <Route exact path="/admin/edit-shop/:id" component={EditShop} />
             <Route component={NotFound} />
           </Switch>
         </Layout>
