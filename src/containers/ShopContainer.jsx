@@ -18,12 +18,20 @@ const ShopContainer = () => {
     };
   }, []);
 
+  if (shops.length === 0) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <h3>No hay comercios aun :(</h3>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="grid  mx-2 gap-2 md:grid-cols-2 lg:grid-cols-3">
         <Search setFilterShops={setFilterShops} filterShops={filterShops} />
         <Filter />
-        {shops?.length == 0 && <PageLoader />}
+        {shops?.length === 0 && <PageLoader />}
         {filterShops?.length > 0
           ? filterShops.map((shop) => <Shop {...shop} key={shop._id} />)
           : shops?.map((shop) => <Shop {...shop} key={shop._id} />)}

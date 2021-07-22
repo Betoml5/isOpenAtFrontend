@@ -73,7 +73,7 @@ export const updateShop = async (id, update) => {
   console.log("update", update);
   try {
     const response = await axios({
-      method: "PATCH",
+      method: "PUT",
       url: `${API}/update/${id}`,
       data: update,
     });
