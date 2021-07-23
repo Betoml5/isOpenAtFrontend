@@ -1,9 +1,14 @@
-import axios from "axios";
+import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
-import Swal from "sweetalert2";
+import { createShop, setImageCover } from "../services/Shop";
+import storage from "../firebase";
+import useUser from "../hooks/useUser";
+import { useHistory } from "react-router-dom";
+import { getUser } from "../services/User";
 
-export const ShopForm = () => {
+const ShopForm = () => {
+  const history = useHistory();
   const {
     register,
     handleSubmit,
@@ -11,31 +16,67 @@ export const ShopForm = () => {
     formState: { errors },
   } = useForm();
 
+  const { isLogged, user } = useUser();
+
+  const [view, setView] = useState(false);
+  const [file, setFile] = useState(null);
+  const [url, setURL] = useState("");
+  const [progress, setProgress] = useState(0);
+  const [userFetched, setUserFetched] = useState({});
+
+  const userParsed = JSON.parse(user);
+
+  function handleChange(e) {
+    console.log(e.target.files[0].name);
+    setFile(e.target.files[0]);
+  }
+
+  // console.log(watch("name"));
+
   const form = useRef("");
   const onSubmit = (data) => {
-    console.log(data);
-    axios({
-      method: "POST",
-      url: "http://localhost:3013/api/shops/create",
-      data,
-    })
-      .then(() => {
-        Swal.fire({
-          title: "Comercio Registrado",
-          text: `Hey, ya quedo registrado ${watch("name")}`,
-          confirmButtonText: "Ya quedo!",
-        });
+    createShop(data.name, data.address, data.email, data.phone)
+      .then((response) => {
+        const ref = storage.ref(`/images/${file?.name}`);
+        const uploadTask = ref.put(file);
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progressData =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            setProgress(progressData);
+          },
+          console.error,
+          () => {
+            ref.getDownloadURL().then((url) => {
+              setFile(null);
+              setURL(url);
+              setImageCover(response?._id, url);
+              setTimeout(() => {
+                setView(!view);
+              }, 100);
+            });
+          }
+        );
         form.current.reset();
       })
-      .catch(() =>
-        Swal.fire({
-          title: "Error",
-          text: "Uy! Hubo un error al registrar el comercio",
-          icon: "error",
-          confirmButtonText: "Ni pedo",
-        })
-      );
+      .catch((err) => console.log(err));
   };
+
+  useEffect(() => {
+    const getUserFetched = async () => {
+      const response = await getUser(userParsed?._id);
+      setUserFetched(response);
+    };
+    getUserFetched();
+    return () => {
+      setUserFetched(null);
+    };
+  }, [userParsed?._id]);
+
+  if (!isLogged) {
+    history.push("/");
+  }
 
   return (
     <form
@@ -86,7 +127,26 @@ export const ShopForm = () => {
       {errors.phone && (
         <span className="field-required">Este campo es obligatorio</span>
       )}
-      <input type="submit" value="Registrar" className="btn cursor-pointer" />
+      <label htmlFor="imageCover" className="my-4">
+        Imagen de portada
+      </label>
+      <label class="self-center w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer  hover:text-veryHighOrange text-black ease-linear transition-all duration-150">
+        <i class="fas fa-cloud-upload-alt fa-3x"></i>
+        <span class="mt-2 text-base leading-normal">Select a file</span>
+        <input type="file" class="hidden" onChange={handleChange} />
+      </label>
+      <progress
+        className="self-center my-4"
+        value={progress}
+        max={100}
+      ></progress>
+      <input
+        type="submit"
+        value="Registrar"
+        className="btn cursor-pointer my-4"
+      />
     </form>
   );
 };
+
+export default ShopForm;

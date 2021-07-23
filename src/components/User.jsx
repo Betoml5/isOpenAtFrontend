@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { setImage } from "../services/User";
+import { useHistory, useParams } from "react-router-dom";
+import { getUser, setImage } from "../services/User";
 import useUser from "../hooks/useUser";
 import storage from "../firebase";
-import { UploadImageForm } from "./UploadImageForm";
-import { PageLoader } from "./PageLoader";
-import { Spinner } from "./Spinner";
+import UploadImageForm from "./UploadImageForm";
+import PageLoader from "./PageLoader";
+import Spinner from "./Spinner";
 
-export const User = (props) => {
+const User = (props) => {
   const { id } = useParams();
-  const { getOneUser, userFetched, logout } = useUser();
+  const { logout, isLogged, user } = useUser();
   const [view, setView] = useState(false);
   const [file, setFile] = useState(null);
   const [url, setURL] = useState("");
   const [progress, setProgress] = useState(0);
-  console.log(userFetched);
+  const [userFetched, setUserFetched] = useState({});
+  const history = useHistory();
+  const userParsed = JSON.parse(user);
 
   function handleChange(e) {
     setFile(e.target.files[0]);
@@ -38,16 +40,20 @@ export const User = (props) => {
           setURL(url);
           setImage(id, url).then((res) => console.log(res));
           setTimeout(() => {
-            getOneUser(id);
             setView(!view);
           }, 100);
         });
       }
     );
   }
-  useEffect(() => {
-    getOneUser(id);
+  useEffect(async () => {
+    const response = await getUser(userParsed._id);
+    setUserFetched(response);
   }, []);
+
+  if (!isLogged) {
+    history.push("/");
+  }
 
   if (!userFetched) {
     return <PageLoader />;
@@ -76,7 +82,7 @@ export const User = (props) => {
         </div>
 
         <div className="my-2">
-          <p>Te gustan {userFetched?.favorites.length} comercios</p>
+          <p>Te gustan {userFetched?.favorites?.length} comercios</p>
         </div>
         <button
           className="btn  w-full my-2 hover:bg-veryLightRed transition-all"
@@ -102,3 +108,5 @@ export const User = (props) => {
     </div>
   );
 };
+
+export default User;

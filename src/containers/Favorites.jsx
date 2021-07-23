@@ -1,12 +1,11 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
-import useUser from "../hooks/useUser";
-import { getFavorites } from "../services/User";
-
-export const Favorites = (props) => {
-  const { userFetched } = useUser();
-
-  console.log("userfetched", userFetched);
-
-  return <div></div>;
+const Favorites = () => {
+  return (
+    <div className="flex justify-center items-center h-screen w-full">
+      <h3 className="text-white text-3xl font-bold">
+        Estamos trabajando en esto :)
+      </h3>
+    </div>
+  );
 };
+
+export default Favorites;

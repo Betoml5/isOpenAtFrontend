@@ -1,9 +1,9 @@
 import avocadoImage from "../static/avocado.jpg";
 import { Link } from "react-router-dom";
-import { HeroItemsContainer } from "./HeroItemsContainer";
-import { HeroSectionContainer } from "./HeroSectionContainer";
+import HeroItemsContainer from "./HeroItemsContainer";
+import HeroSectionContainer from "./HeroSectionContainer";
 
-export const HeroContainer = () => {
+const HeroContainer = () => {
   return (
     <div>
       <div className="bg-highOrange relative">
@@ -47,3 +47,5 @@ export const HeroContainer = () => {
     </div>
   );
 };
+
+export default HeroContainer;

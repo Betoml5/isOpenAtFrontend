@@ -1,6 +1,6 @@
-import { Header } from "../components/Header";
+import Header from "../components/Header";
 
-export const Layout = ({ children }) => {
+const Layout = ({ children }) => {
   return (
     <div className="">
       {children}
@@ -8,3 +8,5 @@ export const Layout = ({ children }) => {
     </div>
   );
 };
+
+export default Layout;

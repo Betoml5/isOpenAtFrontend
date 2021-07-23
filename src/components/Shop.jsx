@@ -11,8 +11,9 @@ import { useEffect, useState } from "react";
 import useUser from "../hooks/useUser";
 import Swal from "sweetalert2";
 import { addFavorite, getUser, removeFavorite } from "../services/User";
+import Context from "../context/userContext";
 
-export const Shop = ({
+const Shop = ({
   _id,
   name,
   highLight,
@@ -21,15 +22,20 @@ export const Shop = ({
   rating,
   address,
   openNow,
+  reviews,
 }) => {
-  const { isLogged, addFavorites, user } = useUser();
-
+  const { isLogged, user } = useUser();
   const [userFetched, setUserFetched] = useState(null);
   const userParsed = JSON.parse(user);
 
-  const handleFavorite = () => {
+  const handleFavorite = async () => {
     if (isLogged) {
-      addFavorite(userParsed._id, _id).then((res) => console.log(res));
+      try {
+        const res = await addFavorite(userParsed._id, _id);
+        setUserFetched(res);
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       Swal.fire({
         title: "Inicia sesion",
@@ -39,9 +45,10 @@ export const Shop = ({
     }
   };
 
-  const deleteFavorite = () => {
+  const deleteFavorite = async () => {
     if (isLogged) {
-      removeFavorite(userParsed?._id, _id).then((res) => console.log(res));
+      const res = await removeFavorite(userParsed?._id, _id);
+      setUserFetched(res);
     } else {
       Swal.fire({
         title: "Inicia sesion",
@@ -51,10 +58,10 @@ export const Shop = ({
     }
   };
 
-  useEffect(() => {
-    getUser(userParsed?._id).then((res) => setUserFetched(res));
-  }, [handleFavorite, deleteFavorite]);
-
+  useEffect(async () => {
+    const user = await getUser(userParsed?._id);
+    setUserFetched(user);
+  }, []);
   return (
     <div className="flex flex-col max-w-md justify-self-center my-4 cursor-pointer">
       <Link to={`/shops/detail/${_id}`}>
@@ -118,13 +125,17 @@ export const Shop = ({
             <picture>
               <img src={starIcon} alt="starIcon" className="w-6 h-5" />
             </picture>
-            <p className="text-white">{rating}</p>
+            <p className="text-white">
+              {rating <= 0 ? 0 : (rating / reviews?.length).toFixed(2)}
+            </p>
           </div>
           <div className="flex items-center">
             <picture>
               <img src={timeIcon} alt="timeIcon" />
             </picture>
-            <p className="lg:text-sm">{avgTime} minutos</p>
+            <p className="lg:text-sm">
+              {avgTime <= 0 ? 0 : Math.floor(avgTime / reviews?.length)} Min
+            </p>
           </div>
           <div className="flex items-center">
             <picture>
@@ -139,3 +150,5 @@ export const Shop = ({
     </div>
   );
 };
+
+export default Shop;

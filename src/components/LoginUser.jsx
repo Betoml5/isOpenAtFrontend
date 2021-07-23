@@ -3,14 +3,12 @@ import { useForm } from "react-hook-form";
 import useUser from "../hooks/useUser";
 import { Link, useHistory } from "react-router-dom";
 
-export const LoginUser = () => {
-  const { loginUser, state } = useUser();
-  const history = useHistory();
+const LoginUser = () => {
+  const { loginUser } = useUser();
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
@@ -60,3 +58,5 @@ export const LoginUser = () => {
     </div>
   );
 };
+
+export default LoginUser;
