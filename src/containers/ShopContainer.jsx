@@ -5,26 +5,28 @@ import { useEffect, useState } from "react";
 import { getShops } from "../services/Shop";
 import PageLoader from "../components/PageLoader";
 
+
+
 const ShopContainer = () => {
   const [shops, setShops] = useState([]);
   const [filterShops, setFilterShops] = useState([]);
 
   useEffect(() => {
     getShops(setShops);
-    console.log(shops);
     return () => {
       setShops([]);
       setFilterShops([]);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (shops.length === 0) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <h3>No hay comercios aun :(</h3>
-      </div>
-    );
-  }
+  // if (shops.length === 0) {
+  //   return (
+  //     <div className="flex justify-center items-center min-h-screen">
+  //       <h3>No hay comercios aun :(</h3>
+  //     </div>
+  //   );
+  // }
 
   return (
     <>

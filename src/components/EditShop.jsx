@@ -68,7 +68,7 @@ const EditShop = () => {
     return () => {
       setShop(null);
     };
-  }, []);
+  }, [id]);
 
   return (
     <div className="flex  justify-center items-center  min-h-screen">

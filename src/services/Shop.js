@@ -1,5 +1,8 @@
 import axios from "axios";
-const API = "https://isopenatapi.herokuapp.com/api/shops";
+// const API = "https://isopenatapi.herokuapp.com/api/shops";
+
+const BASE_API = process.env.REACT_APP_API_URL;
+const API = `${BASE_API}/shops`;
 
 export const getShops = async (setState) => {
   try {

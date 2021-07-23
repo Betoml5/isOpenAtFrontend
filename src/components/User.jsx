@@ -7,11 +7,12 @@ import UploadImageForm from "./UploadImageForm";
 import PageLoader from "./PageLoader";
 import Spinner from "./Spinner";
 
-const User = (props) => {
+const User = () => {
   const { id } = useParams();
   const { logout, isLogged, user } = useUser();
   const [view, setView] = useState(false);
   const [file, setFile] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [url, setURL] = useState("");
   const [progress, setProgress] = useState(0);
   const [userFetched, setUserFetched] = useState({});
@@ -46,10 +47,14 @@ const User = (props) => {
       }
     );
   }
-  useEffect(async () => {
-    const response = await getUser(userParsed._id);
-    setUserFetched(response);
-  }, []);
+
+  useEffect(() => {
+    const getUserFetched = async () => {
+      const response = await getUser(userParsed._id);
+      setUserFetched(response);
+    };
+    getUserFetched();
+  }, [userParsed._id]);
 
   if (!isLogged) {
     history.push("/");

@@ -11,7 +11,6 @@ import { useEffect, useState } from "react";
 import useUser from "../hooks/useUser";
 import Swal from "sweetalert2";
 import { addFavorite, getUser, removeFavorite } from "../services/User";
-import Context from "../context/userContext";
 
 const Shop = ({
   _id,
@@ -59,10 +58,16 @@ const Shop = ({
     }
   };
 
-  useEffect(async () => {
-    const user = await getUser(userParsed?._id);
-    setUserFetched(user);
-  }, []);
+  useEffect(() => {
+    const getUserFetched = async () => {
+      const response = await getUser(userParsed?._id);
+      setUserFetched(response);
+    };
+    getUserFetched();
+    return () => {
+      setUserFetched({});
+    };
+  }, [userParsed?._id]);
   return (
     <div className="flex flex-col max-w-md justify-self-center my-4 cursor-pointer ">
       <Link to={`/shops/detail/${_id}`}>

@@ -4,7 +4,6 @@ import starIcon from "../static/star.svg";
 import timeIcon from "../static/time.svg";
 import dollarIcon from "../static/dollar.svg";
 import percentIcon from "../static/percent.svg";
-import hamburgerPic from "../static/ham.jpg";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getShop } from "../services/Shop";
@@ -144,7 +143,7 @@ const ShopDetail = () => {
             }}
           >
             <p className="text-center border-b-2 border-veryHighOrange">
-              Resenas
+              Reseñas
             </p>
           </div>
         </div>
@@ -171,7 +170,7 @@ const ShopDetail = () => {
           }`}
         >
           {shop?.imagesMenu?.map((item) => (
-            <div className=" sliderProductItem">
+            <div className=" sliderProductItem" key={item}>
               <img
                 src={item}
                 alt="img"

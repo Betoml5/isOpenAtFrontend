@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import useUser from "../hooks/useUser";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const LoginUser = () => {
   const { loginUser } = useUser();
