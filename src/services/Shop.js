@@ -4,14 +4,14 @@ import axios from "axios";
 const BASE_API = process.env.REACT_APP_API_URL;
 const API = `${BASE_API}/shops`;
 
-export const getShops = async (setState) => {
+export const getShops = async () => {
   try {
     const response = await axios({
       method: "GET",
       url: `${API}/all`,
     });
     console.log(response.data.body);
-    setState(response.data.body);
+    return response.data.body;
   } catch (error) {
     return error;
   }

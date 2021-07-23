@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { getUser, setImage } from "../services/User";
 import useUser from "../hooks/useUser";
 import storage from "../firebase";
@@ -89,6 +89,24 @@ const User = () => {
         <div className="my-2">
           <p>Te gustan {userFetched?.favorites?.length} comercios</p>
         </div>
+
+        {userFetched?.admin && (
+          <>
+            <Link
+              to="/admin/add-shop"
+              className="btn w-full text-center hover:bg-veryLightRed transition-all mb-2"
+            >
+              Agregar comercio
+            </Link>
+            <Link
+              to="/shops/panel"
+              className="btn w-full text-center hover:bg-veryLightRed transition-all"
+            >
+              Panel de comercios
+            </Link>
+          </>
+        )}
+
         <button
           className="btn  w-full my-2 hover:bg-veryLightRed transition-all"
           onClick={setView}

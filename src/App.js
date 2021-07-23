@@ -7,6 +7,7 @@ import { lazy } from "react";
 import ShopReview from "./components/ShopReview";
 import { initAxiosInterceptors } from "./services/auth-helpers";
 import EditShop from "./components/EditShop";
+// import ControlPanel from "./containers/ControlPanel";
 // import { HeroContainer } from "./containers/HeroContainer";
 // import { ShopDetail } from "./components/ShopDetail";
 // import { ShopContainer } from "./containers/ShopContainer";
@@ -26,6 +27,7 @@ const RegisterUser = lazy(() => import("./components/RegisterUser"));
 const LoginUser = lazy(() => import("./components/LoginUser"));
 const User = lazy(() => import("./components/User"));
 const Favorites = lazy(() => import("./containers/Favorites"));
+const ControlPanel = lazy(() => import("./containers/ControlPanel"));
 
 initAxiosInterceptors();
 const App = () => {
@@ -53,6 +55,7 @@ const App = () => {
             <Route exact={true} path="/user/:id" component={User} />
             <Route exact path="/admin/add-shop" component={ShopForm} />
             <Route exact path="/admin/edit-shop/:id" component={EditShop} />
+            <Route exact path="/shops/panel" component={ControlPanel} />
             <Route component={NotFound} />
           </Switch>
         </Layout>
