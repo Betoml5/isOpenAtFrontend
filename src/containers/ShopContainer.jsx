@@ -23,13 +23,6 @@ const ShopContainer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // if (shops.length === 0) {
-  //   return (
-  //     <div className="flex justify-center items-center min-h-screen">
-  //       <h3>No hay comercios aun :(</h3>
-  //     </div>
-  //   );
-  // }
 
   return (
     <div className="grid  mx-2 gap-2 md:grid-cols-2 lg:grid-cols-3">
