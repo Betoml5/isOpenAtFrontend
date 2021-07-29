@@ -1,5 +1,6 @@
 import axios from "axios";
-const API = "https://isopenatapi.herokuapp.com/api/users";
+const BASE_API = process.env.REACT_APP_API_URL;
+const API = `${BASE_API}/users`;
 
 export const signin = async (username, password) => {
   try {

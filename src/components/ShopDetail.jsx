@@ -4,7 +4,6 @@ import starIcon from "../static/star.svg";
 import timeIcon from "../static/time.svg";
 import dollarIcon from "../static/dollar.svg";
 import percentIcon from "../static/percent.svg";
-import hamburgerPic from "../static/ham.jpg";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getShop } from "../services/Shop";
@@ -21,19 +20,27 @@ const ShopDetail = () => {
   // const [like, setLike] = useState(false);
   const { id } = useParams();
 
-  useEffect(async () => {
-    const res = await getShop(id);
-    setShop(res);
-    const response = await getUser(userParsed?._id);
-    setUserFetched(response);
-  }, []);
+  useEffect(() => {
+    const getShopFetched = async () => {
+      const res = await getShop(id);
+      setShop(res);
+      console.log("res", res);
+      const response = await getUser(userParsed?._id);
+      setUserFetched(response);
+    };
+    getShopFetched();
+    return () => {
+      setShop(null);
+      setUserFetched(null);
+    };
+  }, [id, userParsed?._id]);
 
   return (
     <div className="flex flex-col lg:w-full mx-auto">
       <div className="">
         <picture>
           <img
-            src={restaurantCover}
+            src={shop?.imageCover || restaurantCover}
             alt="shopCover"
             className="w-full object-cover lg:h-96"
             loading="lazy"
@@ -51,7 +58,7 @@ const ShopDetail = () => {
           </div>
 
           <div className="flex items-center my-2 ">
-            {shop.openNow?.openNow ? (
+            {shop?.openNow?.openNow ? (
               <p className="text-highGreen font-semibold uppercase mr-2">
                 Abierto
               </p>
@@ -136,7 +143,7 @@ const ShopDetail = () => {
             }}
           >
             <p className="text-center border-b-2 border-veryHighOrange">
-              Resenas
+              Reseñas
             </p>
           </div>
         </div>
@@ -147,7 +154,10 @@ const ShopDetail = () => {
           }`}
         >
           {shop?.reviews?.map((review) => (
-            <div className="bg-white rounded-lg shadow-2xl sliderReviewItem p-4 max-h-96 overflow-y-scroll">
+            <div
+              className="bg-white rounded-lg shadow-2xl sliderReviewItem p-4 max-h-96 overflow-y-scroll"
+              key={review?._id}
+            >
               <p>{review?.text}</p>
               <p className="my-2 italic font-bold">{review?.name}</p>
             </div>
@@ -159,18 +169,15 @@ const ShopDetail = () => {
             enviosView ? `flex p-4 slider lg:justify-evenly` : `hidden`
           }`}
         >
-          <div className=" sliderProductItem">
-            <img src={hamburgerPic} alt="" className=" rounded-2xl" />
-          </div>
-          <div className=" sliderProductItem">
-            <img src={hamburgerPic} alt="" className=" rounded-2xl" />
-          </div>
-          <div className=" sliderProductItem">
-            <img src={hamburgerPic} alt="" className=" rounded-2xl" />
-          </div>
-          <div className=" sliderProductItem">
-            <img src={hamburgerPic} alt="" className=" rounded-2xl" />
-          </div>
+          {shop?.imagesMenu?.map((item) => (
+            <div className=" sliderProductItem" key={item}>
+              <img
+                src={item}
+                alt="img"
+                className="w-56 h-56 object-cover rounded-2xl"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>

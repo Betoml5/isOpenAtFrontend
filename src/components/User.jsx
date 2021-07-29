@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { getUser, setImage } from "../services/User";
 import useUser from "../hooks/useUser";
 import storage from "../firebase";
@@ -7,11 +7,12 @@ import UploadImageForm from "./UploadImageForm";
 import PageLoader from "./PageLoader";
 import Spinner from "./Spinner";
 
-const User = (props) => {
+const User = () => {
   const { id } = useParams();
   const { logout, isLogged, user } = useUser();
   const [view, setView] = useState(false);
   const [file, setFile] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [url, setURL] = useState("");
   const [progress, setProgress] = useState(0);
   const [userFetched, setUserFetched] = useState({});
@@ -46,10 +47,14 @@ const User = (props) => {
       }
     );
   }
-  useEffect(async () => {
-    const response = await getUser(userParsed._id);
-    setUserFetched(response);
-  }, []);
+
+  useEffect(() => {
+    const getUserFetched = async () => {
+      const response = await getUser(userParsed._id);
+      setUserFetched(response);
+    };
+    getUserFetched();
+  }, [userParsed._id]);
 
   if (!isLogged) {
     history.push("/");
@@ -84,6 +89,24 @@ const User = (props) => {
         <div className="my-2">
           <p>Te gustan {userFetched?.favorites?.length} comercios</p>
         </div>
+
+        {userFetched?.admin && (
+          <>
+            <Link
+              to="/admin/add-shop"
+              className="btn w-full text-center hover:bg-veryLightRed transition-all mb-2"
+            >
+              Agregar comercio
+            </Link>
+            <Link
+              to="/shops/panel"
+              className="btn w-full text-center hover:bg-veryLightRed transition-all"
+            >
+              Panel de comercios
+            </Link>
+          </>
+        )}
+
         <button
           className="btn  w-full my-2 hover:bg-veryLightRed transition-all"
           onClick={setView}

@@ -1,14 +1,17 @@
 import axios from "axios";
-const API = "https://isopenatapi.herokuapp.com/api/shops";
+// const API = "https://isopenatapi.herokuapp.com/api/shops";
 
-export const getShops = async (setState) => {
+const BASE_API = process.env.REACT_APP_API_URL;
+const API = `${BASE_API}/shops`;
+
+export const getShops = async () => {
   try {
     const response = await axios({
       method: "GET",
       url: `${API}/all`,
     });
     console.log(response.data.body);
-    setState(response.data.body);
+    return response.data.body;
   } catch (error) {
     return error;
   }
@@ -73,7 +76,7 @@ export const updateShop = async (id, update) => {
   console.log("update", update);
   try {
     const response = await axios({
-      method: "PATCH",
+      method: "PUT",
       url: `${API}/update/${id}`,
       data: update,
     });

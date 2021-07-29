@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
@@ -12,7 +13,6 @@ const ShopForm = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
