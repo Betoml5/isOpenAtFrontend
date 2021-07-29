@@ -164,19 +164,20 @@ const ShopDetail = () => {
         </div>
 
         <div
-          className={`${enviosView ? 'flex p-4 slider lg:justify-evenly' : 'hidden'
+          className={`${enviosView ? `flex p-4 slider lg:justify-evenly` : `hidden`
             }`}
         >
-          {shop?.imagesMenu?.map((item) => (
-            <div className=" sliderProductItem" key={item}>
-              <img
-                src={item}
-                alt="img"
-                className="w-56 h-56 object-cover rounded-2xl"
-              />
-            </div>
-          ))}
+          {
+            shop?.imagesMenu?.map(image => (
+              <div className="sliderProductItem" key={image}>
+                <img src={image} alt="imageMenu" className=" rounded-2xl" />
+              </div>
+            ))
+          }
+
         </div>
+
+
       </div>
     </div>
   );
