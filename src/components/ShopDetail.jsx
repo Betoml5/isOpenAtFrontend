@@ -149,7 +149,7 @@ const ShopDetail = () => {
         </div>
 
         <div
-          className={`${resenasView ? 'flex p-4 lg:justify-evenly slider' : 'hidden'
+          className={`${resenasView ? 'flex p-4 lg:justify-evenly foodSlider' : 'hidden'
             }`}
         >
           {shop?.reviews?.map((review) => (
@@ -164,7 +164,7 @@ const ShopDetail = () => {
         </div>
 
         <div
-          className={`${enviosView ? `flex p-4 slider lg:justify-evenly` : `hidden`
+          className={`${enviosView ? `flex p-4 foodSlider lg:justify-evenly` : `hidden`
             }`}
         >
           {

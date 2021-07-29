@@ -82,7 +82,7 @@ body {
   margin: 0 6px;
 }
 
-.slider {
+.foodSlider {
   display: flex;
   align-items: center;
   overflow-x: scroll;
@@ -117,7 +117,7 @@ body {
   transition: 0.4s;
 }
 
-/* .slider:before {
+.slider:before {
   position: absolute;
   content: "";
   height: 26px;
@@ -127,7 +127,7 @@ body {
   background-color: white;
   -webkit-transition: 0.4s;
   transition: 0.4s;
-} */
+}
 
 input:checked + .slider {
   background-color: #2196f3;
