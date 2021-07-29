@@ -149,9 +149,8 @@ const ShopDetail = () => {
         </div>
 
         <div
-          className={`${
-            resenasView ? `flex p-4 lg:justify-evenly slider` : `hidden`
-          }`}
+          className={`${resenasView ? `flex p-4 lg:justify-evenly slider` : `hidden`
+            }`}
         >
           {shop?.reviews?.map((review) => (
             <div
@@ -165,9 +164,8 @@ const ShopDetail = () => {
         </div>
 
         <div
-          className={`${
-            enviosView ? `flex p-4 slider lg:justify-evenly` : `hidden`
-          }`}
+          className={`${enviosView ? `flex p-4 slider lg:justify-evenly` : `hidden`
+            }`}
         >
           {shop?.imagesMenu?.map((item) => (
             <div className=" sliderProductItem" key={item}>
