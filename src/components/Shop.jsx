@@ -11,12 +11,11 @@ import { useEffect, useState } from "react";
 import useUser from "../hooks/useUser";
 import Swal from "sweetalert2";
 import { addFavorite, getUser, removeFavorite } from "../services/User";
-import Context from "../context/userContext";
 
 const Shop = ({
   _id,
   name,
-  highLight,
+  imageCover,
   avgTime,
   freeShipping,
   rating,
@@ -59,18 +58,18 @@ const Shop = ({
   };
 
   useEffect(async () => {
-    const user = await getUser(userParsed?._id);
-    setUserFetched(user);
+    const res = await getUser(userParsed?._id);
+    setUserFetched(res);
   }, []);
   return (
-    <div className="flex flex-col max-w-md justify-self-center my-4 cursor-pointer">
-      <Link to={`/shops/detail/${_id}`}>
-        <div className="w-full">
-          <picture>
+    <div className="flex flex-col max-w-md justify-self-center cursor-pointer ">
+      <Link to={`/shops/detail/${_id}`} className="h-1/2">
+        <div className="w-full h-full">
+          <picture className="w-full h-full">
             <img
-              src={restaurantCover}
+              src={imageCover || restaurantCover}
               alt="restaurantCover"
-              className="w-full rounded-tr-2xl rounded-tl-2xl"
+              className="w-full h-full rounded-tr-2xl rounded-tl-2xl"
               loading="lazy"
             />
           </picture>

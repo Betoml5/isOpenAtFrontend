@@ -12,10 +12,13 @@ const LoginUser = () => {
     formState: { errors },
   } = useForm();
 
+  const history = useHistory();
+
   const form = useRef("");
   const onSubmit = ({ username, password }) => {
-    loginUser(username, password);
-    form.current.reset();
+    loginUser(username, password).then(() => {
+      history.push('/')
+    });
   };
 
   return (

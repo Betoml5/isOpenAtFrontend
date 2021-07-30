@@ -19,7 +19,7 @@ const Header = (props) => {
           <img src={HomeIcon} alt="home" className={itemStyles} />
         </picture>
       </Link>
-      <Link to="/user/favorites">
+      <Link to={`/user/favorites/${userParsed?._id}`}>
         <picture>
           <img src={LoveIcon} alt="LoveIcon" className={itemStyles} />
         </picture>
@@ -42,7 +42,7 @@ const Header = (props) => {
           </picture>
         </Link>
       )}
-      <Link to="/">
+      <Link to="/shops/map">
         <picture>
           <img src={LocationIcon} alt="home" className={itemStyles} />
         </picture>

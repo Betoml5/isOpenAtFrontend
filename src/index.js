@@ -4,11 +4,11 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Suspense } from "react";
-import Spinner from "./components/Spinner";
+import PageLoader from "./components/PageLoader";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Suspense fallback={<Spinner />}>
+    <Suspense fallback={<PageLoader />}>
       <App />
     </Suspense>
   </React.StrictMode>,
