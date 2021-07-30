@@ -164,7 +164,7 @@ const ShopDetail = () => {
         </div>
 
         <div
-          className={`${enviosView ? `flex p-4 foodSlider lg:justify-evenly` : `hidden`
+          className={`${enviosView ? 'flex p-4 foodSlider lg:justify-evenly' : 'hidden'
             }`}
         >
           {
