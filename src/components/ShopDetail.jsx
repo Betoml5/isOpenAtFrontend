@@ -17,7 +17,6 @@ const ShopDetail = () => {
   const [userFetched, setUserFetched] = useState({});
   const { user } = useUser();
   const userParsed = JSON.parse(user);
-  // const [like, setLike] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {

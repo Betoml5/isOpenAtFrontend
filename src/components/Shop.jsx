@@ -11,12 +11,10 @@ import { useEffect, useState } from "react";
 import useUser from "../hooks/useUser";
 import Swal from "sweetalert2";
 import { addFavorite, getUser, removeFavorite } from "../services/User";
-import Context from "../context/userContext";
 
 const Shop = ({
   _id,
   name,
-  highLight,
   imageCover,
   avgTime,
   freeShipping,
