@@ -51,7 +51,7 @@ const App = () => {
             />
             <Route exact={true} path="/sign-up" component={RegisterUser} />
             <Route exact={true} path="/sign-in" component={LoginUser} />
-            <Route exact={true} path="/user/favorites" component={Favorites} />
+            <Route exact={true} path="/user/favorites/:id" component={Favorites} />
             <Route exact={true} path="/user/:id" component={User} />
             <Route exact path="/admin/add-shop" component={ShopForm} />
             <Route exact path="/admin/edit-shop/:id" component={EditShop} />

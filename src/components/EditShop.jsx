@@ -27,8 +27,8 @@ const EditShop = () => {
     }
   };
 
-  function handleUpload(images) {
-    images.forEach((image) => {
+  function handleUpload(imagesArray) {
+    imagesArray.forEach((image) => {
       const ref = storage.ref(`/images/${image.name}`);
       const uploadTask = ref.put(image);
       uploadTask.on(
@@ -52,7 +52,6 @@ const EditShop = () => {
   //TODO
   //Si no hay datos, el shop quedara con datos vacios.
   const handleChange = (e) => {
-    // setImages([...images, e.target.files[0]]);
     setImages([...images, e.target.files[0]]);
     console.log(e.target.files);
     console.log(images);

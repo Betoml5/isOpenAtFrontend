@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import useUser from "../hooks/useUser";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const LoginUser = () => {
   const { loginUser } = useUser();
@@ -12,10 +12,14 @@ const LoginUser = () => {
     formState: { errors },
   } = useForm();
 
+  const history = useHistory();
+
   const form = useRef("");
   const onSubmit = ({ username, password }) => {
-    loginUser(username, password);
-    form.current.reset();
+    loginUser(username, password).then(() => {
+      form.current.reset();
+      history.push('/')
+    });
   };
 
   return (

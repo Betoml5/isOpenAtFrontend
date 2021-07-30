@@ -82,10 +82,10 @@ body {
   margin: 0 6px;
 }
 
-.slider {
+.foodSlider {
   display: flex;
   align-items: center;
-  /* overflow-x: scroll; */
+  overflow-x: scroll;
   overscroll-behavior: contain;
   scroll-snap-type: x proximity;
 }

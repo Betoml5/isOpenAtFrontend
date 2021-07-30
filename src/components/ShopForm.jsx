@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react";
-import { useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { createShop, setImageCover } from "../services/Shop";
 import storage from "../firebase";

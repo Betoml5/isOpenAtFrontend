@@ -18,7 +18,6 @@ const ShopDetail = () => {
   const [userFetched, setUserFetched] = useState({});
   const { user } = useUser();
   const userParsed = JSON.parse(user);
-  // const [like, setLike] = useState(false);
   const { id } = useParams();
 
   useEffect(async () => {
@@ -144,7 +143,7 @@ const ShopDetail = () => {
         </div>
 
         <div
-          className={`${resenasView ? `flex p-4 lg:justify-evenly slider` : `hidden`
+          className={`${resenasView ? 'flex p-4 lg:justify-evenly foodSlider' : 'hidden'
             }`}
         >
           {shop?.reviews?.map((review) => (
@@ -156,22 +155,20 @@ const ShopDetail = () => {
         </div>
 
         <div
-          className={`${enviosView ? `flex p-4 slider lg:justify-evenly` : `hidden`
+          className={`${enviosView ? 'flex p-4 foodSlider lg:justify-evenly' : 'hidden'
             }`}
         >
-          <div className=" sliderProductItem">
-            <img src={hamburgerPic} alt="" className=" rounded-2xl" />
-          </div>
-          <div className=" sliderProductItem">
-            <img src={hamburgerPic} alt="" className=" rounded-2xl" />
-          </div>
-          <div className=" sliderProductItem">
-            <img src={hamburgerPic} alt="" className=" rounded-2xl" />
-          </div>
-          <div className=" sliderProductItem">
-            <img src={hamburgerPic} alt="" className=" rounded-2xl" />
-          </div>
+          {
+            shop?.imagesMenu?.map(image => (
+              <div className="sliderProductItem" key={image}>
+                <img src={image} alt="imageMenu" className=" rounded-2xl" />
+              </div>
+            ))
+          }
+
         </div>
+
+
       </div>
     </div>
   );
