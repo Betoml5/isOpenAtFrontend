@@ -11,7 +11,8 @@ const ShopPanel = ({ name, highLight, freeShipping, hot, promo, openNow }) => {
   });
 
   return (
-    <div className="flex flex-wrap  bg-white p-4 border border-black">
+
+    <div className="flex flex-wrap bg-white p-4 ">
       <div>
         <p className="uppercase mb-2">Abierto</p>
         <Button value={openNow} values={values} setValues={setValues} />

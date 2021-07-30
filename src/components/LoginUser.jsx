@@ -17,7 +17,6 @@ const LoginUser = () => {
   const form = useRef("");
   const onSubmit = ({ username, password }) => {
     loginUser(username, password).then(() => {
-      form.current.reset();
       history.push('/')
     });
   };
