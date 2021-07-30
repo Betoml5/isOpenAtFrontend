@@ -11,18 +11,19 @@ import { useEffect, useState } from "react";
 import useUser from "../hooks/useUser";
 import Swal from "sweetalert2";
 import { addFavorite, getUser, removeFavorite } from "../services/User";
+import Context from "../context/userContext";
 
 const Shop = ({
   _id,
   name,
   highLight,
+  imageCover,
   avgTime,
   freeShipping,
   rating,
   address,
   openNow,
   reviews,
-  imageCover,
 }) => {
   const { isLogged, user } = useUser();
   const [userFetched, setUserFetched] = useState(null);
@@ -58,32 +59,26 @@ const Shop = ({
     }
   };
 
-  useEffect(() => {
-    const getUserFetched = async () => {
-      const response = await getUser(userParsed?._id);
-      setUserFetched(response);
-    };
-    getUserFetched();
-    return () => {
-      setUserFetched({});
-    };
-  }, [userParsed?._id]);
+  useEffect(async () => {
+    const res = await getUser(userParsed?._id);
+    setUserFetched(res);
+  }, []);
   return (
-    <div className="flex flex-col max-w-md justify-self-center my-4 cursor-pointer ">
-      <Link to={`/shops/detail/${_id}`}>
-        <div className="w-full">
-          <picture>
+    <div className="flex flex-col max-w-md justify-self-center cursor-pointer ">
+      <Link to={`/shops/detail/${_id}`} className="h-1/2">
+        <div className="w-full h-full">
+          <picture className="w-full h-full">
             <img
               src={imageCover || restaurantCover}
               alt="restaurantCover"
-              className="w-full h-72 object-cover rounded-tr-2xl rounded-tl-2xl"
+              className="w-full h-full rounded-tr-2xl rounded-tl-2xl"
               loading="lazy"
             />
           </picture>
         </div>
       </Link>
 
-      <div className="bg-white p-4 rounded-2xl -mt-6">
+      <div className="bg-white p-4 rounded-2xl">
         <div className="flex justify-between">
           <div className="flex items-center">
             <h4 className="mr-2">{name}</h4>
