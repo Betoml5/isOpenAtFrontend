@@ -7,6 +7,7 @@ import { lazy } from "react";
 import ShopReview from "./components/ShopReview";
 import { initAxiosInterceptors } from "./services/auth-helpers";
 import EditShop from "./components/EditShop";
+import Location from "./containers/Location";
 // import ControlPanel from "./containers/ControlPanel";
 // import { HeroContainer } from "./containers/HeroContainer";
 // import { ShopDetail } from "./components/ShopDetail";
@@ -49,6 +50,7 @@ const App = () => {
               path="/shops/detail/:id"
               component={ShopDetail}
             />
+            <Route exact path="/shops/map" component={Location} />
             <Route exact={true} path="/sign-up" component={RegisterUser} />
             <Route exact={true} path="/sign-in" component={LoginUser} />
             <Route exact={true} path="/user/favorites/:id" component={Favorites} />

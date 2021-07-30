@@ -42,7 +42,7 @@ const Header = (props) => {
           </picture>
         </Link>
       )}
-      <Link to="/">
+      <Link to="/shops/map">
         <picture>
           <img src={LocationIcon} alt="home" className={itemStyles} />
         </picture>
