@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ShopPanel from "../components/ShopPanel";
 import { getShops } from "../services/Shop";
 

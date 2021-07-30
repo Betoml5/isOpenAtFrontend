@@ -1,8 +1,6 @@
 
 
-const Button = ({ value, setValues, values }) => {
-  console.log("btn value", values);
-  console.log(setValues);
+const Button = ({ value, setValues, values, handleClick, shopId }) => {
   return (
     <label class="switch">
       <input
@@ -13,6 +11,7 @@ const Button = ({ value, setValues, values }) => {
             ...values,
             value: !values?.values,
           });
+          handleClick(shopId);
         }}
       />
       <span class="slider round"></span>
