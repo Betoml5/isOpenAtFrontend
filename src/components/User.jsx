@@ -54,9 +54,9 @@ const User = () => {
       setUserFetched(response);
     };
     getUserFetched();
-  }, [userParsed._id]);
+  }, [userParsed?._id]);
 
-  if (!isLogged) {
+  if (!userParsed || !isLogged) {
     history.push("/");
   }
 

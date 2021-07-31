@@ -53,11 +53,17 @@ const App = () => {
             <Route exact path="/shops/map" component={Location} />
             <Route exact={true} path="/sign-up" component={RegisterUser} />
             <Route exact={true} path="/sign-in" component={LoginUser} />
-            <Route exact={true} path="/user/favorites/:id" component={Favorites} />
+
+            <Route
+              exact={true}
+              path="/user/favorites/:id"
+              component={Favorites}
+            />
             <Route exact={true} path="/user/:id" component={User} />
             <Route exact path="/admin/add-shop" component={ShopForm} />
             <Route exact path="/admin/edit-shop/:id" component={EditShop} />
             <Route exact path="/shops/panel" component={ControlPanel} />
+
             <Route component={NotFound} />
           </Switch>
         </Layout>
