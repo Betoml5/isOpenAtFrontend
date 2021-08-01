@@ -57,9 +57,14 @@ const Shop = ({
     }
   };
 
-  useEffect(async () => {
-    const res = await getUser(userParsed?._id);
-    setUserFetched(res);
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await getUser(userParsed?._id);
+      setUserFetched(res);
+    };
+
+    fetchUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="flex flex-col max-w-md justify-self-center cursor-pointer ">

@@ -1,15 +1,7 @@
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  useMapEvents,
-  useMapEvent,
-  useMap,
-} from "react-leaflet";
+import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import { useState } from "react";
 
 delete L.Icon.Default.prototype._getIconUrl;
@@ -38,12 +30,6 @@ function MyComponent() {
 }
 
 const Location = () => {
-  const position = [27.9324, -101.2157];
-
-  const [marker, setMarker] = useState({ lat: 0, lng: 0 });
-
-  const eventHandlers = useMemo((e) => {}, []);
-
   return (
     <MapContainer
       center={[27.8617, -101.1255]}

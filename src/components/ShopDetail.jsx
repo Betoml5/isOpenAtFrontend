@@ -4,7 +4,6 @@ import starIcon from "../static/star.svg";
 import timeIcon from "../static/time.svg";
 import dollarIcon from "../static/dollar.svg";
 import percentIcon from "../static/percent.svg";
-import hamburgerPic from "../static/ham.jpg";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getShop } from "../services/Shop";
@@ -20,13 +19,15 @@ const ShopDetail = () => {
   const userParsed = JSON.parse(user);
   const { id } = useParams();
 
-  useEffect(async () => {
-    const res = await getShop(id);
-    setShop(res);
-    const response = await getUser(userParsed?._id);
-    setUserFetched(response);
-
-
+  useEffect(() => {
+    const fetchData = async (id) => {
+      const response = await getShop(id);
+      setShop(response);
+      const user = await getUser(userParsed?.id);
+      setUserFetched(user);
+    };
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -143,8 +144,9 @@ const ShopDetail = () => {
         </div>
 
         <div
-          className={`${resenasView ? 'flex p-4 lg:justify-evenly foodSlider' : 'hidden'
-            }`}
+          className={`${
+            resenasView ? "flex p-4 lg:justify-evenly foodSlider" : "hidden"
+          }`}
         >
           {shop?.reviews?.map((review) => (
             <div className="bg-white rounded-lg shadow-2xl sliderReviewItem p-4 max-h-96 overflow-y-scroll">
@@ -155,20 +157,16 @@ const ShopDetail = () => {
         </div>
 
         <div
-          className={`${enviosView ? 'flex p-4 foodSlider lg:justify-evenly' : 'hidden'
-            }`}
+          className={`${
+            enviosView ? "flex p-4 foodSlider lg:justify-evenly" : "hidden"
+          }`}
         >
-          {
-            shop?.imagesMenu?.map(image => (
-              <div className="sliderProductItem" key={image}>
-                <img src={image} alt="imageMenu" className=" rounded-2xl" />
-              </div>
-            ))
-          }
-
+          {shop?.imagesMenu?.map((image) => (
+            <div className="sliderProductItem" key={image}>
+              <img src={image} alt="imageMenu" className=" rounded-2xl" />
+            </div>
+          ))}
         </div>
-
-
       </div>
     </div>
   );
