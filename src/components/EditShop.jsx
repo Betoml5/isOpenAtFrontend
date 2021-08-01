@@ -3,12 +3,17 @@ import { useHistory, useParams } from "react-router-dom";
 import { getShop, pushImageMenu, updateShop } from "../services/Shop";
 import storage from "../firebase";
 import { useForm } from "react-hook-form";
+import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+import { useCallback } from "react";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
 
 const EditShop = () => {
   const { id } = useParams();
   const [shop, setShop] = useState({});
   const [images, setImages] = useState([]);
   const [progress, setProgress] = useState(0);
+  const [cords, setCords] = useState({ lat: 27.9324, lng: -101.1255 });
   const {
     register,
     handleSubmit,
@@ -19,8 +24,15 @@ const EditShop = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await updateShop(id, data);
-      console.log("response", response);
+      // Cree un objeto para poder enviarlo.
+      const datacords = {
+        location: {
+          lat: cords.lat.toFixed(6),
+          lng: cords.lng.toFixed(6),
+        },
+      };
+      await updateShop(id, data);
+      await updateShop(id, datacords);
       handleUpload(images);
     } catch (error) {
       console.log(error);
@@ -68,6 +80,30 @@ const EditShop = () => {
       setShop(null);
     };
   }, [id]);
+
+  delete L.Icon.Default.prototype._getIconUrl;
+
+  L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png").default,
+    iconUrl: require("leaflet/dist/images/marker-icon.png").default,
+    shadowUrl: require("leaflet/dist/images/marker-shadow.png").default,
+  });
+
+  function MyComponent() {
+    const map = useMap();
+    map.on(
+      "click",
+      useCallback(({ latlng }) => {
+        console.log("setting cords...");
+        setCords({
+          lat: latlng.lat,
+          lng: latlng.lng,
+        });
+      }, [])
+    );
+
+    return <Marker position={cords} />;
+  }
 
   return (
     <div className="flex  justify-center items-center  min-h-screen">
@@ -138,6 +174,21 @@ const EditShop = () => {
           value={progress}
           max={100}
         ></progress>
+
+        <h3 className="my-4">Selecciona ubicacion</h3>
+        <MapContainer
+          center={[27.8617, -101.1255]}
+          zoom={15}
+          scrollWheelZoom={true}
+          style={{ height: "350px", zIndex: "0" }}
+          zoomAnimation={true}
+        >
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <MyComponent />
+        </MapContainer>
         <input
           type="submit"
           value="Editar"

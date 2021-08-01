@@ -1,35 +1,30 @@
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import L from "leaflet";
+import L, { Popup } from "leaflet";
 import { useCallback } from "react";
 import { useState } from "react";
+import { useEffect } from "react";
+import { getShops } from "../services/Shop";
 
 delete L.Icon.Default.prototype._getIconUrl;
-
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png").default,
   iconUrl: require("leaflet/dist/images/marker-icon.png").default,
   shadowUrl: require("leaflet/dist/images/marker-shadow.png").default,
 });
 
-function MyComponent() {
-  const [cords, setCords] = useState({ lat: 27.9324, lng: -101.1255 });
-  const map = useMap();
-  map.on(
-    "click",
-    useCallback(({ latlng }) => {
-      console.log("setting cords...");
-      setCords({
-        lat: latlng.lat,
-        lng: latlng.lng,
-      });
-    }, [])
-  );
-
-  return <Marker position={cords} />;
-}
-
 const Location = () => {
+  const [shops, setShops] = useState([]);
+
+  useEffect(() => {
+    const fetchShops = async () => {
+      const fetchedShops = await getShops();
+      console.log(fetchedShops);
+      setShops(fetchedShops);
+    };
+    fetchShops();
+  }, []);
+
   return (
     <MapContainer
       center={[27.8617, -101.1255]}
@@ -43,7 +38,9 @@ const Location = () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      <MyComponent />
+      {shops?.map((shop) => (
+        <Marker position={shop?.location}></Marker>
+      ))}
     </MapContainer>
   );
 };

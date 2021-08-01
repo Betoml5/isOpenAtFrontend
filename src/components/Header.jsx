@@ -13,7 +13,7 @@ const Header = (props) => {
   const userParsed = JSON.parse(user);
 
   return (
-    <div className="flex justify-around items-center bg-headerRed p-4 w-full z-50 sticky bottom-0">
+    <div className="flex justify-around items-center bg-headerRed p-4 w-full z-50 sticky bottom-0 ">
       <Link to="/">
         <picture>
           <img src={HomeIcon} alt="home" className={itemStyles} />

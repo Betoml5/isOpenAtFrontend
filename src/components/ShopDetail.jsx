@@ -4,6 +4,7 @@ import starIcon from "../static/star.svg";
 import timeIcon from "../static/time.svg";
 import dollarIcon from "../static/dollar.svg";
 import percentIcon from "../static/percent.svg";
+import hamburgerPic from "../static/ham.jpg";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getShop } from "../services/Shop";
@@ -19,15 +20,11 @@ const ShopDetail = () => {
   const userParsed = JSON.parse(user);
   const { id } = useParams();
 
-  useEffect(() => {
-    const fetchData = async (id) => {
-      const response = await getShop(id);
-      setShop(response);
-      const user = await getUser(userParsed?.id);
-      setUserFetched(user);
-    };
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
+    const res = await getShop(id);
+    setShop(res);
+    const response = await getUser(userParsed?._id);
+    setUserFetched(response);
   }, []);
 
   return (
