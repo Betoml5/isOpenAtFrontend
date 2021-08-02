@@ -1,15 +1,23 @@
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, useMap, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import L, { Popup } from "leaflet";
+import L from "leaflet";
 import { useState } from "react";
 import { useEffect } from "react";
 import { getShops } from "../services/Shop";
+import shopIcon from "../static/shops.svg";
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png").default,
   iconUrl: require("leaflet/dist/images/marker-icon.png").default,
   shadowUrl: require("leaflet/dist/images/marker-shadow.png").default,
+});
+
+const myIcon = L.icon({
+  iconUrl: shopIcon,
+  iconRetinaUrl: shopIcon,
+  popupAnchor: [0, -8],
+  iconSize: [48, 48],
 });
 
 const Location = () => {
@@ -39,7 +47,11 @@ const Location = () => {
         />
 
         {shops?.map((shop) => (
-          <Marker position={shop?.location}></Marker>
+          <Marker position={shop?.location} icon={myIcon}>
+            <Popup>
+              <div className="flex flex-col">{shop?.name}</div>
+            </Popup>
+          </Marker>
         ))}
       </MapContainer>
     </div>
