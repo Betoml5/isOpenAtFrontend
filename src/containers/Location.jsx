@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { getShops } from "../services/Shop";
 import shopIcon from "../static/shops.svg";
+import { Helmet } from "react-helmet";
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -34,6 +35,11 @@ const Location = () => {
 
   return (
     <div className="h-screen">
+      <Helmet htmlAttributes>
+        <html lang="es" />
+        <title>IsOpenAt - Mapa</title>
+        <meta name="description" content="Mapa de comercios - IsOpenAt" />
+      </Helmet>
       <MapContainer
         center={[27.8617, -101.1255]}
         zoom={15}

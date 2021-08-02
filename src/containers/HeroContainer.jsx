@@ -2,10 +2,16 @@ import avocadoImage from "../static/avocado.jpg";
 import { Link } from "react-router-dom";
 import HeroItemsContainer from "./HeroItemsContainer";
 import HeroSectionContainer from "./HeroSectionContainer";
+import { Helmet } from "react-helmet";
 
 const HeroContainer = () => {
   return (
     <div>
+      <Helmet htmlAttributes>
+        <html lang="es" />
+        <title>IsOpenAt - Inicio</title>
+        <meta name="description" content="Hero" />
+      </Helmet>
       <div className="bg-highOrange relative">
         <div className="p-4 ">
           <div>
