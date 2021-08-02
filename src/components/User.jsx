@@ -68,7 +68,9 @@ const User = () => {
     <div className="flex justify-center items-center h-screen">
       <div className="flex flex-col items-center bg-white rounded-md p-6 w-4/5 max-w-lg">
         <div className="flex items-center justify-center w-60 mb-10">
-          {!userFetched.image ? (
+          {userFetched.image === "" ? (
+            <span>Aun no tienes imagen</span>
+          ) : !userFetched.image ? (
             <Spinner />
           ) : (
             <picture>
