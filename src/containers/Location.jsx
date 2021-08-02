@@ -30,7 +30,7 @@ const Location = () => {
       center={[27.8617, -101.1255]}
       zoom={15}
       scrollWheelZoom={true}
-      style={{ height: "100vh" }}
+      style={{ height: "90vh" }}
       zoomAnimation={true}
     >
       <TileLayer
