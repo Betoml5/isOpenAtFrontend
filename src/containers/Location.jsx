@@ -1,9 +1,7 @@
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L, { Popup } from "leaflet";
-import { useCallback } from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { getShops } from "../services/Shop";
 
 delete L.Icon.Default.prototype._getIconUrl;
@@ -23,6 +21,8 @@ const Location = () => {
       setShops(fetchedShops);
     };
     fetchShops();
+
+
   }, []);
 
   return (
@@ -38,9 +38,15 @@ const Location = () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
+
       {shops?.map((shop) => (
-        <Marker position={shop?.location}></Marker>
+        <Marker position={shop?.location}>
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </Popup>
+        </Marker>
       ))}
+
     </MapContainer>
   );
 };
