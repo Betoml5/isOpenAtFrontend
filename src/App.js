@@ -9,6 +9,7 @@ import { initAxiosInterceptors } from "./services/auth-helpers";
 import EditShop from "./components/EditShop";
 import Location from "./containers/Location";
 import PrivateRoute from "./components/PrivateRoute";
+import Home from "./containers/Home";
 // import ControlPanel from "./containers/ControlPanel";
 // import { HeroContainer } from "./containers/HeroContainer";
 // import { ShopDetail } from "./components/ShopDetail";
@@ -39,7 +40,7 @@ const App = () => {
       <UserContextProvider>
         <Layout>
           <Switch>
-            <Route exact={true} path="/" component={HeroContainer} />
+            <Route exact={true} path="/" component={Home} />
             <Route exact={true} path="/shops" component={ShopContainer} />
             <Route
               exact={true}
