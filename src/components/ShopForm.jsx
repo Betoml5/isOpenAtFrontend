@@ -2,10 +2,11 @@
 import { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { createShop, setImageCover } from "../services/Shop";
-import storage from "../firebase";
-import useUser from "../hooks/useUser";
 import { useHistory } from "react-router-dom";
 import { getUser } from "../services/User";
+
+import storage from "../firebase";
+import useUser from "../hooks/useUser";
 
 const ShopForm = () => {
   const history = useHistory();
@@ -15,8 +16,7 @@ const ShopForm = () => {
     formState: { errors },
   } = useForm();
 
-  const { isLogged, user } = useUser();
-
+  const {  user } = useUser();
   const [view, setView] = useState(false);
   const [file, setFile] = useState(null);
   const [url, setURL] = useState("");
@@ -73,9 +73,11 @@ const ShopForm = () => {
     };
   }, [userParsed?._id]);
 
-  if (!isLogged) {
+  if (userFetched.admin === false) {
     history.push("/");
   }
+
+  console.log(userFetched.admin);
 
   return (
     <form
@@ -129,16 +131,19 @@ const ShopForm = () => {
       <label htmlFor="imageCover" className="my-4">
         Imagen de portada
       </label>
-      <label class="self-center w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer  hover:text-veryHighOrange text-black ease-linear transition-all duration-150">
-        <i class="fas fa-cloud-upload-alt fa-3x"></i>
-        <span class="mt-2 text-base leading-normal">Select a file</span>
-        <input type="file" class="hidden" onChange={handleChange} />
+      <label className="self-center w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer  hover:text-veryHighOrange text-black ease-linear transition-all duration-150">
+        <i className="fas fa-cloud-upload-alt fa-3x"></i>
+        <span className="mt-2 text-base leading-normal text-center">
+          Selecciona un archivo
+        </span>
+        <input type="file" className="hidden" onChange={handleChange} />
       </label>
       <progress
         className="self-center my-4"
         value={progress}
         max={100}
       ></progress>
+
       <input
         type="submit"
         value="Registrar"

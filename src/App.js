@@ -8,6 +8,7 @@ import ShopReview from "./components/ShopReview";
 import { initAxiosInterceptors } from "./services/auth-helpers";
 import EditShop from "./components/EditShop";
 import Location from "./containers/Location";
+import PrivateRoute from "./components/PrivateRoute";
 // import ControlPanel from "./containers/ControlPanel";
 // import { HeroContainer } from "./containers/HeroContainer";
 // import { ShopDetail } from "./components/ShopDetail";
@@ -53,11 +54,32 @@ const App = () => {
             <Route exact path="/shops/map" component={Location} />
             <Route exact={true} path="/sign-up" component={RegisterUser} />
             <Route exact={true} path="/sign-in" component={LoginUser} />
-            <Route exact={true} path="/user/favorites/:id" component={Favorites} />
-            <Route exact={true} path="/user/:id" component={User} />
-            <Route exact path="/admin/add-shop" component={ShopForm} />
-            <Route exact path="/admin/edit-shop/:id" component={EditShop} />
-            <Route exact path="/shops/panel" component={ControlPanel} />
+            <PrivateRoute
+              exact={true}
+              path="/user/favorites/:id"
+              component={Favorites}
+            ></PrivateRoute>
+            <PrivateRoute
+              exact={true}
+              path="/user/:id"
+              component={User}
+            ></PrivateRoute>
+            <PrivateRoute
+              exact={true}
+              path="/admin/add-shop"
+              component={ShopForm}
+            ></PrivateRoute>
+            <PrivateRoute
+              exact={true}
+              path="/admin/edit-shop/:id"
+              component={EditShop}
+            ></PrivateRoute>
+            <PrivateRoute
+              exact={true}
+              path="/shops/panel"
+              component={ControlPanel}
+            ></PrivateRoute>
+
             <Route component={NotFound} />
           </Switch>
         </Layout>

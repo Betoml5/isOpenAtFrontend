@@ -23,9 +23,8 @@ const ShopContainer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
   return (
-    <div className="grid  mx-2 gap-2 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid mx-2 gap-2 min-h-screen md:grid-cols-2 lg:grid-cols-3">
       <Search setFilterShops={setFilterShops} filterShops={filterShops} />
       <Filter />
       {shops?.length === 0 && <PageLoader />}

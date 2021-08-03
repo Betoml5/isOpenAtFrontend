@@ -25,8 +25,6 @@ const ShopDetail = () => {
     setShop(res);
     const response = await getUser(userParsed?._id);
     setUserFetched(response);
-
-
   }, []);
 
   return (
@@ -143,8 +141,9 @@ const ShopDetail = () => {
         </div>
 
         <div
-          className={`${resenasView ? 'flex p-4 lg:justify-evenly foodSlider' : 'hidden'
-            }`}
+          className={`${
+            resenasView ? "flex p-4 lg:justify-evenly foodSlider" : "hidden"
+          }`}
         >
           {shop?.reviews?.map((review) => (
             <div className="bg-white rounded-lg shadow-2xl sliderReviewItem p-4 max-h-96 overflow-y-scroll">
@@ -155,20 +154,16 @@ const ShopDetail = () => {
         </div>
 
         <div
-          className={`${enviosView ? 'flex p-4 foodSlider lg:justify-evenly' : 'hidden'
-            }`}
+          className={`${
+            enviosView ? "flex p-4 foodSlider lg:justify-evenly" : "hidden"
+          }`}
         >
-          {
-            shop?.imagesMenu?.map(image => (
-              <div className="sliderProductItem" key={image}>
-                <img src={image} alt="imageMenu" className=" rounded-2xl" />
-              </div>
-            ))
-          }
-
+          {shop?.imagesMenu?.map((image) => (
+            <div className="sliderProductItem" key={image}>
+              <img src={image} alt="imageMenu" className=" rounded-2xl" />
+            </div>
+          ))}
         </div>
-
-
       </div>
     </div>
   );
