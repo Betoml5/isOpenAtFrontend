@@ -16,8 +16,7 @@ const ShopForm = () => {
     formState: { errors },
   } = useForm();
 
-  const { isLogged, user } = useUser();
-
+  const {  user } = useUser();
   const [view, setView] = useState(false);
   const [file, setFile] = useState(null);
   const [url, setURL] = useState("");
@@ -74,9 +73,11 @@ const ShopForm = () => {
     };
   }, [userParsed?._id]);
 
-  if (!isLogged) {
+  if (userFetched.admin === false) {
     history.push("/");
   }
+
+  console.log(userFetched.admin);
 
   return (
     <form

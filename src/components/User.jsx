@@ -6,6 +6,7 @@ import storage from "../firebase";
 import UploadImageForm from "./UploadImageForm";
 import PageLoader from "./PageLoader";
 import Spinner from "./Spinner";
+import { Helmet } from "react-helmet";
 
 const User = () => {
   const { id } = useParams();
@@ -66,9 +67,16 @@ const User = () => {
 
   return (
     <div className="flex justify-center items-center h-screen">
+      <Helmet htmlAttributes>
+        <html lang="es" />
+        <title>IsOpenAt - {userFetched?.username}</title>
+        <meta name="description" content="User" />
+      </Helmet>
       <div className="flex flex-col items-center bg-white rounded-md p-6 w-4/5 max-w-lg">
-        <div className="w-60 mb-10">
-          {!userFetched.image ? (
+        <div className="flex items-center justify-center w-60 mb-10">
+          {userFetched.image === "" ? (
+            <span>Aun no tienes imagen</span>
+          ) : !userFetched.image ? (
             <Spinner />
           ) : (
             <picture>
