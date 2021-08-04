@@ -6,7 +6,7 @@ import LoveIcon from "../static/love.svg";
 import loginUser from "../static/loginuser.svg";
 import useUser from "../hooks/useUser";
 import { Link } from "react-router-dom";
-import { getFavorites } from "../services/User";
+import { getFavorites, getRandomFavorite } from "../services/User";
 import { useState } from "react";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
@@ -17,30 +17,13 @@ const Header = (props) => {
   const userParsed = JSON.parse(user);
   const [favorites, setFavorites] = useState([]);
 
-  const handleFavorite = async (max) => {
-    const fetchedFavorites = await getFavorites(userParsed?._id);
-    if (fetchedFavorites?.length === 0) {
-      Swal.fire({
-        title: "No encontramos favoritos",
-        text: "No tienes ningun comercio como favorito",
-        confirmButtonText: "OK",
-        icon: "error",
-      });
-    } else {
-      const randomNumber =
-        Math.floor(Math.random() * fetchedFavorites?.length) + 1;
-      const randomShop = fetchedFavorites[randomNumber];
-      return fetchedFavorites[randomShop];
-    }
+  const randomFavorite = async () => {
+    const response = await getRandomFavorite(userParsed?._id);
+    console.log(response);
+    Swal.fire({
+      text: "Hola mundo",
+    });
   };
-
-  // useEffect(() => {
-  //   const handleFavorites = async () => {
-  //     const fetchedFavorites = await getFavorites(userParsed?._id);
-  //     setFavorites(fetchedFavorites);
-  //   };
-  //   handleFavorites();
-  // }, []);
 
   return (
     <div className="flex justify-around items-center bg-headerRed p-4 w-full z-50 sticky bottom-0 ">
@@ -56,7 +39,7 @@ const Header = (props) => {
       </Link>
       <div
         className="bg-white p-2 rounded-full cursor-pointer"
-        onClick={() => handleFavorite(10)}
+        onClick={randomFavorite}
       >
         <picture>
           <img src={DadosIcon} alt="randomPic" className="w-8" />

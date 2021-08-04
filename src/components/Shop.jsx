@@ -32,6 +32,7 @@ const Shop = ({
       try {
         const res = await addFavorite(userParsed._id, _id);
         setUserFetched(res);
+        console.log(res);
       } catch (error) {
         console.log(error);
       }
