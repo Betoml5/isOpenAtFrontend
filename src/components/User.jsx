@@ -69,7 +69,7 @@ const User = () => {
     <div className="flex justify-center items-center h-screen">
       <Helmet htmlAttributes>
         <html lang="es" />
-        <title>IsOpenAt - {userFetched?.username}</title>
+        <title>IsOpenAt - Perfil</title>
         <meta name="description" content="User" />
       </Helmet>
       <div className="flex flex-col items-center bg-white rounded-md p-6 w-4/5 max-w-lg">
