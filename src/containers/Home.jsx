@@ -17,7 +17,9 @@ const Home = () => {
   return (
     <>
       <div className="header-svg flex flex-col items-center justify-between p-20 ">
-        <h3 className="text-7xl text-white">IsOpenAt</h3>
+        <h3 className="text-white text-5xl tracking-widest neonText lg:text-8xl ">
+          IsOpenAt
+        </h3>
         <form className="flex flex-col items-end" onSubmit={handleSubmit}>
           <input
             type="text"
@@ -34,16 +36,14 @@ const Home = () => {
       </div>
       <div className="flex flex-col items-center p-8 lg:flex-row lg:justify-between lg:p-20">
         <div className="text-white lg:w-1/2">
-          <p className="mb-8 leading-8">
-            <span className="text-3xl font-semibold">IsOpenAt</span>
+          <p className="mb-8 leading-8 lg:text-xl lg:leading-10">
+            <span className="text-3xl font-semibold lg:text-5xl">IsOpenAt</span>
             <br />
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae at
-            voluptates, consequatur iste tempora molestias voluptate, laudantium
-            magnam sint dolorem sapiente provident vitae esse ut reiciendis
-            pariatur possimus eos voluptatibus. Lorem, ipsum dolor sit amet
-            consectetur adipisicing elit. Eos aspernatur tempore eaque. Ipsam
-            alias impedit asperiores tempora, natus at, aliquam enim fugiat,
-            temporibus vel dolorum dolores. Ab rem similique dolor.
+            ¿Quieres saber si tus comercios favoritos estan abiertos? En
+            IsOpenAt, podras saber la informacion de tus comercios favoritos,
+            asi como de promociones, y reseñas de parte de otras personas.
+            Tambien podras hacer reseñas por tu mismo, y aportar para poder
+            tener la información mas reciente del comercio que mas te gusta.
           </p>
           <Link to="/shops" className="bg-veryHighOrange p-4">
             Ver comercios
