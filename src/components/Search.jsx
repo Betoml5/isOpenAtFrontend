@@ -1,6 +1,6 @@
 import { getShopByName } from "../services/Shop";
 
-const Search = ({ setFilterShops, filterShops }) => {
+const Search = ({ setFilterShops }) => {
   const handleSearch = (e) => {
     setTimeout(async () => {
       const response = await getShopByName(e.target.value);
