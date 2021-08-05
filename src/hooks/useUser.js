@@ -49,9 +49,9 @@ export default function useUser() {
   const registerUser = useCallback(async (username, email, password) => {
     try {
       setState({ loading: true, error: false });
-      const res = await signup(username, email, password);
+      await signup(username, email, password);
       setState({ loading: false, error: false });
-      console.log(res);
+      history.push("/sign-in");
     } catch (error) {
       console.log(error);
     }

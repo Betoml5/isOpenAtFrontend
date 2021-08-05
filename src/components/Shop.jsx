@@ -44,7 +44,9 @@ const Shop = ({
       Swal.fire({
         title: "Inicia sesion",
         text: "Hey! Inicia sesion primero",
-        confirmButtonText: "Yasta",
+        confirmButtonText: "OK",
+      }).then(() => {
+        history.push("/sign-in");
       });
     }
   };
@@ -131,9 +133,9 @@ const Shop = ({
         <hr className="my-2" />
 
         <div className="flex justify-center  items-center self-center shadow-2xl my-6 p-4 rounded-lg lg:justify-center">
-          <picture>
+          {/* <picture>
             <img src={percentIcon} alt="percentIcon" />
-          </picture>
+          </picture> */}
           <p className="text-sm text-center lg:text-xs">
             Codigo "IsOpenAt" para un 5% off
           </p>
