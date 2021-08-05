@@ -23,7 +23,6 @@ import DicesAnimation from "./components/DicesAnimation";
 // import { ShopReview } from "./components/ShopReview";
 // const ShopReview = lazy(() => import("./components/ShopReview"));
 
-const HeroContainer = lazy(() => import("./containers/HeroContainer"));
 const ShopDetail = lazy(() => import("./components/ShopDetail"));
 const ShopContainer = lazy(() => import("./containers/ShopContainer"));
 const ShopForm = lazy(() => import("./components/ShopForm"));
