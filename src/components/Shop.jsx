@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import restaurantCover from "../static/restaurantCover.jpg";
 import verifyIcon from "../static/verify.svg";
 import favoriteIcon from "../static/favorite.svg";
@@ -28,6 +28,8 @@ const Shop = ({
   const { isLogged, user } = useUser();
   const [userFetched, setUserFetched] = useState(null);
   const userParsed = JSON.parse(user);
+
+  const history = useHistory();
 
   const handleFavorite = async () => {
     if (isLogged) {
@@ -60,6 +62,8 @@ const Shop = ({
         title: "Inicia sesion",
         text: "Hey! Inicia sesion primero",
         confirmButtonText: "Yasta",
+      }).then(() => {
+        history.push("/sign-in");
       });
     }
   };
