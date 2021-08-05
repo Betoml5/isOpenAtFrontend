@@ -6,6 +6,7 @@ import { getShop, getShopByName, getShops } from "../services/Shop";
 import PageLoader from "../components/PageLoader";
 import { useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -57,6 +58,11 @@ const ShopContainer = () => {
   return (
     <div className="grid mx-2 my-2 gap-2 min-h-screen md:grid-cols-2 lg:grid-cols-3 lg:my-0">
       <Search setFilterShops={setFilterShops} filterShops={filterShops} />
+      <Helmet htmlAttributes>
+        <html lang="es" />
+        <title>IsOpenAt - Negocios</title>
+        <meta name="description" content="Favorites" />
+      </Helmet>
       {/* <Filter /> */}
       {shops?.length === 0 && <PageLoader />}
       {filterShops?.length > 0

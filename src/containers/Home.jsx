@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 import Search from "../components/Search";
@@ -18,6 +19,11 @@ const Home = () => {
 
   return (
     <>
+      <Helmet htmlAttributes>
+        <html lang="es" />
+        <title>IsOpenAt - Inicio</title>
+        <meta name="description" content="Home" />
+      </Helmet>
       <div className="header-svg flex flex-col items-center justify-between p-20 ">
         <h3 className="text-white text-5xl tracking-widest neonText lg:text-8xl ">
           IsOpenAt

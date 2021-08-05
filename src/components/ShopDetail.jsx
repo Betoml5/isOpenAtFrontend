@@ -10,6 +10,7 @@ import { Link, useParams } from "react-router-dom";
 import { getShop } from "../services/Shop";
 import useUser from "../hooks/useUser";
 import { getUser } from "../services/User";
+import { Helmet } from "react-helmet";
 
 const ShopDetail = () => {
   const [enviosView, setEnviosView] = useState(true);
@@ -29,6 +30,11 @@ const ShopDetail = () => {
 
   return (
     <div className="flex flex-col lg:w-full mx-auto">
+      <Helmet htmlAttributes>
+        <html lang="es" />
+        <title>IsOpenAt - {shop?.name}</title>
+        <meta name="description" content="Favorites" />
+      </Helmet>
       <div className="">
         <picture>
           <img
