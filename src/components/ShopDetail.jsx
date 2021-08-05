@@ -95,9 +95,6 @@ const ShopDetail = () => {
         </div>
 
         <div className="flex items-center self-center shadow-2xl my-6 p-4 rounded-lg">
-          <picture>
-            <img src={percentIcon} alt="percentIcon" loading="lazy" />
-          </picture>
           <p>Codigo "IsOpenAt" para un 5% off</p>
         </div>
 
@@ -135,7 +132,7 @@ const ShopDetail = () => {
             }}
           >
             <p className="text-center border-b-2 border-veryHighOrange">
-              Resenas
+              Reseñas
             </p>
           </div>
         </div>
