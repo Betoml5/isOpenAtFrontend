@@ -1,6 +1,6 @@
+import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
-import Search from "../components/Search";
 import ilustrationIcon from "../static/cashpayment.png";
 
 const Home = () => {
@@ -18,6 +18,11 @@ const Home = () => {
 
   return (
     <div className="flex flex-col">
+      <Helmet htmlAttributes>
+        <html lang="es" />
+        <title>IsOpenAt - Inicio</title>
+        <meta name="description" content="Home" />
+      </Helmet>
       <div className="header-svg flex flex-col items-center justify-between p-20 ">
         <h3 className="text-white text-5xl tracking-widest neonText lg:text-8xl ">
           IsOpenAt
@@ -66,7 +71,7 @@ const Home = () => {
           </picture>
         </div>
       </div>
-      <span className="font-extralight text-white text-center p-4">
+      <span className="font-extralight text-white text-center mb-4">
         Made with love by @Betoml5💚
       </span>
     </div>
