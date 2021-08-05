@@ -20,27 +20,37 @@ const Header = (props) => {
   const userParsed = JSON.parse(user);
   const history = useHistory();
   const randomFavorite = async () => {
-    setAnimation(true);
+    if (!isLogged) {
+      Swal.fire({
+        titleText: "Inicia Sesion",
+        text: "Inicia sesion primero",
+        confirmButtonText: "Siuuuu!",
+      }).then(() => {
+        history.push(`/sign-in`);
+      });
+    } else {
+      setAnimation(true);
 
-    setTimeout(async () => {
-      setAnimation(false);
-      const shop = await getRandomFavorite(userParsed?._id);
-      const recomendShop = shop.name;
-      if (shop.length !== 0) {
-        Swal.fire({
-          titleText: "Recomendacion",
-          text: `Te recomendamos ir a ${recomendShop}`,
-          confirmButtonText: "Gracias!",
-        }).then(() => {
-          history.push(`/shops/detail/${shop?._id}`);
-        });
-      } else {
-        Swal.fire({
-          titleText: "No tienes favoritos",
-          text: `Aun no tienes favoritos :(`,
-        });
-      }
-    }, 3000);
+      setTimeout(async () => {
+        setAnimation(false);
+        const shop = await getRandomFavorite(userParsed?._id);
+        const recomendShop = shop.name;
+        if (shop.length !== 0) {
+          Swal.fire({
+            titleText: "Recomendacion",
+            text: `Te recomendamos ir a ${recomendShop}`,
+            confirmButtonText: "Gracias!",
+          }).then(() => {
+            history.push(`/shops/detail/${shop?._id}`);
+          });
+        } else {
+          Swal.fire({
+            titleText: "No tienes favoritos",
+            text: `Aun no tienes favoritos :(`,
+          });
+        }
+      }, 3000);
+    }
 
     //  else {
     //   Swal.fire({
