@@ -1,17 +1,19 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Search from "../components/Search";
 import ilustrationIcon from "../static/cashpayment.png";
 
 const Home = () => {
+  const history = useHistory();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = ({ shop }) => {
+    console.log(shop);
+    history.push(`/shops?shop=${shop}`);
   };
 
   return (
@@ -20,7 +22,10 @@ const Home = () => {
         <h3 className="text-white text-5xl tracking-widest neonText lg:text-8xl ">
           IsOpenAt
         </h3>
-        <form className="flex flex-col items-end" onSubmit={handleSubmit}>
+        <form
+          className="flex flex-col items-end"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <input
             type="text"
             placeholder="Buscar comercio..."
