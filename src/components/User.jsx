@@ -55,7 +55,8 @@ const User = () => {
       setUserFetched(response);
     };
     getUserFetched();
-  }, [userParsed?._id]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!userParsed || !isLogged) {
     history.push("/");

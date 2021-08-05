@@ -202,6 +202,24 @@ input:checked + .slider:before {
   background-position: 0px -450px;
 }
 
+.dicesAnimation {
+  position: absolute;
+  left: calc(50% - 150px);
+  top: -435%;
+  transition: 300ms all ease;
+  animation-name: fade;
+  animation-duration: 3s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* .neonText {
   color: #fff;
   text-shadow: 0 0 0px #fff, 0 0 0px #fff, 0 0 0px #fff, 0 0 22px #f2573d,

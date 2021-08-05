@@ -47,8 +47,12 @@ const Shop = ({
 
   const deleteFavorite = async () => {
     if (isLogged) {
-      const res = await removeFavorite(userParsed?._id, _id);
-      setUserFetched(res);
+      try {
+        const res = await removeFavorite(userParsed?._id, _id);
+        setUserFetched(res);
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       Swal.fire({
         title: "Inicia sesion",

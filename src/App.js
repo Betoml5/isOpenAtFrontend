@@ -10,6 +10,7 @@ import EditShop from "./components/EditShop";
 import Location from "./containers/Location";
 import PrivateRoute from "./components/PrivateRoute";
 import Home from "./containers/Home";
+import DicesAnimation from "./components/DicesAnimation";
 // import ControlPanel from "./containers/ControlPanel";
 // import { HeroContainer } from "./containers/HeroContainer";
 // import { ShopDetail } from "./components/ShopDetail";
@@ -52,6 +53,7 @@ const App = () => {
               path="/shops/detail/:id"
               component={ShopDetail}
             />
+            <Route exact={true} path="/dices" component={DicesAnimation} />
             <Route exact path="/shops/map" component={Location} />
             <Route exact={true} path="/sign-up" component={RegisterUser} />
             <Route exact={true} path="/sign-in" component={LoginUser} />

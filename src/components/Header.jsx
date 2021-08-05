@@ -5,24 +5,49 @@ import UserIcon from "../static/user.svg";
 import LoveIcon from "../static/love.svg";
 import loginUser from "../static/loginuser.svg";
 import useUser from "../hooks/useUser";
-import { Link } from "react-router-dom";
-import { getFavorites, getRandomFavorite } from "../services/User";
+import { Link, useHistory } from "react-router-dom";
+import { getRandomFavorite } from "../services/User";
 import { useState } from "react";
-import { useEffect } from "react";
+import dicesAnimation from "../static/dicesAnimation.svg";
+
 import Swal from "sweetalert2";
+import DicesAnimation from "./DicesAnimation";
 const itemStyles = "w-6 cursor-pointer";
 
 const Header = (props) => {
+  const [animation, setAnimation] = useState(false);
   const { user, isLogged } = useUser();
   const userParsed = JSON.parse(user);
-  const [favorites, setFavorites] = useState([]);
-
+  const history = useHistory();
   const randomFavorite = async () => {
-    const response = await getRandomFavorite(userParsed?._id);
-    console.log(response);
-    Swal.fire({
-      text: "Hola mundo",
-    });
+    setAnimation(true);
+
+    setTimeout(async () => {
+      setAnimation(false);
+      const shop = await getRandomFavorite(userParsed?._id);
+      const recomendShop = shop.name;
+      if (shop.length !== 0) {
+        Swal.fire({
+          titleText: "Recomendacion",
+          text: `Te recomendamos ir a ${recomendShop}`,
+          confirmButtonText: "Gracias!",
+        }).then(() => {
+          history.push(`/shops/detail/${shop?._id}`);
+        });
+      } else {
+        Swal.fire({
+          titleText: "No tienes favoritos",
+          text: `Aun no tienes favoritos :(`,
+        });
+      }
+    }, 3000);
+
+    //  else {
+    //   Swal.fire({
+    //     titleText: "No tienes favoritos",
+    //     text: "Aún no tienes favoritos :(",
+    //   }).then(() => history.push("/shops"));
+    // }
   };
 
   return (
@@ -63,6 +88,12 @@ const Header = (props) => {
           <img src={LocationIcon} alt="home" className={itemStyles} />
         </picture>
       </Link>
+
+      <div className={`${animation ? `dicesAnimation` : `hidden`}`}>
+        <object type="image/svg+xml" data={dicesAnimation} className="w-full">
+          svg-animation
+        </object>
+      </div>
     </div>
   );
 };
