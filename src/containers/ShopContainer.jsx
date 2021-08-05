@@ -24,7 +24,7 @@ const ShopContainer = () => {
         Swal.fire({
           icon: "error",
           titleText: "No encontrado",
-          html: "<p>No encontramos lo que buscabas. 🙃 </br>pero mira estos negocios</p>",
+          html: "<p>No encontramos lo que buscabas. </br> 🙃 </br>Pero mira estos negocios</p>",
           confirmButtonText: "Ni pedo",
         });
       }
