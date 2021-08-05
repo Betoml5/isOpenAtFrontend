@@ -17,7 +17,7 @@ const Home = () => {
   };
 
   return (
-    <>
+    <div className="flex flex-col">
       <div className="header-svg flex flex-col items-center justify-between p-20 ">
         <h3 className="text-white text-5xl tracking-widest neonText lg:text-8xl ">
           IsOpenAt
@@ -49,6 +49,7 @@ const Home = () => {
             asi como de promociones, y reseñas de parte de otras personas.
             Tambien podras hacer reseñas por tu mismo, y aportar para poder
             tener la información mas reciente del comercio que mas te gusta.
+            <br />
           </p>
           <Link to="/shops" className="bg-veryHighOrange p-4">
             Ver comercios
@@ -65,7 +66,10 @@ const Home = () => {
           </picture>
         </div>
       </div>
-    </>
+      <span className="font-extralight text-white text-center p-4">
+        Made with love by @Betoml5💚
+      </span>
+    </div>
   );
 };
 
