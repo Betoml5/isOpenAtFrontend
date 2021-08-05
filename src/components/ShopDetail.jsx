@@ -32,7 +32,7 @@ const ShopDetail = () => {
     <div className="flex flex-col lg:w-full mx-auto">
       <Helmet htmlAttributes>
         <html lang="es" />
-        <title>IsOpenAt - {shop?.name}</title>
+        <title>IsOpenAt - {`${shop?.name}`}</title>
         <meta name="description" content="Favorites" />
       </Helmet>
       <div className="">
