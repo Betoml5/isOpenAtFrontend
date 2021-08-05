@@ -107,7 +107,7 @@ const Shop = ({
         </div>
 
         <div className="flex items-center my-2">
-          {openNow?.openNow ? (
+          {openNow ? (
             <p className="text-highGreen font-semibold uppercase mr-2">
               Abierto
             </p>
