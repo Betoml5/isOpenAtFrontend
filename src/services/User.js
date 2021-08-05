@@ -110,6 +110,20 @@ export const getFavorites = async (id) => {
   }
 };
 
+export const getRandomFavorite = async (id) => {
+  try {
+    const response = await axios({
+      method: "GET",
+      url: `${API}/random-fav/${id}`,
+      ///random-fav/:userId
+    });
+    return response.data.body;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 export const setImage = async (id, imageurl) => {
   try {
     const response = await axios({
@@ -119,10 +133,9 @@ export const setImage = async (id, imageurl) => {
         imageurl: imageurl,
       },
     });
-    console.log("imageURL", imageurl);
-    console.log(response);
     return response;
   } catch (error) {
+    console.log(error);
     return error;
   }
 };

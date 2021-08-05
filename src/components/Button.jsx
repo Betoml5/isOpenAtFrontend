@@ -1,5 +1,3 @@
-
-
 const Button = ({ value, setValues, values, handleClick, shopId }) => {
   return (
     <label class="switch">
@@ -11,6 +9,7 @@ const Button = ({ value, setValues, values, handleClick, shopId }) => {
             ...values,
             value: !values?.values,
           });
+
           handleClick(shopId);
         }}
       />

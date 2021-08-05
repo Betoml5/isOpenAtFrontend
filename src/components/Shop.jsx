@@ -22,6 +22,8 @@ const Shop = ({
   address,
   openNow,
   reviews,
+  hot,
+  highLight,
 }) => {
   const { isLogged, user } = useUser();
   const [userFetched, setUserFetched] = useState(null);
@@ -32,6 +34,7 @@ const Shop = ({
       try {
         const res = await addFavorite(userParsed._id, _id);
         setUserFetched(res);
+        console.log(res);
       } catch (error) {
         console.log(error);
       }
@@ -46,8 +49,12 @@ const Shop = ({
 
   const deleteFavorite = async () => {
     if (isLogged) {
-      const res = await removeFavorite(userParsed?._id, _id);
-      setUserFetched(res);
+      try {
+        const res = await removeFavorite(userParsed?._id, _id);
+        setUserFetched(res);
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       Swal.fire({
         title: "Inicia sesion",
@@ -85,7 +92,11 @@ const Shop = ({
         <div className="flex justify-between">
           <div className="flex items-center">
             <h4 className="mr-2">{name}</h4>
-            <img src={verifyIcon} alt="verifyIcon" className="w-6" />
+            {highLight && (
+              <img src={verifyIcon} alt="verifyIcon" className="w-6" />
+            )}
+            {/* Aqui podria ir una seccion de emojis */}
+            {hot && <span className="ml-2">🔥</span>}
           </div>
 
           <div className="cursor-pointer">
@@ -102,7 +113,7 @@ const Shop = ({
         </div>
 
         <div className="flex items-center my-2">
-          {openNow?.openNow ? (
+          {openNow ? (
             <p className="text-highGreen font-semibold uppercase mr-2">
               Abierto
             </p>

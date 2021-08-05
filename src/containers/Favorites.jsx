@@ -14,6 +14,7 @@ const Favorites = () => {
     const getUserFavorites = async (id) => {
       try {
         const response = await getFavorites(id);
+
         console.log("favorites", response);
         setFavorites(response);
       } catch (error) {

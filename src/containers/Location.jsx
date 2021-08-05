@@ -1,8 +1,7 @@
 import { MapContainer, TileLayer, Marker, useMap, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { getShops } from "../services/Shop";
 import shopIcon from "../static/shops.svg";
 import { Helmet } from "react-helmet";
@@ -31,6 +30,8 @@ const Location = () => {
       setShops(fetchedShops);
     };
     fetchShops();
+
+
   }, []);
 
   return (

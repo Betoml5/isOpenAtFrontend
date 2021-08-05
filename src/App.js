@@ -9,6 +9,8 @@ import { initAxiosInterceptors } from "./services/auth-helpers";
 import EditShop from "./components/EditShop";
 import Location from "./containers/Location";
 import PrivateRoute from "./components/PrivateRoute";
+import Home from "./containers/Home";
+import DicesAnimation from "./components/DicesAnimation";
 // import ControlPanel from "./containers/ControlPanel";
 // import { HeroContainer } from "./containers/HeroContainer";
 // import { ShopDetail } from "./components/ShopDetail";
@@ -21,7 +23,6 @@ import PrivateRoute from "./components/PrivateRoute";
 // import { ShopReview } from "./components/ShopReview";
 // const ShopReview = lazy(() => import("./components/ShopReview"));
 
-const HeroContainer = lazy(() => import("./containers/HeroContainer"));
 const ShopDetail = lazy(() => import("./components/ShopDetail"));
 const ShopContainer = lazy(() => import("./containers/ShopContainer"));
 const ShopForm = lazy(() => import("./components/ShopForm"));
@@ -39,7 +40,7 @@ const App = () => {
       <UserContextProvider>
         <Layout>
           <Switch>
-            <Route exact={true} path="/" component={HeroContainer} />
+            <Route exact={true} path="/" component={Home} />
             <Route exact={true} path="/shops" component={ShopContainer} />
             <Route
               exact={true}
@@ -51,6 +52,7 @@ const App = () => {
               path="/shops/detail/:id"
               component={ShopDetail}
             />
+            <Route exact={true} path="/dices" component={DicesAnimation} />
             <Route exact path="/shops/map" component={Location} />
             <Route exact={true} path="/sign-up" component={RegisterUser} />
             <Route exact={true} path="/sign-in" component={LoginUser} />
