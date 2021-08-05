@@ -22,6 +22,8 @@ const Shop = ({
   address,
   openNow,
   reviews,
+  hot,
+  highLight,
 }) => {
   const { isLogged, user } = useUser();
   const [userFetched, setUserFetched] = useState(null);
@@ -90,7 +92,11 @@ const Shop = ({
         <div className="flex justify-between">
           <div className="flex items-center">
             <h4 className="mr-2">{name}</h4>
-            <img src={verifyIcon} alt="verifyIcon" className="w-6" />
+            {highLight && (
+              <img src={verifyIcon} alt="verifyIcon" className="w-6" />
+            )}
+            {/* Aqui podria ir una seccion de emojis */}
+            {hot && <span className="ml-2">🔥</span>}
           </div>
 
           <div className="cursor-pointer">
