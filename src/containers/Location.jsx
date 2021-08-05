@@ -30,8 +30,6 @@ const Location = () => {
       setShops(fetchedShops);
     };
     fetchShops();
-
-
   }, []);
 
   return (
@@ -43,7 +41,7 @@ const Location = () => {
       </Helmet>
       <MapContainer
         center={[27.8617, -101.1255]}
-        zoom={15}
+        zoom={13}
         scrollWheelZoom={true}
         style={{ height: "100%", zIndex: 10 }}
         zoomAnimation={true}
