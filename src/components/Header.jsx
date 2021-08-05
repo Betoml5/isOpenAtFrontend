@@ -24,7 +24,7 @@ const Header = (props) => {
       Swal.fire({
         titleText: "Inicia Sesion",
         text: "Inicia sesion primero",
-        confirmButtonText: "Siuuuu!",
+        confirmButtonText: "OK",
       }).then(() => {
         history.push(`/sign-in`);
       });
