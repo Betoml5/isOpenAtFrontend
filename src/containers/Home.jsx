@@ -5,11 +5,7 @@ import ilustrationIcon from "../static/cashpayment.png";
 
 const Home = () => {
   const history = useHistory();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const onSubmit = ({ shop }) => {
     console.log(shop);

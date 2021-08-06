@@ -41,23 +41,24 @@ const User = () => {
         ref.getDownloadURL().then((url) => {
           setFile(null);
           setURL(url);
-          setImage(id, url).then((res) => console.log(res));
+          setImage(id, url);
           setTimeout(() => {
             setView(!view);
-          }, 100);
+            getUserFetched(userParsed._id);
+          }, 1000);
         });
       }
     );
   }
+  const getUserFetched = async (id) => {
+    const response = await getUser(id);
+    setUserFetched(response);
+  };
 
   useEffect(() => {
-    const getUserFetched = async () => {
-      const response = await getUser(userParsed._id);
-      setUserFetched(response);
-    };
-    getUserFetched();
+    getUserFetched(userParsed._id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [url]);
 
   if (!userParsed || !isLogged) {
     history.push("/");
@@ -76,7 +77,7 @@ const User = () => {
       </Helmet>
       <div className="flex flex-col items-center bg-white rounded-md p-6 w-4/5 max-w-lg">
         <div className="flex items-center justify-center w-60 mb-10">
-          {userFetched.image === "" ? (
+          {userFetched?.image === "" ? (
             <picture>
               <img
                 src={userDefault}

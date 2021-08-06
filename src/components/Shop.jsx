@@ -2,7 +2,6 @@ import { Link, useHistory } from "react-router-dom";
 import restaurantCover from "../static/restaurantCover.jpg";
 import verifyIcon from "../static/verify.svg";
 import favoriteIcon from "../static/favorite.svg";
-import percentIcon from "../static/percent.svg";
 import starIcon from "../static/star.svg";
 import timeIcon from "../static/time.svg";
 import dollarIcon from "../static/dollar.svg";
@@ -36,7 +35,6 @@ const Shop = ({
       try {
         const res = await addFavorite(userParsed._id, _id);
         setUserFetched(res);
-        console.log(res);
       } catch (error) {
         console.log(error);
       }

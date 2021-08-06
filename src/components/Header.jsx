@@ -9,9 +9,7 @@ import { Link, useHistory } from "react-router-dom";
 import { getRandomFavorite } from "../services/User";
 import { useState } from "react";
 import dicesAnimation from "../static/dicesAnimation.svg";
-
 import Swal from "sweetalert2";
-import DicesAnimation from "./DicesAnimation";
 const itemStyles = "w-6 cursor-pointer";
 
 const Header = (props) => {

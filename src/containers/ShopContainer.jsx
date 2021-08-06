@@ -1,8 +1,8 @@
-import Filter from "../components/Filter";
+// import Filter from "../components/Filter";
 import Search from "../components/Search";
 import Shop from "../components/Shop";
 import { useEffect, useState } from "react";
-import { getShop, getShopByName, getShops } from "../services/Shop";
+import { getShopByName, getShops } from "../services/Shop";
 import PageLoader from "../components/PageLoader";
 import { useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -58,7 +58,7 @@ const ShopContainer = () => {
   return (
     <div className="grid mx-2 my-2 gap-2 min-h-screen md:grid-cols-2 lg:grid-cols-3 lg:my-0">
       <Search setFilterShops={setFilterShops} filterShops={filterShops} />
-      <Helmet htmlAttributes>
+      <Helmet>
         <html lang="es" />
         <title>IsOpenAt - Negocios</title>
         <meta name="description" content="Favorites" />
