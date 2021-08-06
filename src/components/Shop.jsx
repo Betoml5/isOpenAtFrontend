@@ -85,14 +85,14 @@ const Shop = ({
             <img
               src={imageCover || restaurantCover}
               alt="restaurantCover"
-              className="w-full h-full rounded-tr-2xl rounded-tl-2xl"
+              className="w-full h-full rounded-tr-2xl rounded-tl-2xl object-cover"
               loading="lazy"
             />
           </picture>
         </div>
       </Link>
 
-      <div className="bg-white p-4 rounded-2xl">
+      <div className="flex flex-col justify-between bg-white p-4 rounded-2xl shop-item -mt-4">
         <div className="flex justify-between">
           <div className="flex items-center">
             <h4 className="mr-2">{name}</h4>
@@ -127,7 +127,7 @@ const Shop = ({
             </p>
           )}
         </div>
-        <p>{address}</p>
+        <p className="text-sm">{address}</p>
         <hr className="my-2" />
 
         <div className="flex justify-center  items-center self-center shadow-2xl my-6 p-4 rounded-lg lg:justify-center">

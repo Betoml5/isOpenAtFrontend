@@ -45,6 +45,7 @@ const User = () => {
           setTimeout(() => {
             setView(!view);
             getUserFetched(userParsed._id);
+            setProgress(0);
           }, 1000);
         });
       }
@@ -109,13 +110,24 @@ const User = () => {
         </div>
 
         {userFetched?.admin && (
-          <Link
-            className={`btn text-center w-full hover:bg-veryLightRed transition-all ${
-              view && "hidden"
-            }`}
-          >
-            Administrador
-          </Link>
+          <>
+            <Link
+              to="/admin/add-shop"
+              className={`btn w-full text-center hover:bg-veryLightRed transition-all mb-2 ${
+                view && "hidden"
+              }`}
+            >
+              Agregar comercio
+            </Link>
+            <Link
+              to="/shops/panel"
+              className={`btn w-full text-center hover:bg-veryLightRed transition-all ${
+                view && "hidden"
+              }`}
+            >
+              Panel de comercios
+            </Link>
+          </>
         )}
 
         <button
@@ -135,12 +147,20 @@ const User = () => {
           Cerrar sesion
         </button>
         {view && (
-          <UploadImageForm
-            handleUpload={handleUpload}
-            file={file}
-            handleChange={handleChange}
-            progress={progress}
-          />
+          <>
+            <UploadImageForm
+              handleUpload={handleUpload}
+              file={file}
+              handleChange={handleChange}
+              progress={progress}
+            />
+            <button
+              className={`btn  w-full  hover:bg-veryLightRed transition-all`}
+              onClick={() => setView(false)}
+            >
+              Cancelar
+            </button>
+          </>
         )}
       </div>
     </div>
