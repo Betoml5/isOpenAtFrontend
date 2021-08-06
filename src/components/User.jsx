@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { getUser, setImage } from "../services/User";
+import { Helmet } from "react-helmet";
 import useUser from "../hooks/useUser";
 import storage from "../firebase";
 import UploadImageForm from "./UploadImageForm";
 import PageLoader from "./PageLoader";
 import Spinner from "./Spinner";
-import { Helmet } from "react-helmet";
+import userDefault from "../static/user-black.svg";
 
 const User = () => {
   const { id } = useParams();
@@ -55,7 +56,7 @@ const User = () => {
       setUserFetched(response);
     };
     getUserFetched();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!userParsed || !isLogged) {
@@ -76,7 +77,14 @@ const User = () => {
       <div className="flex flex-col items-center bg-white rounded-md p-6 w-4/5 max-w-lg">
         <div className="flex items-center justify-center w-60 mb-10">
           {userFetched.image === "" ? (
-            <span>Aun no tienes imagen</span>
+            <picture>
+              <img
+                src={userDefault}
+                alt="userImage"
+                className="w-full  rounded-xl "
+                loading="lazy"
+              />
+            </picture>
           ) : !userFetched.image ? (
             <Spinner />
           ) : (
