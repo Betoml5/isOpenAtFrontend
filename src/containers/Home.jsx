@@ -14,7 +14,7 @@ const Home = () => {
 
   return (
     <div className="flex flex-col">
-      <Helmet htmlAttributes>
+      <Helmet>
         <html lang="es" />
         <title>IsOpenAt - Inicio</title>
         <meta name="description" content="Home" />

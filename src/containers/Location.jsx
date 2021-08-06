@@ -34,7 +34,7 @@ const Location = () => {
 
   return (
     <div className="h-screen">
-      <Helmet htmlAttributes>
+      <Helmet>
         <html lang="es" />
         <title>IsOpenAt - Mapa</title>
         <meta name="description" content="Mapa de comercios - IsOpenAt" />
