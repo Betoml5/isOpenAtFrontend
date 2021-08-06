@@ -109,30 +109,27 @@ const User = () => {
         </div>
 
         {userFetched?.admin && (
-          <>
-            <Link
-              to="/admin/add-shop"
-              className="btn w-full text-center hover:bg-veryLightRed transition-all mb-2"
-            >
-              Agregar comercio
-            </Link>
-            <Link
-              to="/shops/panel"
-              className="btn w-full text-center hover:bg-veryLightRed transition-all"
-            >
-              Panel de comercios
-            </Link>
-          </>
+          <Link
+            className={`btn text-center w-full hover:bg-veryLightRed transition-all ${
+              view && "hidden"
+            }`}
+          >
+            Administrador
+          </Link>
         )}
 
         <button
-          className="btn  w-full my-2 hover:bg-veryLightRed transition-all"
+          className={`btn  w-full my-2 hover:bg-veryLightRed transition-all ${
+            view && "hidden"
+          }`}
           onClick={setView}
         >
           Cambiar imagen
         </button>
         <button
-          className="btn w-full  hover:bg-veryLightRed transition-all"
+          className={`btn  w-full m hover:bg-veryLightRed transition-all ${
+            view && "hidden"
+          }`}
           onClick={logout}
         >
           Cerrar sesion
