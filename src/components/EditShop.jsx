@@ -1,26 +1,36 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { getShop, pushImageMenu, updateShop } from "../services/Shop";
 import storage from "../firebase";
 import { useForm } from "react-hook-form";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
-import { useCallback } from "react";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import axios from "axios";
 
 const EditShop = () => {
+  // 146 Sierra de sacramento, Coahuila
+  // Esta es la forma para busccar
+
+  const API = `http://api.positionstack.com/v1/forward?access_key=ef449ba03412c67915b892fbbfd5bdad&query=`;
+
   const { id } = useParams();
   const [shop, setShop] = useState({});
   const [images, setImages] = useState([]);
   const [progress, setProgress] = useState(0);
   const [cords, setCords] = useState({ lat: 27.9324, lng: -101.1255 });
+  const [address, setAddress] = useState("");
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   const history = useHistory();
+
+  const onChangeAddress = (e) => {
+    setAddress(e.target.value);
+  };
 
   const onSubmit = async (data) => {
     try {
@@ -53,8 +63,7 @@ const EditShop = () => {
         console.error,
         async () => {
           const refURL = await ref.getDownloadURL();
-          const response = await pushImageMenu(id, refURL);
-          console.log(response);
+          await pushImageMenu(id, refURL);
         }
       );
     });
@@ -65,8 +74,6 @@ const EditShop = () => {
   //Si no hay datos, el shop quedara con datos vacios.
   const handleChange = (e) => {
     setImages([...images, e.target.files[0]]);
-    console.log(e.target.files);
-    console.log(images);
   };
 
   useEffect(() => {
@@ -89,21 +96,38 @@ const EditShop = () => {
     shadowUrl: require("leaflet/dist/images/marker-shadow.png").default,
   });
 
-  function MyComponent() {
-    const map = useMap();
-    map.on(
-      "click",
-      useCallback(({ latlng }) => {
-        console.log("setting cords...");
-        setCords({
-          lat: latlng.lat,
-          lng: latlng.lng,
-        });
-      }, [])
-    );
+  function MyComponent({ cords }) {
+    // const map = useMap();
+    // map.on(
+    //   "click",
+    //   useCallback(({ latlng }) => {
+    //     console.log("setting cords...");
+    //     setCords({
+    //       lat: latlng.lat,
+    //       lng: latlng.lng,
+    //     });
+    //   }, [])
+    // );
 
     return <Marker position={cords} />;
   }
+
+  function ChangeMapView({ coords }) {
+    const map = useMap();
+    map.setView(coords, 13);
+
+    return null;
+  }
+
+  const fetchCords = async (address) => {
+    const response = await fetch(API + address);
+    const cords = await response.json();
+    setCords({
+      lat: cords.data[0].latitude,
+      lng: cords.data[0].longitude,
+    });
+    console.log("cords", cords.data[0]);
+  };
 
   return (
     <div className="flex  justify-center items-center  min-h-screen">
@@ -176,8 +200,23 @@ const EditShop = () => {
         ></progress>
 
         <h3 className="my-4">Selecciona ubicacion</h3>
+        <div className="justify-center ">
+          <input
+            type="text"
+            className="form-field w-3/4"
+            placeholder="Sierra mojada 102, Colinas del pedregal, Nueva Rosita, Mexico"
+            onChange={onChangeAddress}
+          />
+          <button
+            onClick={() => fetchCords(address)}
+            type="button"
+            className="bg-veryHighOrange p-4 text-white rounded-tr-md rounded-br-md"
+          >
+            Buscar
+          </button>
+        </div>
         <MapContainer
-          center={[27.8617, -101.1255]}
+          center={cords || [27.8617, -101.1255]}
           zoom={15}
           scrollWheelZoom={true}
           style={{ height: "350px", zIndex: "0" }}
@@ -187,7 +226,8 @@ const EditShop = () => {
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <MyComponent />
+          <MyComponent cords={cords} />
+          <ChangeMapView coords={cords} />
         </MapContainer>
         <input
           type="submit"

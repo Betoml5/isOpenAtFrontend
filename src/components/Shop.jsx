@@ -27,7 +27,6 @@ const Shop = ({
   const { isLogged, user } = useUser();
   const [userFetched, setUserFetched] = useState(null);
   const userParsed = JSON.parse(user);
-
   const history = useHistory();
 
   const handleFavorite = async () => {
