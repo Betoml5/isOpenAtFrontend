@@ -50,11 +50,11 @@ const Home = () => {
           <p className="mb-8 leading-8 lg:text-xl lg:leading-10">
             <span className="text-3xl font-semibold lg:text-5xl">IsOpenAt</span>
             <br />
-            ¿Quieres saber si tus comercios favoritos estan abiertos? En
-            IsOpenAt, podras saber la informacion de tus comercios favoritos,
-            asi como de promociones, y reseñas de parte de otras personas.
-            Tambien podras hacer reseñas por tu mismo, y aportar para poder
-            tener la información mas reciente del comercio que mas te gusta.
+            ¿Quieres saber si tus negocios favoritos estan abiertos? En
+            IsOpenAt, podras saber la informacion de tus negocios favoritos, asi
+            como de promociones, y reseñas de parte de otras personas. Tambien
+            podras hacer reseñas por tu mismo, y aportar para poder tener la
+            información mas reciente del negocio que mas te gusta.
             <br />
           </p>
           <Link to="/shops" className="bg-veryHighOrange p-4">

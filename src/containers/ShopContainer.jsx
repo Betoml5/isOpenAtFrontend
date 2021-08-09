@@ -26,7 +26,7 @@ const ShopContainer = () => {
           icon: "error",
           titleText: "No encontrado",
           html: "<p>No encontramos lo que buscabas. </br> 🙃 </br>Pero mira estos negocios</p>",
-          confirmButtonText: "Ni pedo",
+          confirmButtonText: "OK",
         });
       }
       setFilterShops(response);
