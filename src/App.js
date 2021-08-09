@@ -11,17 +11,6 @@ import Location from "./containers/Location";
 import PrivateRoute from "./components/PrivateRoute";
 import Home from "./containers/Home";
 import DicesAnimation from "./components/DicesAnimation";
-// import ControlPanel from "./containers/ControlPanel";
-// import { HeroContainer } from "./containers/HeroContainer";
-// import { ShopDetail } from "./components/ShopDetail";
-// import { ShopContainer } from "./containers/ShopContainer";
-// import { ShopForm } from "./components/ShopForm";
-// import { RegisterUser } from "./components/RegisterUser";
-// import { LoginUser } from "./components/LoginUser";
-// import { User } from "./components/User";
-// import { Favorites } from "./containers/Favorites";
-// import { ShopReview } from "./components/ShopReview";
-// const ShopReview = lazy(() => import("./components/ShopReview"));
 
 const ShopDetail = lazy(() => import("./components/ShopDetail"));
 const ShopContainer = lazy(() => import("./containers/ShopContainer"));
