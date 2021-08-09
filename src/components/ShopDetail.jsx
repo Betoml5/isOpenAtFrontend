@@ -15,7 +15,7 @@ const ShopDetail = () => {
   const [resenasView, setResenasView] = useState(false);
   const [shop, setShop] = useState({});
   const [userFetched, setUserFetched] = useState({});
-  const { user } = useUser();
+  const { user, isLogged } = useUser();
   const userParsed = JSON.parse(user);
   const { id } = useParams();
 
@@ -105,9 +105,15 @@ const ShopDetail = () => {
           <p>Codigo "IsOpenAt" para un 5% off</p>
         </div>
 
-        <div className=" bg-veryHighOrange p-4 self-center text-white rounded-lg">
-          <Link to={`/shops/review/${id}`}>Hacer reseña</Link>
-        </div>
+        {isLogged ? (
+          <div className=" bg-veryHighOrange p-4 self-center text-white rounded-lg">
+            <Link to={`/shops/review/${id}`}>Hacer reseña</Link>
+          </div>
+        ) : (
+          <div className="bg-veryHighOrange p-4 self-center text-white rounded-lg">
+            <Link to="/sign-in">Quiero hacer una reseña</Link>
+          </div>
+        )}
 
         {userFetched?.admin && (
           <div className="bg-veryHighOrange p-4 self-center text-white rounded-lg my-4">
