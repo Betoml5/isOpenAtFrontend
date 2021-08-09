@@ -60,7 +60,7 @@ const Shop = ({
       Swal.fire({
         title: "Inicia sesion",
         text: "Hey! Inicia sesion primero",
-        confirmButtonText: "Yasta",
+        confirmButtonText: "OK",
       }).then(() => {
         history.push("/sign-in");
       });

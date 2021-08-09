@@ -13,7 +13,7 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       <Helmet>
         <html lang="es" />
         <title>IsOpenAt - Inicio</title>
@@ -58,7 +58,7 @@ const Home = () => {
             <br />
           </p>
           <Link to="/shops" className="bg-veryHighOrange p-4">
-            Ver comercios
+            Ver negocios
           </Link>
         </div>
 

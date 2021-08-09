@@ -26,7 +26,6 @@ const Location = () => {
   useEffect(() => {
     const fetchShops = async () => {
       const fetchedShops = await getShops();
-      console.log(fetchedShops);
       setShops(fetchedShops);
     };
     fetchShops();
@@ -52,7 +51,7 @@ const Location = () => {
         />
 
         {shops?.map((shop) => (
-          <Marker position={shop?.location} icon={myIcon}>
+          <Marker position={shop?.location} icon={myIcon} key={shop?._id}>
             <Popup>{shop?.name}</Popup>
           </Marker>
         ))}
