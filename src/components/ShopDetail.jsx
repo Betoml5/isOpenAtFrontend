@@ -126,7 +126,7 @@ const ShopDetail = () => {
             }}
           >
             <p className="text-center border-b-2 border-veryHighOrange">
-              Envios
+              Productos
             </p>
           </div>
           <div
