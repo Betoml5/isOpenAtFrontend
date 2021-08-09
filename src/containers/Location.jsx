@@ -53,9 +53,7 @@ const Location = () => {
 
         {shops?.map((shop) => (
           <Marker position={shop?.location} icon={myIcon}>
-            <Popup>
-              <div className="flex flex-col">{shop?.name}</div>
-            </Popup>
+            <Popup>{shop?.name}</Popup>
           </Marker>
         ))}
       </MapContainer>

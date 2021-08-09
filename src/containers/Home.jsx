@@ -20,16 +20,21 @@ const Home = () => {
         <meta name="description" content="Home" />
       </Helmet>
       <div className="header-svg flex flex-col items-center justify-between p-20 ">
-        <h3 className="text-white text-5xl tracking-widest neonText lg:text-8xl ">
-          IsOpenAt
-        </h3>
+        <div className="flex flex-col justify-center">
+          <h3 className="text-white text-5xl tracking-widest neonText lg:text-8xl">
+            IsOpenAt
+          </h3>
+          <p className="text-white text-lg self-center font-light ">
+            Tu buscador de negocios
+          </p>
+        </div>
         <form
           className="flex flex-col items-end"
           onSubmit={handleSubmit(onSubmit)}
         >
           <input
             type="text"
-            placeholder="Buscar comercio..."
+            placeholder="Buscar negocio..."
             className="h-12 rounded-full p-4 outline-none mb-2"
             {...register("shop", { required: true })}
           />

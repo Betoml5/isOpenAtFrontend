@@ -6,12 +6,8 @@ import { useForm } from "react-hook-form";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import axios from "axios";
 
 const EditShop = () => {
-  // 146 Sierra de sacramento, Coahuila
-  // Esta es la forma para busccar
-
   const API = `http://api.positionstack.com/v1/forward?access_key=ef449ba03412c67915b892fbbfd5bdad&query=`;
 
   const { id } = useParams();
@@ -70,7 +66,6 @@ const EditShop = () => {
     history.push("/shops");
   }
 
-  //TODO
   //Si no hay datos, el shop quedara con datos vacios.
   const handleChange = (e) => {
     setImages([...images, e.target.files[0]]);
@@ -80,7 +75,6 @@ const EditShop = () => {
     const getShopFetched = async () => {
       const response = await getShop(id);
       setShop(response);
-      console.log("shop to edit", response);
     };
     getShopFetched();
     return () => {
@@ -89,7 +83,6 @@ const EditShop = () => {
   }, [id]);
 
   delete L.Icon.Default.prototype._getIconUrl;
-
   L.Icon.Default.mergeOptions({
     iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png").default,
     iconUrl: require("leaflet/dist/images/marker-icon.png").default,
@@ -97,25 +90,12 @@ const EditShop = () => {
   });
 
   function MyComponent({ cords }) {
-    // const map = useMap();
-    // map.on(
-    //   "click",
-    //   useCallback(({ latlng }) => {
-    //     console.log("setting cords...");
-    //     setCords({
-    //       lat: latlng.lat,
-    //       lng: latlng.lng,
-    //     });
-    //   }, [])
-    // );
-
     return <Marker position={cords} />;
   }
 
   function ChangeMapView({ coords }) {
     const map = useMap();
     map.setView(coords, 13);
-
     return null;
   }
 
