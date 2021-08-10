@@ -16,7 +16,7 @@ const ShopForm = () => {
     formState: { errors },
   } = useForm();
 
-  const {  user } = useUser();
+  const { user } = useUser();
   const [view, setView] = useState(false);
   const [file, setFile] = useState(null);
   const [url, setURL] = useState("");
@@ -29,8 +29,6 @@ const ShopForm = () => {
     console.log(e.target.files[0].name);
     setFile(e.target.files[0]);
   }
-
-  // console.log(watch("name"));
 
   const form = useRef("");
   const onSubmit = (data) => {
@@ -54,6 +52,7 @@ const ShopForm = () => {
               setTimeout(() => {
                 setView(!view);
               }, 100);
+              history.push("/");
             });
           }
         );
@@ -73,11 +72,9 @@ const ShopForm = () => {
     };
   }, [userParsed?._id]);
 
-  if (userFetched.admin === false) {
+  if (userFetched?.admin === false) {
     history.push("/");
   }
-
-  console.log(userFetched.admin);
 
   return (
     <form
@@ -86,9 +83,9 @@ const ShopForm = () => {
       className="flex flex-col justify-center bg-white  p-4 max-w-xl lg:max-w-3xl mx-auto"
     >
       <h3 className="text-xl uppercase text-center my-4 bg-veryHighOrange p-4 text-white rounded-md">
-        Afiliar nuevo comercio
+        Afiliar nuevo negocio
       </h3>
-      <label htmlFor="shopName">Nombre del comercio</label>
+      <label htmlFor="shopName">Nombre del negocio</label>
       <input
         placeholder="Nombre del comercio"
         name="shopName"
