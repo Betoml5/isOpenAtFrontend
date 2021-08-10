@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import { useMemo } from "react";
 
 const EditShop = () => {
   const API = `http://api.positionstack.com/v1/forward?access_key=ef449ba03412c67915b892fbbfd5bdad&query=`;
@@ -21,7 +22,12 @@ const EditShop = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+    reset,
+  } = useForm({
+    defaultValues: useMemo(() => {
+      return shop;
+    }, [shop]),
+  });
   const history = useHistory();
 
   const onChangeAddress = (e) => {
@@ -70,6 +76,9 @@ const EditShop = () => {
   const handleChange = (e) => {
     setImages([...images, e.target.files[0]]);
   };
+  useEffect(() => {
+    reset(shop);
+  }, [shop]);
 
   useEffect(() => {
     const getShopFetched = async () => {
@@ -77,6 +86,10 @@ const EditShop = () => {
       setShop(response);
     };
     getShopFetched();
+    setCords({
+      lat: shop?.location?.lat,
+      lng: shop?.location?.lng,
+    });
     return () => {
       setShop(null);
     };
@@ -115,7 +128,7 @@ const EditShop = () => {
         className="flex flex-col w-full max-w-lg bg-white p-6"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <label htmlFor="name">Nombre - {shop?.name} (Nombre anterior)</label>
+        <label htmlFor="name">Nombre</label>
         <input
           type="text"
           className="form-field"
@@ -126,9 +139,7 @@ const EditShop = () => {
         {errors.name && (
           <span className="field-required">Este campo es obligatorio</span>
         )}
-        <label htmlFor="address">
-          Direccion - {shop?.address} (Direccion anterior)
-        </label>
+        <label htmlFor="address">Direccion</label>
 
         <input
           type="text"
@@ -139,9 +150,7 @@ const EditShop = () => {
         {errors.address && (
           <span className="field-required">Este campo es obligatorio</span>
         )}
-        <label htmlFor="phone">
-          Telefono - {shop?.phone} (Telefono anterior)
-        </label>
+        <label htmlFor="phone">Telefono</label>
         <input
           type="tel"
           id="phone"
@@ -154,9 +163,7 @@ const EditShop = () => {
         {errors.phone && (
           <span className="field-required">Este campo es obligatorio</span>
         )}
-        <label htmlFor="code">
-          Codigo de descuento - {shop?.code} (Codigo anterior)
-        </label>
+        <label htmlFor="code">Codigo de descuento</label>
         <input
           type="text"
           className="form-field"

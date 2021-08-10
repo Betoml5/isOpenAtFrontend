@@ -36,10 +36,10 @@ const ShopDetail = () => {
         <title>IsOpenAt - {`${shop?.name}`}</title>
         <meta name="description" content="Favorites" />
       </Helmet>
-      <div className="">
+      <div>
         <picture>
           <img
-            src={restaurantCover}
+            src={shop?.imageCover || restaurantCover}
             alt="shopCover"
             className="w-full object-cover lg:h-96"
             loading="lazy"
