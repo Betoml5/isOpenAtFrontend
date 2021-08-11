@@ -87,8 +87,8 @@ const EditShop = () => {
     };
     getShopFetched();
     setcoords({
-      lat: shop?.location?.lat,
-      lng: shop?.location?.lng,
+      lat: shop?.location?.lat || 27.9324,
+      lng: shop?.location?.lng || -101.1255,
     });
     return () => {
       setShop(null);
@@ -125,103 +125,117 @@ const EditShop = () => {
   return (
     <div className="flex  justify-center items-center  min-h-screen">
       <form
-        className="flex flex-col w-full max-w-lg bg-white p-6"
+        className="flex flex-col w-full max-w-lg bg-white p-6 md:max-w-full lg:flex-row lg:flex-wrap lg:gap-12"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <label htmlFor="name">Nombre</label>
-        <input
-          type="text"
-          className="form-field"
-          placeholder="Nombre"
-          {...register("name", { required: true })}
-        />
-
-        {errors.name && (
-          <span className="field-required">Este campo es obligatorio</span>
-        )}
-        <label htmlFor="address">Direccion</label>
-
-        <input
-          type="text"
-          className="form-field"
-          placeholder="Direccion"
-          {...register("address", { required: true })}
-        />
-        {errors.address && (
-          <span className="field-required">Este campo es obligatorio</span>
-        )}
-        <label htmlFor="phone">Telefono</label>
-        <input
-          type="tel"
-          id="phone"
-          name="phone"
-          className="form-field"
-          placeholder="Numero del telefono"
-          pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
-          {...register("phone", { required: true })}
-        />
-        {errors.phone && (
-          <span className="field-required">Este campo es obligatorio</span>
-        )}
-        <label htmlFor="code">Codigo de descuento</label>
-        <input
-          type="text"
-          className="form-field"
-          placeholder="Codigo de descuento"
-          {...register("code", { required: true })}
-        />
-        {errors.code && (
-          <span className="field-required">Este campo es obligatorio</span>
-        )}
-        {/* <label htmlFor="images">Subir imagenes para exposicion</label> */}
-        <span>imagenes al momento {images?.length}</span>
-        <label class="self-center w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer   text-black ease-linear transition-all duration-150">
-          <i class="fas fa-cloud-upload-alt fa-3x"></i>
-          <span class="mt-2 text-base leading-normal">Selecciona archivos</span>
-          <input type="file" class="hidden" onChange={handleChange} />
-        </label>
-        <progress
-          className="self-center my-4"
-          value={progress}
-          max={100}
-        ></progress>
-
-        <h3 className="my-4">Selecciona ubicacion</h3>
-        <div className="justify-center ">
+        <div className="flex flex-col">
+          <label htmlFor="name">Nombre</label>
           <input
             type="text"
-            className="form-field w-3/4"
-            placeholder="Sierra mojada 102, Colinas del pedregal, Nueva Rosita, Mexico"
-            onChange={onChangeAddress}
+            className="form-field"
+            placeholder="Nombre"
+            {...register("name", { required: true })}
           />
-          <button
-            onClick={() => fetchcoords(address)}
-            type="button"
-            className="bg-veryHighOrange p-4 text-white rounded-tr-md rounded-br-md"
-          >
-            Buscar
-          </button>
+
+          {errors.name && (
+            <span className="field-required">Este campo es obligatorio</span>
+          )}
         </div>
-        <MapContainer
-          center={coords || [27.8617, -101.1255]}
-          zoom={15}
-          scrollWheelZoom={true}
-          style={{ height: "350px", zIndex: "0" }}
-          zoomAnimation={true}
-        >
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        <div className="flex flex-col">
+          <label htmlFor="address">Direccion</label>
+
+          <input
+            type="text"
+            className="form-field"
+            placeholder="Direccion"
+            {...register("address", { required: true })}
           />
-          <MyComponent coords={coords} />
-          <ChangeMapView coords={coords} />
-        </MapContainer>
-        <input
-          type="submit"
-          value="Editar"
-          className="btn my-4 cursor-pointer"
-          disabled={!register}
-        />
+          {errors.address && (
+            <span className="field-required">Este campo es obligatorio</span>
+          )}
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="phone">Telefono</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            className="form-field"
+            placeholder="Numero del telefono"
+            pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+            {...register("phone", { required: true })}
+          />
+          {errors.phone && (
+            <span className="field-required">Este campo es obligatorio</span>
+          )}
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="code">Codigo de descuento</label>
+          <input
+            type="text"
+            className="form-field"
+            placeholder="Codigo de descuento"
+            {...register("code", { required: true })}
+          />
+          {errors.code && (
+            <span className="field-required">Este campo es obligatorio</span>
+          )}
+        </div>
+        {/* <label htmlFor="images">Subir imagenes para exposicion</label> */}
+        <div className="flex flex-col">
+          <span>imagenes al momento {images?.length}</span>
+          <label class="self-center w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer   text-black ease-linear transition-all duration-150">
+            <i class="fas fa-cloud-upload-alt fa-3x"></i>
+            <span class="mt-2 text-base leading-normal">
+              Selecciona archivos
+            </span>
+            <input type="file" class="hidden" onChange={handleChange} />
+          </label>
+          <progress
+            className="self-center my-4"
+            value={progress}
+            max={100}
+          ></progress>
+        </div>
+
+        <div className="flex flex-col lg:w-full">
+          <h3 className="my-4">Selecciona ubicacion</h3>
+          <div className="justify-center ">
+            <input
+              type="text"
+              className="form-field w-3/4"
+              placeholder="Sierra mojada 102, Colinas del pedregal, Nueva Rosita, Mexico"
+              onChange={onChangeAddress}
+            />
+            <button
+              onClick={() => fetchcoords(address)}
+              type="button"
+              className="bg-veryHighOrange p-4 text-white rounded-tr-md rounded-br-md w-1/4"
+            >
+              Buscar
+            </button>
+          </div>
+          <MapContainer
+            center={coords || [27.8617, -101.1255]}
+            zoom={15}
+            scrollWheelZoom={true}
+            style={{ height: "350px", zIndex: "0" }}
+            zoomAnimation={true}
+          >
+            <TileLayer
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <MyComponent coords={coords} />
+            <ChangeMapView coords={coords} />
+          </MapContainer>
+          <input
+            type="submit"
+            value="Editar"
+            className="btn my-4 cursor-pointer"
+            disabled={!register}
+          />
+        </div>
       </form>
     </div>
   );
