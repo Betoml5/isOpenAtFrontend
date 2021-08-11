@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { getShop, pushImageMenu, updateShop } from "../services/Shop";
 import storage from "../firebase";
@@ -6,8 +6,7 @@ import { useForm } from "react-hook-form";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { useMemo } from "react";
-
+import downArrowIcon from "../static/down-arrow.png";
 const EditShop = () => {
   const API = `http://api.positionstack.com/v1/forward?access_key=ef449ba03412c67915b892fbbfd5bdad&query=`;
 
@@ -17,6 +16,10 @@ const EditShop = () => {
   const [progress, setProgress] = useState(0);
   const [coords, setcoords] = useState({ lat: 27.9324, lng: -101.1255 });
   const [address, setAddress] = useState("");
+
+  const [basicInformationView, setBasicInformationView] = useState(false);
+  const [scheduleView, setScheduleView] = useState(false);
+  const [locationView, setLocationView] = useState(false);
 
   const {
     register,
@@ -123,12 +126,130 @@ const EditShop = () => {
   };
 
   return (
-    <div className="flex  justify-center items-center  min-h-screen">
+    <div className="flex flex-col min-h-screen">
       <form
-        className="flex flex-col w-full max-w-lg bg-white p-6 md:max-w-full lg:flex-row lg:flex-wrap lg:gap-12"
+        className="flex flex-col bg-white p-4 min-h-screen"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="flex flex-col">
+        <div
+          className="flex justify-between items-center my-2"
+          onClick={() => {
+            setBasicInformationView(!basicInformationView);
+          }}
+        >
+          <h3 className="text-xl ">Información basica</h3>
+          <img src={downArrowIcon} alt="downArrowIcon" className="w-4" />
+        </div>
+        {basicInformationView && (
+          <div className="mt-4">
+            <div className="flex flex-col">
+              <label htmlFor="name">Nombre del negocio</label>
+              <input
+                type="text"
+                placeholder="Nombre del negocio"
+                className="form-field"
+                {...register("name", { required: true })}
+              />
+              {errors.name && <span>Este campo es obligatorio</span>}
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="address">Direccion del negocio</label>
+              <input
+                type="text"
+                placeholder="Direccion del negocio"
+                className="form-field"
+                {...register("address", { required: true })}
+              />
+              {errors.address && <span>Este campo es obligatorio</span>}
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="phone">Numero de telefono</label>
+              <input
+                type="tel"
+                placeholder="Numero de telefono"
+                pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+                className="form-field"
+                {...register("phone", { required: true })}
+              />
+              {errors.phone && <span>Este campo es obligatorio</span>}
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="code">Codigo de descuento</label>
+              <input
+                type="text"
+                placeholder="Codigo de descuento"
+                className="form-field"
+                {...register("code", { required: true })}
+              />
+            </div>
+          </div>
+        )}
+        <div
+          className="flex justify-between items-center my-2"
+          onClick={() => {
+            setScheduleView(!scheduleView);
+          }}
+        >
+          <h3 className="text-xl ">Horario</h3>
+          <img src={downArrowIcon} alt="downArrowIcon" className="w-4" />
+        </div>
+        {scheduleView &&
+          shop?.schedule?.map((item) => (
+            <div className="flex flex-col my-2">
+              <p className="text-xl text-veryHighOrange">{item.day}</p>
+              <span className="font-bold">Abierto de: </span>
+              <input type="time" name="time" />
+              <span className="font-bold">A:</span>
+              <input type="time" name="time" />
+            </div>
+          ))}
+
+        <div
+          className="flex justify-between items-center my-2"
+          onClick={() => {
+            setLocationView(!locationView);
+          }}
+        >
+          <h3 className="text-xl">Ubicación</h3>
+          <img src={downArrowIcon} alt="downArrowIcon" className="w-4" />
+        </div>
+
+        {locationView && (
+          <div>
+            <h3 className="my-4">Selecciona ubicacion</h3>
+            <div className="justify-center ">
+              <input
+                type="text"
+                className="form-field w-3/4"
+                placeholder="Sierra mojada 102, Colinas del pedregal, Nueva Rosita, Mexico"
+                onChange={onChangeAddress}
+              />
+              <button
+                onClick={() => fetchcoords(address)}
+                type="button"
+                className="bg-veryHighOrange p-4 text-white rounded-tr-md rounded-br-md w-1/4"
+              >
+                Buscar
+              </button>
+            </div>
+            <MapContainer
+              center={coords || [27.8617, -101.1255]}
+              zoom={15}
+              scrollWheelZoom={true}
+              style={{ height: "350px", zIndex: "0" }}
+              zoomAnimation={true}
+            >
+              <TileLayer
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              <MyComponent coords={coords} />
+              <ChangeMapView coords={coords} />
+            </MapContainer>
+          </div>
+        )}
+
+        {/* <div className="flex flex-col">
           <label htmlFor="name">Nombre</label>
           <input
             type="text"
@@ -181,7 +302,7 @@ const EditShop = () => {
             <span className="field-required">Este campo es obligatorio</span>
           )}
         </div>
-        {/* <label htmlFor="images">Subir imagenes para exposicion</label> */}
+     
         <div className="flex flex-col">
           <span>imagenes al momento {images?.length}</span>
           <label class="self-center w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer   text-black ease-linear transition-all duration-150">
@@ -197,7 +318,6 @@ const EditShop = () => {
             max={100}
           ></progress>
         </div>
-
         <div className="flex flex-col lg:w-full">
           <h3 className="my-4">Selecciona ubicacion</h3>
           <div className="justify-center ">
@@ -235,7 +355,8 @@ const EditShop = () => {
             className="btn my-4 cursor-pointer"
             disabled={!register}
           />
-        </div>
+        </div>{" "}
+        */}
       </form>
     </div>
   );
