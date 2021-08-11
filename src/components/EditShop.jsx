@@ -15,7 +15,7 @@ const EditShop = () => {
   const [shop, setShop] = useState({});
   const [images, setImages] = useState([]);
   const [progress, setProgress] = useState(0);
-  const [cords, setCords] = useState({ lat: 27.9324, lng: -101.1255 });
+  const [coords, setcoords] = useState({ lat: 27.9324, lng: -101.1255 });
   const [address, setAddress] = useState("");
 
   const {
@@ -37,14 +37,14 @@ const EditShop = () => {
   const onSubmit = async (data) => {
     try {
       // Cree un objeto para poder enviarlo.
-      const datacords = {
+      const datacoords = {
         location: {
-          lat: cords.lat.toFixed(6),
-          lng: cords.lng.toFixed(6),
+          lat: coords.lat.toFixed(6),
+          lng: coords.lng.toFixed(6),
         },
       };
       await updateShop(id, data);
-      await updateShop(id, datacords);
+      await updateShop(id, datacoords);
       handleUpload(images);
     } catch (error) {
       console.log(error);
@@ -86,7 +86,7 @@ const EditShop = () => {
       setShop(response);
     };
     getShopFetched();
-    setCords({
+    setcoords({
       lat: shop?.location?.lat,
       lng: shop?.location?.lng,
     });
@@ -102,8 +102,8 @@ const EditShop = () => {
     shadowUrl: require("leaflet/dist/images/marker-shadow.png").default,
   });
 
-  function MyComponent({ cords }) {
-    return <Marker position={cords} />;
+  function MyComponent({ coords }) {
+    return <Marker position={coords} />;
   }
 
   function ChangeMapView({ coords }) {
@@ -112,14 +112,14 @@ const EditShop = () => {
     return null;
   }
 
-  const fetchCords = async (address) => {
+  const fetchcoords = async (address) => {
     const response = await fetch(API + address);
-    const cords = await response.json();
-    setCords({
-      lat: cords.data[0].latitude,
-      lng: cords.data[0].longitude,
+    const coords = await response.json();
+    setcoords({
+      lat: coords.data[0].latitude,
+      lng: coords.data[0].longitude,
     });
-    console.log("cords", cords.data[0]);
+    console.log("coords", coords.data[0]);
   };
 
   return (
@@ -195,7 +195,7 @@ const EditShop = () => {
             onChange={onChangeAddress}
           />
           <button
-            onClick={() => fetchCords(address)}
+            onClick={() => fetchcoords(address)}
             type="button"
             className="bg-veryHighOrange p-4 text-white rounded-tr-md rounded-br-md"
           >
@@ -203,7 +203,7 @@ const EditShop = () => {
           </button>
         </div>
         <MapContainer
-          center={cords || [27.8617, -101.1255]}
+          center={coords || [27.8617, -101.1255]}
           zoom={15}
           scrollWheelZoom={true}
           style={{ height: "350px", zIndex: "0" }}
@@ -213,8 +213,8 @@ const EditShop = () => {
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <MyComponent cords={cords} />
-          <ChangeMapView coords={cords} />
+          <MyComponent coords={coords} />
+          <ChangeMapView coords={coords} />
         </MapContainer>
         <input
           type="submit"

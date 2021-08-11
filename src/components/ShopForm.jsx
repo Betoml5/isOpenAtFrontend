@@ -105,7 +105,7 @@ const ShopForm = () => {
       {errors.address && (
         <span className="field-required">Este campo es obligatorio</span>
       )}
-      <label htmlFor="email">Email</label>
+      {/* <label htmlFor="email">Email</label>
       <input
         placeholder="Email"
         className="form-field"
@@ -114,7 +114,7 @@ const ShopForm = () => {
       />
       {errors.email && (
         <span className="field-required">Este campo es obligatorio</span>
-      )}
+      )} */}
       <label htmlFor="phone">Numero de celular</label>
       <input
         placeholder="Numero de celular"
@@ -125,6 +125,28 @@ const ShopForm = () => {
       {errors.phone && (
         <span className="field-required">Este campo es obligatorio</span>
       )}
+
+      {/* <label htmlFor="rangeHours">Rango de horas</label> */}
+      {/* 
+      <div className="flex items-center">
+        <p className="mr-4">De: </p>
+        <input
+          type="time"
+          className="form-field"
+          onChange={(e) => {
+            console.log(e.target.value);
+          }}
+        />
+        <p className="mx-4">A: </p>
+        <input
+          type="time"
+          className="form-field"
+          onChange={(e) => {
+            console.log(e.target.value);
+          }}
+        />
+      </div> */}
+
       <label htmlFor="imageCover" className="my-4">
         Imagen de portada
       </label>
