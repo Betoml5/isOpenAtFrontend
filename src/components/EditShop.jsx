@@ -7,6 +7,8 @@ import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import downArrowIcon from "../static/down-arrow.png";
+import restaurantCover from "../static/restaurantCover.jpg";
+
 const EditShop = () => {
   const API = `http://api.positionstack.com/v1/forward?access_key=ef449ba03412c67915b892fbbfd5bdad&query=`;
 
@@ -16,10 +18,19 @@ const EditShop = () => {
   const [progress, setProgress] = useState(0);
   const [coords, setcoords] = useState({ lat: 27.9324, lng: -101.1255 });
   const [address, setAddress] = useState("");
+  const [imageCover, setImageCover] = useState("");
+  const [schedule, setSchedule] = useState({
+    stateSchedule: [],
+  });
 
   const [basicInformationView, setBasicInformationView] = useState(false);
   const [scheduleView, setScheduleView] = useState(false);
   const [locationView, setLocationView] = useState(false);
+  const [imageCoverView, setImageCoverView] = useState(false);
+  const [uploadImagesView, setUploadImagesView] = useState(false);
+  const [removeImagesView, setRemoveImagesView] = useState(false);
+
+  console.log(typeof schedule);
 
   const {
     register,
@@ -198,12 +209,19 @@ const EditShop = () => {
             <div className="flex flex-col my-2">
               <p className="text-xl text-veryHighOrange">{item.day}</p>
               <span className="font-bold">Abierto de: </span>
-              <input type="time" name="time" />
+              <input
+                type="time"
+                name={item?.day + "from"}
+                onChange={}
+              />
               <span className="font-bold">A:</span>
-              <input type="time" name="time" />
+              <input
+                type="time"
+                name={item?.day + "to"}
+                onChange={}
+              />
             </div>
           ))}
-
         <div
           className="flex justify-between items-center my-2"
           onClick={() => {
@@ -213,7 +231,6 @@ const EditShop = () => {
           <h3 className="text-xl">Ubicación</h3>
           <img src={downArrowIcon} alt="downArrowIcon" className="w-4" />
         </div>
-
         {locationView && (
           <div>
             <h3 className="my-4">Selecciona ubicacion</h3>
@@ -248,6 +265,102 @@ const EditShop = () => {
             </MapContainer>
           </div>
         )}
+        <div
+          className="flex justify-between items-center my-2"
+          onClick={() => {
+            setImageCoverView(!imageCoverView);
+          }}
+        >
+          <h3 className="text-xl">Imagen de portada</h3>
+          <img src={downArrowIcon} alt="downArrowIcon" className="w-4" />
+        </div>
+        {imageCoverView && (
+          <div>
+            <div className="w-80">
+              <img
+                src={shop?.imageCover || restaurantCover}
+                alt="imageCover"
+                className="w-full"
+              />
+              <input
+                type="file"
+                onChange={(e) => {
+                  console.log(e.target.files[0]);
+                  setImageCover(e.target.files[0]);
+                }}
+              />
+            </div>
+          </div>
+        )}
+
+        <div
+          className="flex justify-between items-center my-2"
+          onClick={() => {
+            setUploadImagesView(!uploadImagesView);
+          }}
+        >
+          <h3 className="text-xl">Agregar productos</h3>
+          <img src={downArrowIcon} alt="downArrowIcon" className="w-4" />
+        </div>
+
+        {uploadImagesView && (
+          <div className="flex flex-col">
+            <span className="my-4">imagenes al momento {images?.length}</span>
+            <label class="self-center w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer   text-black ease-linear transition-all duration-150">
+              <i class="fas fa-cloud-upload-alt fa-3x"></i>
+              <span class="mt-2 text-base leading-normal">
+                Selecciona archivos
+              </span>
+              <input type="file" class="hidden" onChange={handleChange} />
+            </label>
+            <progress
+              className="self-center my-4"
+              value={progress}
+              max={100}
+            ></progress>
+          </div>
+        )}
+
+        <div
+          className="flex justify-between items-center my-2"
+          onClick={() => {
+            setRemoveImagesView(!removeImagesView);
+          }}
+        >
+          <h3 className="text-xl">Eliminar productos</h3>
+          <img src={downArrowIcon} alt="downArrowIcon" className="w-4" />
+        </div>
+
+        {removeImagesView && (
+          <div className="flex p-4 foodSlider lg:justify-evenly">
+            {shop?.imagesMenu?.map((image) => (
+              <div className="sliderProductItem" key={image}>
+                <img src={image} alt="imageMenu" className=" rounded-2xl" />
+              </div>
+            ))}
+          </div>
+        )}
+
+        <button type="button" onClick={() => console.log(schedule[0])}>
+          Ver horario
+        </button>
+
+        {/* <input
+          type="submit"
+          value="Editar"
+          className="btn w-full mt-6 cursor-pointer md:w-1/2  lg:w-1/4"
+          disabled={!register}
+        /> */}
+
+        {/* (
+          <div className="flex p-4 foodSlider lg:justify-evenly">
+            {shop?.imagesMenu?.map((image) => (
+              <div className="sliderProductItem" key={image}>
+                <img src={image} alt="imageMenu" className=" rounded-2xl" />
+              </div>
+            ))}
+          </div>
+        ) */}
 
         {/* <div className="flex flex-col">
           <label htmlFor="name">Nombre</label>
