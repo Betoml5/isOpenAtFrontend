@@ -22,6 +22,7 @@ const User = lazy(() => import("./components/User"));
 const Favorites = lazy(() => import("./containers/Favorites"));
 const ControlPanel = lazy(() => import("./containers/ControlPanel"));
 
+
 initAxiosInterceptors();
 const App = () => {
   //Aqui Cualquier provider
@@ -71,7 +72,7 @@ const App = () => {
               path="/shops/panel"
               component={ControlPanel}
             ></PrivateRoute>
-            <PrivateRoute exact={true} path="/admin/shop-schedule" component={ShopSchedule}>
+            <PrivateRoute exact={true} path="/admin/shop-schedule/:id" component={ShopSchedule}>
 
             </PrivateRoute>
 

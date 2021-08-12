@@ -182,7 +182,7 @@ const EditShop = () => {
           )}
         </div>
         {/* <label htmlFor="images">Subir imagenes para exposicion</label> */}
-        {/* <div className="flex flex-col lg:w-full">
+        <div className="flex flex-col lg:w-full">
           <span>Subir productos</span>
           <span className="">imagenes al momento {images?.length}</span>
           <label class="self-center w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer   text-black ease-linear transition-all duration-150 lg:self-start">
@@ -197,13 +197,16 @@ const EditShop = () => {
             value={progress}
             max={100}
           ></progress>
-        </div> */}
-
-        <div className="flex flex-col">
-          <Link className="btn" to="">
-            Cambiar horario
-          </Link>
         </div>
+
+        {/* <div className="flex flex-col w-full text-center">
+          <Link
+            className="btn w-1/2 md:w-1/3"
+            to={`/admin/shop-schedule/${id}`}
+          >
+            Editar horario
+          </Link>
+        </div> */}
 
         <div className="flex flex-col lg:w-full">
           <h3 className="my-4">Selecciona ubicacion</h3>
