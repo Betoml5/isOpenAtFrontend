@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { getShop, pushImageMenu, updateShop } from "../services/Shop";
 import storage from "../firebase";
 import { useForm } from "react-hook-form";
@@ -182,9 +182,10 @@ const EditShop = () => {
           )}
         </div>
         {/* <label htmlFor="images">Subir imagenes para exposicion</label> */}
-        <div className="flex flex-col">
-          <span>imagenes al momento {images?.length}</span>
-          <label class="self-center w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer   text-black ease-linear transition-all duration-150">
+        {/* <div className="flex flex-col lg:w-full">
+          <span>Subir productos</span>
+          <span className="">imagenes al momento {images?.length}</span>
+          <label class="self-center w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer   text-black ease-linear transition-all duration-150 lg:self-start">
             <i class="fas fa-cloud-upload-alt fa-3x"></i>
             <span class="mt-2 text-base leading-normal">
               Selecciona archivos
@@ -192,10 +193,16 @@ const EditShop = () => {
             <input type="file" class="hidden" onChange={handleChange} />
           </label>
           <progress
-            className="self-center my-4"
+            className="self-center my-4 lg:self-start"
             value={progress}
             max={100}
           ></progress>
+        </div> */}
+
+        <div className="flex flex-col">
+          <Link className="btn" to="">
+            Cambiar horario
+          </Link>
         </div>
 
         <div className="flex flex-col lg:w-full">
