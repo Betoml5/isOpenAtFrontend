@@ -51,7 +51,21 @@ const EditShop = () => {
     }
   };
 
-  function handleUpload(imagesArray) {
+  async function handleUpload(imagesArray) {
+    const ref = storage.ref(`/images/${imageCover.name}`);
+    const uploadTask = ref.put(imageCover);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => console.log(snapshot),
+      console.error,
+      async () => {
+        const refURL = await ref.getDownloadURL();
+        const shopUpdated = {
+          imageCover: refURL,
+        };
+        await updateShop(id, shopUpdated);
+      }
+    );
     imagesArray.forEach((image) => {
       const ref = storage.ref(`/images/${image.name}`);
       const uploadTask = ref.put(image);
@@ -69,7 +83,6 @@ const EditShop = () => {
         }
       );
     });
-    history.push("/shops");
   }
 
   //Si no hay datos, el shop quedara con datos vacios.
