@@ -41,7 +41,7 @@ export const getShop = async (id) => {
   }
 };
 
-export const createShop = async (name, address, email, phone) => {
+export const createShop = async (name, address, phone) => {
   try {
     const response = await axios({
       method: "POST",
@@ -49,7 +49,6 @@ export const createShop = async (name, address, email, phone) => {
       data: {
         name,
         address,
-        email,
         phone,
       },
     });

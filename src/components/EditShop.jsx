@@ -19,9 +19,7 @@ const EditShop = () => {
   const [coords, setcoords] = useState({ lat: 27.9324, lng: -101.1255 });
   const [address, setAddress] = useState("");
   const [imageCover, setImageCover] = useState("");
-  const [schedule, setSchedule] = useState({
-    stateSchedule: [],
-  });
+  const [schedule, setSchedule] = useState([]);
 
   const [basicInformationView, setBasicInformationView] = useState(false);
   const [scheduleView, setScheduleView] = useState(false);
@@ -29,8 +27,6 @@ const EditShop = () => {
   const [imageCoverView, setImageCoverView] = useState(false);
   const [uploadImagesView, setUploadImagesView] = useState(false);
   const [removeImagesView, setRemoveImagesView] = useState(false);
-
-  console.log(typeof schedule);
 
   const {
     register,
@@ -57,8 +53,41 @@ const EditShop = () => {
           lng: coords.lng.toFixed(6),
         },
       };
+      const editedSchedule = {
+        schedule: [
+          {
+            day: "Lunes",
+            range: [schedule["Lunesfrom"], schedule["Lunesto"]],
+          },
+          {
+            day: "Martes",
+            range: [schedule["Martesfrom"], schedule["Martesto"]],
+          },
+          {
+            day: "Miercoles",
+            range: [schedule["Miercolesfrom"], schedule["Miercolesto"]],
+          },
+          {
+            day: "Jueves",
+            range: [schedule["Juevesfrom"], schedule["Juevesto"]],
+          },
+          {
+            day: "Viernes",
+            range: [schedule["Viernesfrom"], schedule["Viernesto"]],
+          },
+          {
+            day: "Sabado",
+            range: [schedule["Sabadofrom"], schedule["Sabadoto"]],
+          },
+          {
+            day: "Domingo",
+            range: [schedule["Domingofrom"], schedule["Domingoto"]],
+          },
+        ],
+      };
       await updateShop(id, data);
       await updateShop(id, datacoords);
+      await updateShop(id, editedSchedule);
       handleUpload(images);
     } catch (error) {
       console.log(error);
@@ -212,13 +241,25 @@ const EditShop = () => {
               <input
                 type="time"
                 name={item?.day + "from"}
-                onChange={}
+                onChange={(e) => {
+                  setSchedule({
+                    ...schedule,
+                    [e.target.name]: e.target.value,
+                  });
+                  console.log(schedule["Lunesto"]);
+                }}
               />
               <span className="font-bold">A:</span>
               <input
                 type="time"
                 name={item?.day + "to"}
-                onChange={}
+                onChange={(e) => {
+                  setSchedule({
+                    ...schedule,
+                    [e.target.name]: e.target.value,
+                  });
+                  console.log(schedule["Lunesto"]);
+                }}
               />
             </div>
           ))}
@@ -341,9 +382,11 @@ const EditShop = () => {
           </div>
         )}
 
-        <button type="button" onClick={() => console.log(schedule[0])}>
-          Ver horario
-        </button>
+        <input
+          type="submit"
+          value="Editar"
+          className="btn my-4 cursor-pointer"
+        />
 
         {/* <input
           type="submit"
