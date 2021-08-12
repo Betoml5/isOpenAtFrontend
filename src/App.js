@@ -12,6 +12,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Home from "./containers/Home";
 import DicesAnimation from "./components/DicesAnimation";
 import ShopSchedule from "./components/ShopSchedule";
+import OwnerShops from "./containers/OwnerShops";
 
 const ShopDetail = lazy(() => import("./components/ShopDetail"));
 const ShopContainer = lazy(() => import("./containers/ShopContainer"));
@@ -72,9 +73,11 @@ const App = () => {
               path="/shops/panel"
               component={ControlPanel}
             ></PrivateRoute>
-            <PrivateRoute exact={true} path="/admin/shop-schedule/:id" component={ShopSchedule}>
+            <PrivateRoute exact={true} path="/owner/shops/:id" component={OwnerShops}>
 
             </PrivateRoute>
+
+
 
             <Route component={NotFound} />
           </Switch>

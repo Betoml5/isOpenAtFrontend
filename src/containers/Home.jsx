@@ -57,9 +57,14 @@ const Home = () => {
             información mas reciente del negocio que mas te gusta.
             <br />
           </p>
-          <Link to="/shops" className="bg-veryHighOrange p-4">
-            Ver negocios
-          </Link>
+          <div className="flex flex-wrap">
+            <Link to="/shops" className="bg-veryHighOrange p-4">
+              Ver negocios
+            </Link>
+            <Link to="" className=" bg-veryHighOrange p-4 mt-2 md:mt-0 md:ml-2">
+              Quiero agregar mi negocio
+            </Link>
+          </div>
         </div>
 
         <div className="mt-8 lg:w-1/4">

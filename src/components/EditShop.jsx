@@ -1,23 +1,24 @@
-import { useEffect, useState, useCallback } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { useEffect, useState, useMemo } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import { getShop, pushImageMenu, updateShop } from "../services/Shop";
 import storage from "../firebase";
 import { useForm } from "react-hook-form";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { useMemo } from "react";
+import restaurantCover from "../static/restaurantCover.jpg";
 
 const EditShop = () => {
   const API = `http://api.positionstack.com/v1/forward?access_key=ef449ba03412c67915b892fbbfd5bdad&query=`;
 
   const { id } = useParams();
+  console.log(typeof id);
   const [shop, setShop] = useState({});
   const [images, setImages] = useState([]);
   const [progress, setProgress] = useState(0);
   const [coords, setcoords] = useState({ lat: 27.9324, lng: -101.1255 });
   const [address, setAddress] = useState("");
-
+  const [imageCover, setImageCover] = useState("");
   const {
     register,
     handleSubmit,
@@ -45,7 +46,7 @@ const EditShop = () => {
       };
       await updateShop(id, data);
       await updateShop(id, datacoords);
-      handleUpload(images);
+      handleUpload(images).then(() => history.push("/shops"));
     } catch (error) {
       console.log(error);
     }
@@ -93,11 +94,15 @@ const EditShop = () => {
     reset(shop);
   }, [shop]);
 
+  const getShopFetched = async () => {
+    const response = await getShop(id);
+    // const response1 = await getShop("611547077549c71a68547356");
+    // console.log(response1);
+    console.log(response);
+    setShop(response);
+  };
+
   useEffect(() => {
-    const getShopFetched = async () => {
-      const response = await getShop(id);
-      setShop(response);
-    };
     getShopFetched();
     setcoords({
       lat: shop?.location?.lat || 27.9324,
@@ -198,18 +203,39 @@ const EditShop = () => {
         <div className="flex flex-col lg:w-full">
           <span>Subir productos</span>
           <span className="">imagenes al momento {images?.length}</span>
-          <label class="self-center w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer   text-black ease-linear transition-all duration-150 lg:self-start">
+          <label class=" w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer   text-black ease-linear transition-all duration-150 ">
             <i class="fas fa-cloud-upload-alt fa-3x"></i>
             <span class="mt-2 text-base leading-normal">
               Selecciona archivos
             </span>
             <input type="file" class="hidden" onChange={handleChange} />
           </label>
-          <progress
-            className="self-center my-4 lg:self-start"
-            value={progress}
-            max={100}
-          ></progress>
+          <progress className=" my-4 " value={progress} max={100}></progress>
+        </div>
+
+        <div>
+          <h4 className="my-4">Cambiar imagen de portada </h4>
+          <div className="w-80">
+            <img
+              src={shop?.imageCover || restaurantCover}
+              alt="imageCover"
+              className="w-full"
+            />
+            <label class="self-center my-4 w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer   text-black ease-linear transition-all duration-150 lg:self-start">
+              <i class="fas fa-cloud-upload-alt fa-3x"></i>
+              <span class="mt-2 text-base leading-normal">
+                Selecciona imagen
+              </span>
+              <input
+                type="file"
+                className="hidden"
+                onChange={(e) => {
+                  console.log(e.target.files[0]);
+                  setImageCover(e.target.files[0]);
+                }}
+              />
+            </label>
+          </div>
         </div>
 
         {/* <div className="flex flex-col w-full text-center">

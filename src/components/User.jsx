@@ -109,11 +109,34 @@ const User = () => {
           <p>Te gustan {userFetched?.favorites?.length} comercios</p>
         </div>
 
+        {userFetched?.owner && (
+          <>
+            <Link
+              to="/admin/add-shop"
+              className={`btn w-full text-center hover:bg-veryLightRed transition-all  ${
+                view && "hidden"
+              }`}
+            >
+              Agregar negocio
+            </Link>
+            {userFetched?.shops?.length > 0 && (
+              <Link
+                to={`/owner/shops/${id}`}
+                className={`btn w-full text-center hover:bg-veryLightRed transition-all  mt-2 ${
+                  view && "hidden"
+                }`}
+              >
+                Ver negocios
+              </Link>
+            )}
+          </>
+        )}
+
         {userFetched?.admin && (
           <>
             <Link
               to="/admin/add-shop"
-              className={`btn w-full text-center hover:bg-veryLightRed transition-all mb-2 ${
+              className={`btn w-full text-center hover:bg-veryLightRed transition-all  ${
                 view && "hidden"
               }`}
             >

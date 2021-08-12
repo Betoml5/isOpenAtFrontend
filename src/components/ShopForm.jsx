@@ -7,6 +7,7 @@ import { getUser } from "../services/User";
 
 import storage from "../firebase";
 import useUser from "../hooks/useUser";
+import { addShop } from "../services/OwnerService";
 
 const ShopForm = () => {
   const history = useHistory();
@@ -32,8 +33,10 @@ const ShopForm = () => {
 
   const form = useRef("");
   const onSubmit = (data) => {
-    createShop(data.name, data.address, data.email, data.phone)
+    createShop(data.name, data.address, data.phone)
       .then((response) => {
+        console.log(response?._id);
+        addShop(userFetched?._id, response?._id);
         const ref = storage.ref(`/images/${file?.name}`);
         const uploadTask = ref.put(file);
         uploadTask.on(
@@ -72,7 +75,7 @@ const ShopForm = () => {
     };
   }, [userParsed?._id]);
 
-  if (userFetched?.admin === false) {
+  if (userFetched?.owner === false) {
     history.push("/");
   }
 
@@ -125,27 +128,6 @@ const ShopForm = () => {
       {errors.phone && (
         <span className="field-required">Este campo es obligatorio</span>
       )}
-
-      {/* <label htmlFor="rangeHours">Rango de horas</label> */}
-      {/* 
-      <div className="flex items-center">
-        <p className="mr-4">De: </p>
-        <input
-          type="time"
-          className="form-field"
-          onChange={(e) => {
-            console.log(e.target.value);
-          }}
-        />
-        <p className="mx-4">A: </p>
-        <input
-          type="time"
-          className="form-field"
-          onChange={(e) => {
-            console.log(e.target.value);
-          }}
-        />
-      </div> */}
 
       <label htmlFor="imageCover" className="my-4">
         Imagen de portada

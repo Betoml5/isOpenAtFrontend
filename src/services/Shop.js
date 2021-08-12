@@ -24,7 +24,7 @@ export const getShopByName = async (name) => {
     });
     console.log(response.data.body);
     return response.data.body;
-  } catch (error) {}
+  } catch (error) { }
 };
 
 export const getShop = async (id) => {
@@ -33,15 +33,15 @@ export const getShop = async (id) => {
       method: "GET",
       url: `${API}/shop/${id}`,
     });
-    console.log("getshop", response.data.body);
-    return response.data.body;
+    console.log("getshop", response?.data?.body);
+    return response?.data?.body;
   } catch (error) {
     console.log(error);
     return error;
   }
 };
 
-export const createShop = async (name, address, email, phone) => {
+export const createShop = async (name, address, phone) => {
   try {
     const response = await axios({
       method: "POST",
@@ -49,7 +49,6 @@ export const createShop = async (name, address, email, phone) => {
       data: {
         name,
         address,
-        email,
         phone,
       },
     });
