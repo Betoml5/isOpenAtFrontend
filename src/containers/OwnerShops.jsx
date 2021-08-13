@@ -49,7 +49,7 @@ const OwnerShops = () => {
             <p>{shop?.code || "Aun no tienes codigo"}</p>
           </div>
           <div>
-            <Link to={`/admin/edit-shop/${id}`}>Editar</Link>
+            <Link to={`/admin/edit-shop/${shop?._id}`}>Editar</Link>
             <button type="button" onClick={() => handleRemoveShop()}>
               Eliminar
             </button>

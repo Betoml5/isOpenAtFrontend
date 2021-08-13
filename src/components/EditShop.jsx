@@ -96,9 +96,10 @@ const EditShop = () => {
 
   useEffect(() => {
     const getShopFetched = async () => {
-      const response = await getShop(id);
-      console.log(response);
-      setShop(response);
+      getShop(id).then((res) => {
+        console.log(res);
+        setShop(res);
+      });
     };
 
     getShopFetched();
