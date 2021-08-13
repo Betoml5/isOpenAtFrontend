@@ -94,15 +94,13 @@ const EditShop = () => {
     reset(shop);
   }, [shop]);
 
-  const getShopFetched = async () => {
-    const response = await getShop(id);
-    // const response1 = await getShop("611547077549c71a68547356");
-    // console.log(response1);
-    console.log(response);
-    setShop(response);
-  };
-
   useEffect(() => {
+    const getShopFetched = async () => {
+      const response = await getShop(id);
+      console.log(response);
+      setShop(response);
+    };
+
     getShopFetched();
     setcoords({
       lat: shop?.location?.lat || 27.9324,
