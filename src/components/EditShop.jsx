@@ -20,6 +20,8 @@ const EditShop = () => {
   const [address, setAddress] = useState("");
   const [imageCover, setImageCover] = useState("");
   const [imageCoverView, setImageCoverView] = useState(false);
+  const [productsView, setProductsView] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -210,18 +212,50 @@ const EditShop = () => {
           )}
         </div>
         <ControlPanel shops={shop} />
-        {/* <label htmlFor="images">Subir imagenes para exposicion</label> */}
-        <div className="flex flex-col lg:w-full">
-          <span>Subir productos</span>
-          <span className="">imagenes al momento {images?.length}</span>
-          <label class=" w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer   text-black ease-linear transition-all duration-150 ">
-            <i class="fas fa-cloud-upload-alt fa-3x"></i>
-            <span class="mt-2 text-base leading-normal">
-              Selecciona archivos
-            </span>
-            <input type="file" class="hidden" onChange={handleChange} />
-          </label>
-          <progress className=" my-4 " value={progress} max={100}></progress>
+
+        <div className="flex flex-col my-4 w-full">
+          {productsView && (
+            <>
+              <span>Subir productos</span>
+              <span className="">imagenes al momento {images?.length}</span>
+              <label class=" w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer   text-black ease-linear transition-all duration-150 ">
+                <i class="fas fa-cloud-upload-alt fa-3x"></i>
+                <span class="mt-2 text-base leading-normal">
+                  Selecciona archivos
+                </span>
+                <input type="file" class="hidden" onChange={handleChange} />
+              </label>
+              <progress
+                className=" my-4 "
+                value={progress}
+                max={100}
+              ></progress>
+              <div>
+                <button
+                  type="button"
+                  className="bg-veryHighOrange text-white p-4 mr-1"
+                >
+                  Subir productos
+                </button>
+                <button
+                  type="button"
+                  className="bg-veryHighOrange text-white p-4"
+                  onClick={() => setProductsView(false)}
+                >
+                  Cancelar
+                </button>
+              </div>
+            </>
+          )}
+          <button
+            type="button"
+            className={`bg-veryHighOrange p-4 text-white mt-2 md:w-1/3 ${
+              productsView && "hidden"
+            }`}
+            onClick={() => setProductsView(true)}
+          >
+            Agregar productos
+          </button>
         </div>
 
         <div>
@@ -258,7 +292,6 @@ const EditShop = () => {
                 </button>
               </>
             )}
-            {/* vista dinamica */}
           </div>
           <button
             type="button"
@@ -266,7 +299,6 @@ const EditShop = () => {
               imageCoverView && "hidden"
             }`}
             onClick={() => {
-              //TODO. Hide button and show input
               setImageCoverView(true);
             }}
           >
