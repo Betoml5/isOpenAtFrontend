@@ -126,13 +126,13 @@ const User = () => {
                   view && "hidden"
                 }`}
               >
-                Ver negocios
+                Ver mis negocios
               </Link>
             )}
           </>
         )}
 
-        {userFetched?.admin && (
+        {/* {userFetched?.admin && (
           <>
             <Link
               to="/admin/add-shop"
@@ -151,7 +151,7 @@ const User = () => {
               Panel de comercios
             </Link>
           </>
-        )}
+        )} */}
 
         <button
           className={`btn  w-full my-2 hover:bg-veryLightRed transition-all ${

@@ -2,28 +2,26 @@ import { useEffect, useState } from "react";
 import ShopPanel from "../components/ShopPanel";
 import { getShops } from "../services/Shop";
 
-const ControlPanel = () => {
-  const [shops, setShops] = useState([]);
+const ControlPanel = ({ shop }) => {
+  // const [shops, setShops] = useState([]);
 
-  useEffect(() => {
-    const getShopsFetched = async () => {
-      const shopsFetched = await getShops();
-      setShops(shopsFetched);
-    };
+  // useEffect(() => {
+  //   const getShopsFetched = async () => {
+  //     const shopsFetched = await getShops();
+  //     setShops(shopsFetched);
+  //   };
 
-    getShopsFetched();
+  //   getShopsFetched();
 
-    return () => {
-      setShops([]);
-    };
-  }, []);
+  //   return () => {
+  //     setShops([]);
+  //   };
+  // }, []);
 
   return (
-    <div>
-      {shops?.map((shop) => (
-        <ShopPanel {...shop} key={shop?._id} />
-      ))}
-    </div>
+    <>
+      <ShopPanel {...shop} key={shop?._id} />
+    </>
   );
 };
 

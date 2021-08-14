@@ -56,7 +56,7 @@ const ShopContainer = () => {
   }, []);
 
   return (
-    <div className="grid mx-2 my-2 gap-2 min-h-screen md:grid-cols-2 lg:grid-cols-3 lg:my-0">
+    <div className="grid mx-2 my-2 gap-2 min-h-screen md:grid-cols-2 md:gap-10 lg:grid-cols-3 lg:my-0  ">
       <Search setFilterShops={setFilterShops} filterShops={filterShops} />
       <Helmet>
         <html lang="es" />

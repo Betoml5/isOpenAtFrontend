@@ -77,7 +77,7 @@ const Shop = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div className="flex flex-col max-w-md justify-self-center self-center cursor-pointer ">
+    <div className="flex flex-col max-w-md min-w-full justify-self-center self-center cursor-pointer lg:min-w-3/4">
       <Link to={`/shops/detail/${_id}`} className="h-80">
         <div className="w-full h-full">
           <picture className="w-full h-full">

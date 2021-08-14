@@ -44,12 +44,12 @@ const ShopPanel = ({
     };
   }, [userParsed?._id]);
 
-  if (userFetched.admin === false) {
+  if (userFetched?.owner === false) {
     history.push("/");
   }
 
   return (
-    <div className="flex flex-wrap bg-white p-4 border-b-2 border-black">
+    <div className="flex flex-wrap bg-white p-4 ">
       <div className="w-full text-center my-2">
         <h3 className="text-2xl ">{name}</h3>
       </div>

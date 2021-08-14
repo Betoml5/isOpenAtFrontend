@@ -37,6 +37,10 @@ body {
   @apply shadow-2xl p-4 my-4;
 } */
 
+.shop-item-container {
+  min-width: 350px;
+}
+
 .shop-item {
   min-height: 325px;
 }

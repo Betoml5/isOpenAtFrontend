@@ -7,18 +7,19 @@ import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import restaurantCover from "../static/restaurantCover.jpg";
+import ControlPanel from "../containers/ControlPanel";
 
 const EditShop = () => {
   const API = `http://api.positionstack.com/v1/forward?access_key=ef449ba03412c67915b892fbbfd5bdad&query=`;
 
   const { id } = useParams();
-  console.log(typeof id);
   const [shop, setShop] = useState({});
   const [images, setImages] = useState([]);
   const [progress, setProgress] = useState(0);
-  const [coords, setcoords] = useState({ lat: 27.9324, lng: -101.1255 });
+  const [coords, setCoords] = useState({ lat: 27.9324, lng: -101.1255 });
   const [address, setAddress] = useState("");
   const [imageCover, setImageCover] = useState("");
+  const [imageCoverView, setImageCoverView] = useState(false);
   const {
     register,
     handleSubmit,
@@ -31,10 +32,6 @@ const EditShop = () => {
   });
   const history = useHistory();
 
-  const onChangeAddress = (e) => {
-    setAddress(e.target.value);
-  };
-
   const onSubmit = async (data) => {
     try {
       // Cree un objeto para poder enviarlo.
@@ -46,27 +43,13 @@ const EditShop = () => {
       };
       await updateShop(id, data);
       await updateShop(id, datacoords);
-      handleUpload(images).then(() => history.push("/shops"));
+      handleUpload(images);
+      history.push("/shops");
     } catch (error) {
       console.log(error);
     }
   };
-
   async function handleUpload(imagesArray) {
-    const ref = storage.ref(`/images/${imageCover.name}`);
-    const uploadTask = ref.put(imageCover);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => console.log(snapshot),
-      console.error,
-      async () => {
-        const refURL = await ref.getDownloadURL();
-        const shopUpdated = {
-          imageCover: refURL,
-        };
-        await updateShop(id, shopUpdated);
-      }
-    );
     imagesArray.forEach((image) => {
       const ref = storage.ref(`/images/${image.name}`);
       const uploadTask = ref.put(image);
@@ -86,27 +69,55 @@ const EditShop = () => {
     });
   }
 
-  //Si no hay datos, el shop quedara con datos vacios.
+  const handleImageCover = async () => {
+    const ref = storage.ref(`/images/${imageCover?.name}`);
+    const uploadTask = ref.put(imageCover);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => console.log(snapshot),
+      console.error,
+      async () => {
+        const refURL = await ref.getDownloadURL();
+        const shopUpdated = {
+          imageCover: refURL,
+        };
+        const response = await updateShop(id, shopUpdated);
+        setShop(response);
+        setImageCoverView(false);
+      }
+    );
+  };
+
   const handleChange = (e) => {
     setImages([...images, e.target.files[0]]);
   };
+
+  const onImageCoverChange = (e) => {
+    setImageCover(e.target.files[0]);
+  };
+
+  const onChangeAddress = (e) => {
+    setAddress(e.target.value);
+  };
+
+  //Si no hay datos, el shop quedara con datos vacios.
+
   useEffect(() => {
     reset(shop);
   }, [shop]);
 
   useEffect(() => {
     const getShopFetched = async () => {
-      getShop(id).then((res) => {
-        console.log(res);
-        setShop(res);
+      const response = await getShop(id);
+      setShop(response);
+      console.log(response);
+      setCoords({
+        lat: response?.location?.lat,
+        lng: response?.location?.lng,
       });
+      setImageCover(response?.imageCover);
     };
-
     getShopFetched();
-    setcoords({
-      lat: shop?.location?.lat || 27.9324,
-      lng: shop?.location?.lng || -101.1255,
-    });
     return () => {
       setShop(null);
     };
@@ -132,9 +143,9 @@ const EditShop = () => {
   const fetchcoords = async (address) => {
     const response = await fetch(API + address);
     const coords = await response.json();
-    setcoords({
-      lat: coords.data[0].latitude,
-      lng: coords.data[0].longitude,
+    setCoords({
+      lat: coords.data[0].latitude || 0,
+      lng: coords.data[0].longitude || 0,
     });
     console.log("coords", coords.data[0]);
   };
@@ -198,6 +209,7 @@ const EditShop = () => {
             <span className="field-required">Este campo es obligatorio</span>
           )}
         </div>
+        <ControlPanel shops={shop} />
         {/* <label htmlFor="images">Subir imagenes para exposicion</label> */}
         <div className="flex flex-col lg:w-full">
           <span>Subir productos</span>
@@ -215,26 +227,51 @@ const EditShop = () => {
         <div>
           <h4 className="my-4">Cambiar imagen de portada </h4>
           <div className="w-80">
-            <img
-              src={shop?.imageCover || restaurantCover}
-              alt="imageCover"
-              className="w-full"
-            />
-            <label class="self-center my-4 w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer   text-black ease-linear transition-all duration-150 lg:self-start">
-              <i class="fas fa-cloud-upload-alt fa-3x"></i>
-              <span class="mt-2 text-base leading-normal">
-                Selecciona imagen
-              </span>
-              <input
-                type="file"
-                className="hidden"
-                onChange={(e) => {
-                  console.log(e.target.files[0]);
-                  setImageCover(e.target.files[0]);
-                }}
-              />
-            </label>
+            <img src={shop?.imageCover} alt="imageCover" className="w-full" />
+            {imageCoverView && (
+              <>
+                <label class="self-center my-4 w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer   text-black ease-linear transition-all duration-150 lg:self-start">
+                  <i class="fas fa-cloud-upload-alt fa-3x"></i>
+                  <span class="mt-2 text-base leading-normal">
+                    Selecciona imagen
+                  </span>
+                  <input
+                    type="file"
+                    className="hidden"
+                    name="image"
+                    onChange={onImageCoverChange}
+                  />
+                </label>
+                <button
+                  type="button"
+                  onClick={handleImageCover}
+                  className={`bg-veryHighOrange p-4 text-white mr-1`}
+                >
+                  Subir imagen
+                </button>
+                <button
+                  type="button"
+                  className={`bg-veryHighOrange p-4 text-white`}
+                  onClick={() => setImageCoverView(false)}
+                >
+                  Cancelar
+                </button>
+              </>
+            )}
+            {/* vista dinamica */}
           </div>
+          <button
+            type="button"
+            className={`bg-veryHighOrange p-4 text-white mt-2 ${
+              imageCoverView && "hidden"
+            }`}
+            onClick={() => {
+              //TODO. Hide button and show input
+              setImageCoverView(true);
+            }}
+          >
+            Cambiar imagen
+          </button>
         </div>
 
         {/* <div className="flex flex-col w-full text-center">
