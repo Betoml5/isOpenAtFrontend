@@ -45,30 +45,38 @@ const EditShop = () => {
       };
       await updateShop(id, data);
       await updateShop(id, datacoords);
-      handleUpload(images);
       history.push("/shops");
     } catch (error) {
       console.log(error);
     }
   };
   async function handleUpload(imagesArray) {
-    imagesArray.forEach((image) => {
-      const ref = storage.ref(`/images/${image.name}`);
-      const uploadTask = ref.put(image);
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progressData =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          setProgress(progressData);
-        },
-        console.error,
-        async () => {
-          const refURL = await ref.getDownloadURL();
-          await pushImageMenu(id, refURL);
-        }
-      );
-    });
+    if (imagesArray.length > 0) {
+      imagesArray.forEach((image) => {
+        const ref = storage.ref(`/images/${image.name}`);
+        const uploadTask = ref.put(image);
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progressData =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            setProgress(progressData);
+          },
+          console.error,
+          async () => {
+            const refURL = await ref.getDownloadURL();
+            await pushImageMenu(id, refURL);
+          }
+        );
+      });
+      setTimeout(() => {
+        setImages([]);
+        setProgress(0);
+        setProductsView(false);
+      }, 1000);
+    } else {
+      alert("Tienes que subir al menos 1 producto");
+    }
   }
 
   const handleImageCover = async () => {
@@ -234,6 +242,7 @@ const EditShop = () => {
                 <button
                   type="button"
                   className="bg-veryHighOrange text-white p-4 mr-1"
+                  onClick={() => handleUpload(images)}
                 >
                   Subir productos
                 </button>

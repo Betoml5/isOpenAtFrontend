@@ -1,6 +1,6 @@
 const Button = ({ value, setValues, values, handleClick, shopId }) => {
   return (
-    <label class="switch">
+    <label className="switch">
       <input
         type="checkbox"
         defaultChecked={value}
@@ -13,7 +13,7 @@ const Button = ({ value, setValues, values, handleClick, shopId }) => {
           handleClick(shopId);
         }}
       />
-      <span class="slider round"></span>
+      <span className="slider round"></span>
     </label>
   );
 };

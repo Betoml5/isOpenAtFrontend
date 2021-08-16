@@ -117,7 +117,7 @@ const ShopReview = () => {
             <span className="field-required">Este campo es obligatorio</span>
           )}
           <label htmlFor="shopName" className=" text-2xl font-normal my-2">
-            Rating
+            Calificacion
           </label>
           <Rating
             fractions={2}

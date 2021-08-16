@@ -107,13 +107,17 @@ const ShopForm = () => {
     return null;
   }
   const fetchcoords = async (address) => {
-    const response = await fetch(API + address);
-    const coords = await response.json();
-    setcoords({
-      lat: coords.data[0].latitude || 0,
-      lng: coords.data[0].longitude || 0,
-    });
-    console.log("coords", coords.data[0]);
+    try {
+      const response = await fetch(API + address);
+      const coords = (await response.json()) || [];
+      setcoords({
+        lat: coords.data[0].latitude || 0,
+        lng: coords.data[0].longitude || 0,
+      });
+      console.log("coords", coords.data[0]);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

@@ -262,3 +262,18 @@ export const pushImageMenu = async (shopId, imageURL) => {
     return error;
   }
 };
+
+export const removeImageMenu = async (shopId, imageURL) => {
+  try {
+    const response = await axios({
+      method: "DELETE",
+      url: `${API}/image-menu/${shopId}`,
+      data: {
+        imageURL: imageURL,
+      },
+    });
+    return response.data.body;
+  } catch (error) {
+    return error;
+  }
+};
