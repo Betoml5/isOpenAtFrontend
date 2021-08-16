@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import restaurantCover from "../static/restaurantCover.jpg";
 import ControlPanel from "../containers/ControlPanel";
 
 const EditShop = () => {
@@ -220,6 +219,14 @@ const EditShop = () => {
           )}
         </div>
         <ControlPanel shops={shop} />
+
+        <div className="foodSlider my-4">
+          {shop?.imagesMenu?.map((image) => (
+            <div className="sliderProductItem">
+              <img src={image} alt="imageMenu" className="w-48 h-48" />
+            </div>
+          ))}
+        </div>
 
         <div className="flex flex-col my-4 w-full">
           {productsView && (
