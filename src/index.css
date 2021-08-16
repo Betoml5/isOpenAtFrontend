@@ -87,7 +87,7 @@ body {
 } */
 
 .sliderProductItem {
-  min-width: 200px;
+  min-width: 300px;
   max-width: 300px;
   scroll-snap-align: center;
   width: 80%;

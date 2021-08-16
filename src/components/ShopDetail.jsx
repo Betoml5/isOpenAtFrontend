@@ -173,7 +173,11 @@ const ShopDetail = () => {
         >
           {shop?.imagesMenu?.map((image) => (
             <div className="sliderProductItem" key={image}>
-              <img src={image} alt="imageMenu" className=" rounded-2xl" />
+              <img
+                src={image}
+                alt="imageMenu"
+                className=" w-64 h-64  rounded-2xl"
+              />
             </div>
           ))}
         </div>
