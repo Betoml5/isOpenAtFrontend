@@ -115,11 +115,11 @@ const ShopDetail = () => {
           </div>
         )}
 
-        {userFetched?.admin && (
+        {/* {userFetched?.admin && (
           <div className="bg-veryHighOrange p-4 self-center text-white rounded-lg my-4">
             <Link to={`/admin/edit-shop/${id}`}>Editar</Link>
           </div>
-        )}
+        )} */}
 
         <div className="flex self-center justify-between my-4 w-3/4">
           <div

@@ -1,12 +1,18 @@
 import { useEffect, useState, useMemo } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { getShop, pushImageMenu, updateShop } from "../services/Shop";
+import {
+  getShop,
+  pushImageMenu,
+  removeImageMenu,
+  updateShop,
+} from "../services/Shop";
 import storage from "../firebase";
 import { useForm } from "react-hook-form";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import ControlPanel from "../containers/ControlPanel";
+import removeIcon from "../static/remove.svg";
 
 const EditShop = () => {
   const API = `http://api.positionstack.com/v1/forward?access_key=ef449ba03412c67915b892fbbfd5bdad&query=`;
@@ -64,7 +70,8 @@ const EditShop = () => {
           console.error,
           async () => {
             const refURL = await ref.getDownloadURL();
-            await pushImageMenu(id, refURL);
+            const response = await pushImageMenu(id, refURL);
+            setShop(response);
           }
         );
       });
@@ -95,6 +102,15 @@ const EditShop = () => {
         setImageCoverView(false);
       }
     );
+  };
+
+  const handleRemoveImageMenu = async (imageURL) => {
+    try {
+      const response = await removeImageMenu(shop?._id, imageURL);
+      setShop(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleChange = (e) => {
@@ -222,8 +238,14 @@ const EditShop = () => {
 
         <div className="foodSlider my-4">
           {shop?.imagesMenu?.map((image) => (
-            <div className="sliderProductItem">
-              <img src={image} alt="imageMenu" className="w-48 h-48" />
+            <div className="sliderProductItem relative" key={image}>
+              <img src={image} alt="imageMenu" className="w-48 h-48 " />
+              <div
+                className="absolute top-0 right-2 p-2 cursor-pointer"
+                onClick={() => handleRemoveImageMenu(image)}
+              >
+                <img src={removeIcon} alt="removeIcon" className="w-8 h-8" />
+              </div>
             </div>
           ))}
         </div>
