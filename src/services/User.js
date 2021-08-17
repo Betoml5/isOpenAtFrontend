@@ -12,7 +12,6 @@ export const signin = async (username, password) => {
         password,
       },
     });
-    console.log(response);
     return response;
   } catch (error) {
     return error;
@@ -30,7 +29,6 @@ export const signup = async (username, email, password) => {
         password,
       },
     });
-    console.log(response);
     return response.data.body;
   } catch (error) {
     return error;
@@ -139,5 +137,3 @@ export const setImage = async (id, imageurl) => {
     return error;
   }
 };
-
-

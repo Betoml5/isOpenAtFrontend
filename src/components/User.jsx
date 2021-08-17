@@ -71,7 +71,7 @@ const User = () => {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <Helmet htmlAttributes>
+      <Helmet>
         <html lang="es" />
         <title>IsOpenAt - Perfil</title>
         <meta name="description" content="User" />
