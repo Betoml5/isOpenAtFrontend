@@ -8,7 +8,6 @@ const Home = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = ({ shop }) => {
-    console.log(shop);
     history.push(`/shops?shop=${shop}`);
   };
 

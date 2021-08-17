@@ -10,7 +10,6 @@ export const getShops = async () => {
       method: "GET",
       url: `${API}/all`,
     });
-    console.log(response.data.body);
     return response.data.body;
   } catch (error) {
     return error;
@@ -22,9 +21,11 @@ export const getShopByName = async (name) => {
       method: "GET",
       url: `${API}/name?name=${name}`,
     });
-    console.log(response.data.body);
     return response.data.body;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 };
 
 export const getShop = async (id) => {
@@ -33,7 +34,6 @@ export const getShop = async (id) => {
       method: "GET",
       url: `${API}/shop/${id}`,
     });
-    console.log("getshop", response?.data?.body);
     return response?.data?.body;
   } catch (error) {
     console.log(error);
@@ -73,14 +73,12 @@ export const deleteShop = async (id) => {
 };
 
 export const updateShop = async (id, update) => {
-  console.log("update", update);
   try {
     const response = await axios({
       method: "PUT",
       url: `${API}/update/${id}`,
       data: update,
     });
-    console.log("response from service", response);
     return response.data.body;
   } catch (error) {
     return error;
