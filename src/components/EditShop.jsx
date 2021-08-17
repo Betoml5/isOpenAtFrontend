@@ -238,7 +238,7 @@ const EditShop = () => {
 
         <div className="foodSlider my-4">
           {shop?.imagesMenu?.map((image) => (
-            <div className="sliderProductItem relative" key={image}>
+            <div className="sliderProductItemEdit relative" key={image}>
               <img src={image} alt="imageMenu" className="w-48 h-48 " />
               <div
                 className="absolute top-0  p-2 cursor-pointer "

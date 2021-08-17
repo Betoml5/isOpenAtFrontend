@@ -39,7 +39,10 @@ const OwnerShops = () => {
   return (
     <div className="grid mx-2 my-2 gap-2 min-h-screen md:grid-cols-2 lg:grid-cols-3 lg:my-0">
       {userFetched?.shops?.map((shop) => (
-        <div key={shop?._id} className="bg-white p-4 rounded-lg">
+        <div
+          key={shop?._id}
+          className="bg-white p-4 rounded-lg self-center justify-self-center"
+        >
           <div>
             <img
               src={shop?.imageCover}
