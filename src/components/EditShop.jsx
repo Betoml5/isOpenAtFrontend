@@ -241,7 +241,7 @@ const EditShop = () => {
             <div className="sliderProductItem relative" key={image}>
               <img src={image} alt="imageMenu" className="w-48 h-48 " />
               <div
-                className="absolute top-0 right-2 p-2 cursor-pointer"
+                className="absolute top-0  p-2 cursor-pointer "
                 onClick={() => handleRemoveImageMenu(image)}
               >
                 <img src={removeIcon} alt="removeIcon" className="w-8 h-8" />

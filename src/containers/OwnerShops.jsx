@@ -39,18 +39,33 @@ const OwnerShops = () => {
   return (
     <div className="grid mx-2 my-2 gap-2 min-h-screen md:grid-cols-2 lg:grid-cols-3 lg:my-0">
       {userFetched?.shops?.map((shop) => (
-        <div key={shop?._id}>
+        <div key={shop?._id} className="bg-white p-4 rounded-lg">
           <div>
-            <img src={shop?.imageCover} alt="" />
+            <img
+              src={shop?.imageCover}
+              alt="imageCover"
+              className="rounded-lg"
+            />
           </div>
           <div>
-            <p>{shop?.name}</p>
-            <p>{shop?.address}</p>
-            <p>{shop?.code || "Aun no tienes codigo"}</p>
+            <p className="font-medium text-3xl">{shop?.name}</p>
+            <p className="text-xl">{shop?.address}</p>
+            <p className="text-highGreen">
+              {shop?.code || "Aun no tienes codigo"}
+            </p>
           </div>
-          <div>
-            <Link to={`/admin/edit-shop/${shop?._id}`}>Editar</Link>
-            <button type="button" onClick={() => handleRemoveShop()}>
+          <div className="flex mt-6">
+            <Link
+              to={`/admin/edit-shop/${shop?._id}`}
+              className="bg-green-600 text-white rounded-md p-4 mr-2"
+            >
+              Editar
+            </Link>
+            <button
+              type="button"
+              className="bg-veryLightRed rounded-md p-4 text-white "
+              onClick={() => handleRemoveShop()}
+            >
               Eliminar
             </button>
           </div>

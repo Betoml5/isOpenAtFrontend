@@ -11,7 +11,6 @@ import Location from "./containers/Location";
 import PrivateRoute from "./components/PrivateRoute";
 import Home from "./containers/Home";
 import DicesAnimation from "./components/DicesAnimation";
-import ShopSchedule from "./components/ShopSchedule";
 import OwnerShops from "./containers/OwnerShops";
 
 const ShopDetail = lazy(() => import("./components/ShopDetail"));
@@ -22,7 +21,6 @@ const LoginUser = lazy(() => import("./components/LoginUser"));
 const User = lazy(() => import("./components/User"));
 const Favorites = lazy(() => import("./containers/Favorites"));
 const ControlPanel = lazy(() => import("./containers/ControlPanel"));
-
 
 initAxiosInterceptors();
 const App = () => {
@@ -73,12 +71,11 @@ const App = () => {
               path="/shops/panel"
               component={ControlPanel}
             ></PrivateRoute>
-            <PrivateRoute exact={true} path="/owner/shops/:id" component={OwnerShops}>
-
-            </PrivateRoute>
-
-
-
+            <PrivateRoute
+              exact={true}
+              path="/owner/shops/:id"
+              component={OwnerShops}
+            ></PrivateRoute>
             <Route component={NotFound} />
           </Switch>
         </Layout>

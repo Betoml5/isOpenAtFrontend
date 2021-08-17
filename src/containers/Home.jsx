@@ -61,9 +61,12 @@ const Home = () => {
             <Link to="/shops" className="bg-veryHighOrange p-4">
               Ver negocios
             </Link>
-            <Link to="" className=" bg-veryHighOrange p-4 mt-2 md:mt-0 md:ml-2">
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLScbgINEjtPJ-iKf29jvULrOqv-3bJpdBWfILZbPDGhvS_FDbQ/viewform?usp=sf_link"
+              className=" bg-veryHighOrange p-4 mt-2 md:mt-0 md:ml-2"
+            >
               Quiero agregar mi negocio
-            </Link>
+            </a>
           </div>
         </div>
 
