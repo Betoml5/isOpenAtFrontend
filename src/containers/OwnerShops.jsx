@@ -16,7 +16,7 @@ const OwnerShops = () => {
       setUserFetched(responseUser);
     };
     fetchUser();
-  }, []);
+  }, [id]);
 
   const handleRemoveShop = () => {
     Swal.fire({

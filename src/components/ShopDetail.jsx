@@ -7,27 +7,22 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getShop } from "../services/Shop";
 import useUser from "../hooks/useUser";
-import { getUser } from "../services/User";
 import { Helmet } from "react-helmet";
 
 const ShopDetail = () => {
   const [enviosView, setEnviosView] = useState(true);
   const [resenasView, setResenasView] = useState(false);
   const [shop, setShop] = useState({});
-  const [userFetched, setUserFetched] = useState({});
-  const { user, isLogged } = useUser();
-  const userParsed = JSON.parse(user);
+  const { isLogged } = useUser();
   const { id } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       const response_shop = await getShop(id);
       setShop(response_shop);
-      const response_user = await getUser(userParsed?._id);
-      setUserFetched(response_user);
     };
     fetchData();
-  }, [id, userParsed?._id]);
+  }, [id]);
 
   return (
     <div className="flex flex-col lg:w-full mx-auto">
@@ -114,12 +109,6 @@ const ShopDetail = () => {
             <Link to="/sign-in">Quiero hacer una reseña</Link>
           </div>
         )}
-
-        {/* {userFetched?.admin && (
-          <div className="bg-veryHighOrange p-4 self-center text-white rounded-lg my-4">
-            <Link to={`/admin/edit-shop/${id}`}>Editar</Link>
-          </div>
-        )} */}
 
         <div className="flex self-center justify-between my-4 w-3/4">
           <div

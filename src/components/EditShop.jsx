@@ -129,7 +129,7 @@ const EditShop = () => {
 
   useEffect(() => {
     reset(shop);
-  }, [shop]);
+  }, [reset, shop]);
 
   useEffect(() => {
     const getShopFetched = async () => {

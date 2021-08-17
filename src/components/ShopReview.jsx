@@ -24,12 +24,8 @@ const ShopReview = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
-
-  console.log(watch("avgprice"));
-  console.log(watch("holdingtime"));
 
   const form = useRef("");
 
@@ -65,7 +61,7 @@ const ShopReview = () => {
     return () => {
       setUserFetched({});
     };
-  }, []);
+  }, [userParsed?._id]);
 
   return (
     <div className="w-full ">
