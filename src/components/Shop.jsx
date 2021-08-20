@@ -78,6 +78,9 @@ const Shop = ({
     fetchUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const favorites = userFetched?.favorites;
+  const isFavorite = favorites?.map((item) => item._id === _id);
+
   return (
     <div className="flex flex-col max-w-md min-w-full justify-self-center self-center cursor-pointer lg:min-w-3/4">
       <Link to={`/shops/detail/${_id}`} className="h-80">
@@ -104,7 +107,7 @@ const Shop = ({
           </div>
 
           <div className="cursor-pointer">
-            {userFetched?.favorites?.includes(_id) ? (
+            {isFavorite ? (
               <div className="cursor-pointer" onClick={deleteFavorite}>
                 <img src={favoriteIcon} alt="favoriteIcon" />
               </div>
