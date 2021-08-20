@@ -1,3 +1,5 @@
+import React from "react";
+
 import { Link, useHistory } from "react-router-dom";
 import restaurantCover from "../static/restaurantCover.jpg";
 import verifyIcon from "../static/verify.svg";
@@ -85,7 +87,6 @@ const Shop = ({
               src={imageCover || restaurantCover}
               alt="restaurantCover"
               className="w-full h-full rounded-tr-2xl rounded-tl-2xl object-cover"
-              loading="lazy"
             />
           </picture>
         </div>

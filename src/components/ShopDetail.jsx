@@ -8,6 +8,7 @@ import { Link, useParams } from "react-router-dom";
 import { getShop } from "../services/Shop";
 import useUser from "../hooks/useUser";
 import { Helmet } from "react-helmet";
+import Spinner from "./Spinner";
 
 const ShopDetail = () => {
   const [enviosView, setEnviosView] = useState(true);
@@ -24,6 +25,10 @@ const ShopDetail = () => {
     fetchData();
   }, [id]);
 
+  if (!shop) {
+    return <Spinner />;
+  }
+
   return (
     <div className="flex flex-col lg:w-full mx-auto">
       <Helmet>
@@ -37,7 +42,6 @@ const ShopDetail = () => {
             src={shop?.imageCover || restaurantCover}
             alt="shopCover"
             className="w-full object-cover lg:h-96"
-            loading="lazy"
           />
         </picture>
       </div>
@@ -78,7 +82,7 @@ const ShopDetail = () => {
           </div>
           <div className="flex">
             <picture>
-              <img src={timeIcon} alt="timeIcon" loading="lazy" />
+              <img src={timeIcon} alt="timeIcon" />
             </picture>
             <p>
               {" "}
@@ -90,7 +94,7 @@ const ShopDetail = () => {
           </div>
           <div className="flex">
             <picture>
-              <img src={dollarIcon} alt="dollarIcon" loading="lazy" />
+              <img src={dollarIcon} alt="dollarIcon" />
             </picture>
             {shop?.freeShipping ? <p>Envio gratis</p> : <p>Envio con costo</p>}
           </div>

@@ -182,6 +182,7 @@ const ShopForm = () => {
           type="file"
           className="hidden"
           name="image"
+          accept="image/png, image/jpeg, image/jpg"
           {...register("image", { required: true })}
         />
       </label>
