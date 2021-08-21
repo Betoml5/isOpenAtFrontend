@@ -35,6 +35,7 @@ const Shop = ({
     if (isLogged) {
       try {
         const res = await addFavorite(userParsed._id, _id);
+        console.log(res);
         setUserFetched(res);
       } catch (error) {
         console.log(error);
@@ -76,13 +77,17 @@ const Shop = ({
     };
 
     fetchUser();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  const favorites = userFetched?.favorites;
-  const isFavorite = favorites?.map((item) => item._id === _id);
+  }, [userFetched]);
+
+  const foundFavorites = userFetched?.favorites?.find(
+    (item) => item._id === _id
+  );
+  const isFavorite = foundFavorites?._id === _id;
 
   return (
-    <div className="flex flex-col max-w-md min-w-full justify-self-center self-center cursor-pointer lg:min-w-3/4">
+    <div className="flex flex-col mb-4 max-w-md min-w-full justify-self-center self-center cursor-pointer lg:min-w-3/4">
       <Link to={`/shops/detail/${_id}`} className="h-80">
         <div className="w-full h-full">
           <picture className="w-full h-full">

@@ -15,6 +15,7 @@ const useQuery = () => {
 const ShopContainer = () => {
   const [shops, setShops] = useState([]);
   const [filterShops, setFilterShops] = useState([]);
+
   let query = useQuery();
 
   useEffect(() => {
@@ -42,12 +43,12 @@ const ShopContainer = () => {
   }, []);
 
   useEffect(() => {
-    const getShopsFetched = async () => {
+    const fetchData = async () => {
       const shopsFetched = await getShops();
       setShops(shopsFetched);
     };
 
-    getShopsFetched();
+    fetchData();
     return () => {
       setShops([]);
       setFilterShops([]);
@@ -65,9 +66,10 @@ const ShopContainer = () => {
       </Helmet>
       {/* <Filter /> */}
       {shops?.length === 0 && <PageLoader />}
+
       {filterShops?.length > 0
-        ? filterShops?.map((shop) => <Shop {...shop} key={shop._id} />)
-        : shops?.map((shop) => <Shop {...shop} key={shop._id} />)}
+        ? filterShops?.map((shop, index) => <Shop {...shop} key={shop._id} />)
+        : shops?.map((shop, index) => <Shop {...shop} key={shop._id} />)}
     </div>
   );
 };
