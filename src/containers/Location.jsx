@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, useMap, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { useState, useEffect } from "react";
@@ -26,7 +26,6 @@ const Location = () => {
   useEffect(() => {
     const fetchShops = async () => {
       const fetchedShops = await getShops();
-      console.log(fetchedShops);
       setShops(fetchedShops);
     };
     fetchShops();
@@ -34,7 +33,7 @@ const Location = () => {
 
   return (
     <div className="h-screen">
-      <Helmet htmlAttributes>
+      <Helmet>
         <html lang="es" />
         <title>IsOpenAt - Mapa</title>
         <meta name="description" content="Mapa de comercios - IsOpenAt" />
@@ -52,10 +51,8 @@ const Location = () => {
         />
 
         {shops?.map((shop) => (
-          <Marker position={shop?.location} icon={myIcon}>
-            <Popup>
-              <div className="flex flex-col">{shop?.name}</div>
-            </Popup>
+          <Marker position={shop?.location} icon={myIcon} key={shop?._id}>
+            <Popup>{shop?.name}</Popup>
           </Marker>
         ))}
       </MapContainer>

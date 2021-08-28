@@ -1,8 +1,9 @@
+import React from "react";
+
 import { Link, useHistory } from "react-router-dom";
 import restaurantCover from "../static/restaurantCover.jpg";
 import verifyIcon from "../static/verify.svg";
 import favoriteIcon from "../static/favorite.svg";
-import percentIcon from "../static/percent.svg";
 import starIcon from "../static/star.svg";
 import timeIcon from "../static/time.svg";
 import dollarIcon from "../static/dollar.svg";
@@ -28,15 +29,14 @@ const Shop = ({
   const { isLogged, user } = useUser();
   const [userFetched, setUserFetched] = useState(null);
   const userParsed = JSON.parse(user);
-
   const history = useHistory();
 
   const handleFavorite = async () => {
     if (isLogged) {
       try {
         const res = await addFavorite(userParsed._id, _id);
-        setUserFetched(res);
         console.log(res);
+        setUserFetched(res);
       } catch (error) {
         console.log(error);
       }
@@ -63,7 +63,7 @@ const Shop = ({
       Swal.fire({
         title: "Inicia sesion",
         text: "Hey! Inicia sesion primero",
-        confirmButtonText: "Yasta",
+        confirmButtonText: "OK",
       }).then(() => {
         history.push("/sign-in");
       });
@@ -77,24 +77,30 @@ const Shop = ({
     };
 
     fetchUser();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [userFetched]);
+
+  const foundFavorites = userFetched?.favorites?.find(
+    (item) => item._id === _id
+  );
+  const isFavorite = foundFavorites?._id === _id;
+
   return (
-    <div className="flex flex-col max-w-md justify-self-center cursor-pointer ">
-      <Link to={`/shops/detail/${_id}`} className="h-1/2">
+    <div className="flex flex-col mb-4 max-w-md min-w-full justify-self-center self-center cursor-pointer lg:min-w-3/4">
+      <Link to={`/shops/detail/${_id}`} className="h-80">
         <div className="w-full h-full">
           <picture className="w-full h-full">
             <img
               src={imageCover || restaurantCover}
               alt="restaurantCover"
-              className="w-full h-full rounded-tr-2xl rounded-tl-2xl"
-              loading="lazy"
+              className="w-full h-full rounded-tr-2xl rounded-tl-2xl object-cover"
             />
           </picture>
         </div>
       </Link>
 
-      <div className="bg-white p-4 rounded-2xl">
+      <div className="flex flex-col justify-between bg-white p-4 rounded-2xl shop-item -mt-4">
         <div className="flex justify-between">
           <div className="flex items-center">
             <h4 className="mr-2">{name}</h4>
@@ -106,7 +112,7 @@ const Shop = ({
           </div>
 
           <div className="cursor-pointer">
-            {userFetched?.favorites?.includes(_id) ? (
+            {isFavorite ? (
               <div className="cursor-pointer" onClick={deleteFavorite}>
                 <img src={favoriteIcon} alt="favoriteIcon" />
               </div>
@@ -129,7 +135,7 @@ const Shop = ({
             </p>
           )}
         </div>
-        <p>{address}</p>
+        <p className="text-sm">{address}</p>
         <hr className="my-2" />
 
         <div className="flex justify-center  items-center self-center shadow-2xl my-6 p-4 rounded-lg lg:justify-center">

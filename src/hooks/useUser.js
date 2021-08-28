@@ -55,7 +55,7 @@ export default function useUser() {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [history]);
 
   const logout = useCallback(() => {
     window.localStorage.removeItem("jwt");

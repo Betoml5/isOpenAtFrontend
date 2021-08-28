@@ -1,22 +1,17 @@
 import { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 import Shop from "../components/Shop";
 import { getFavorites } from "../services/User";
-import useUser from "../hooks/useUser";
 import { Helmet } from "react-helmet";
 
 const Favorites = () => {
   const { id } = useParams();
   const [favorites, setFavorites] = useState([]);
-  const { isLogged } = useUser();
-  const history = useHistory();
 
   useEffect(() => {
     const getUserFavorites = async (id) => {
       try {
         const response = await getFavorites(id);
-
-        console.log("favorites", response);
         setFavorites(response);
       } catch (error) {
         console.log(error);

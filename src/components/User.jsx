@@ -41,23 +41,25 @@ const User = () => {
         ref.getDownloadURL().then((url) => {
           setFile(null);
           setURL(url);
-          setImage(id, url).then((res) => console.log(res));
+          setImage(id, url);
           setTimeout(() => {
             setView(!view);
-          }, 100);
+            getUserFetched(userParsed._id);
+            setProgress(0);
+          }, 1000);
         });
       }
     );
   }
+  const getUserFetched = async (id) => {
+    const response = await getUser(id);
+    setUserFetched(response);
+  };
 
   useEffect(() => {
-    const getUserFetched = async () => {
-      const response = await getUser(userParsed._id);
-      setUserFetched(response);
-    };
-    getUserFetched();
+    getUserFetched(userParsed._id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [url]);
 
   if (!userParsed || !isLogged) {
     history.push("/");
@@ -69,14 +71,14 @@ const User = () => {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <Helmet htmlAttributes>
+      <Helmet>
         <html lang="es" />
         <title>IsOpenAt - Perfil</title>
         <meta name="description" content="User" />
       </Helmet>
       <div className="flex flex-col items-center bg-white rounded-md p-6 w-4/5 max-w-lg">
         <div className="flex items-center justify-center w-60 mb-10">
-          {userFetched.image === "" ? (
+          {userFetched?.image === "" ? (
             <picture>
               <img
                 src={userDefault}
@@ -107,42 +109,81 @@ const User = () => {
           <p>Te gustan {userFetched?.favorites?.length} comercios</p>
         </div>
 
-        {userFetched?.admin && (
+        {userFetched?.owner && (
           <>
             <Link
               to="/admin/add-shop"
-              className="btn w-full text-center hover:bg-veryLightRed transition-all mb-2"
+              className={`btn w-full text-center hover:bg-veryLightRed transition-all  ${
+                view && "hidden"
+              }`}
+            >
+              Agregar negocio
+            </Link>
+            {userFetched?.shops?.length > 0 && (
+              <Link
+                to={`/owner/shops/${id}`}
+                className={`btn w-full text-center hover:bg-veryLightRed transition-all  mt-2 ${
+                  view && "hidden"
+                }`}
+              >
+                Ver mis negocios
+              </Link>
+            )}
+          </>
+        )}
+
+        {/* {userFetched?.admin && (
+          <>
+            <Link
+              to="/admin/add-shop"
+              className={`btn w-full text-center hover:bg-veryLightRed transition-all  ${
+                view && "hidden"
+              }`}
             >
               Agregar comercio
             </Link>
             <Link
               to="/shops/panel"
-              className="btn w-full text-center hover:bg-veryLightRed transition-all"
+              className={`btn w-full text-center hover:bg-veryLightRed transition-all ${
+                view && "hidden"
+              }`}
             >
               Panel de comercios
             </Link>
           </>
-        )}
+        )} */}
 
         <button
-          className="btn  w-full my-2 hover:bg-veryLightRed transition-all"
+          className={`btn  w-full my-2 hover:bg-veryLightRed transition-all ${
+            view && "hidden"
+          }`}
           onClick={setView}
         >
           Cambiar imagen
         </button>
         <button
-          className="btn w-full  hover:bg-veryLightRed transition-all"
+          className={`btn  w-full m hover:bg-veryLightRed transition-all ${
+            view && "hidden"
+          }`}
           onClick={logout}
         >
           Cerrar sesion
         </button>
         {view && (
-          <UploadImageForm
-            handleUpload={handleUpload}
-            file={file}
-            handleChange={handleChange}
-            progress={progress}
-          />
+          <>
+            <UploadImageForm
+              handleUpload={handleUpload}
+              file={file}
+              handleChange={handleChange}
+              progress={progress}
+            />
+            <button
+              className={`btn  w-full  hover:bg-veryLightRed transition-all`}
+              onClick={() => setView(false)}
+            >
+              Cancelar
+            </button>
+          </>
         )}
       </div>
     </div>

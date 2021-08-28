@@ -1,8 +1,8 @@
-import Filter from "../components/Filter";
+// import Filter from "../components/Filter";
 import Search from "../components/Search";
 import Shop from "../components/Shop";
 import { useEffect, useState } from "react";
-import { getShop, getShopByName, getShops } from "../services/Shop";
+import { getShopByName, getShops } from "../services/Shop";
 import PageLoader from "../components/PageLoader";
 import { useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -15,6 +15,7 @@ const useQuery = () => {
 const ShopContainer = () => {
   const [shops, setShops] = useState([]);
   const [filterShops, setFilterShops] = useState([]);
+
   let query = useQuery();
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const ShopContainer = () => {
           icon: "error",
           titleText: "No encontrado",
           html: "<p>No encontramos lo que buscabas. </br> 🙃 </br>Pero mira estos negocios</p>",
-          confirmButtonText: "Ni pedo",
+          confirmButtonText: "OK",
         });
       }
       setFilterShops(response);
@@ -42,12 +43,12 @@ const ShopContainer = () => {
   }, []);
 
   useEffect(() => {
-    const getShopsFetched = async () => {
+    const fetchData = async () => {
       const shopsFetched = await getShops();
       setShops(shopsFetched);
     };
 
-    getShopsFetched();
+    fetchData();
     return () => {
       setShops([]);
       setFilterShops([]);
@@ -56,18 +57,19 @@ const ShopContainer = () => {
   }, []);
 
   return (
-    <div className="grid mx-2 my-2 gap-2 min-h-screen md:grid-cols-2 lg:grid-cols-3 lg:my-0">
+    <div className="grid mx-2 my-2 gap-2 min-h-screen md:grid-cols-2 md:gap-10 lg:grid-cols-3 lg:my-0  ">
       <Search setFilterShops={setFilterShops} filterShops={filterShops} />
-      <Helmet htmlAttributes>
+      <Helmet>
         <html lang="es" />
         <title>IsOpenAt - Negocios</title>
         <meta name="description" content="Favorites" />
       </Helmet>
       {/* <Filter /> */}
       {shops?.length === 0 && <PageLoader />}
+
       {filterShops?.length > 0
-        ? filterShops?.map((shop) => <Shop {...shop} key={shop._id} />)
-        : shops?.map((shop) => <Shop {...shop} key={shop._id} />)}
+        ? filterShops?.map((shop, index) => <Shop {...shop} key={shop._id} />)
+        : shops?.map((shop, index) => <Shop {...shop} key={shop._id} />)}
     </div>
   );
 };

@@ -44,17 +44,15 @@ const ShopPanel = ({
     };
   }, [userParsed?._id]);
 
-  if (userFetched.admin === false) {
+  if (userFetched?.owner === false) {
     history.push("/");
   }
 
-  return (
-    <div className="flex flex-wrap bg-white p-4 border-b-2 border-black">
-      <div className="w-full text-center my-2">
-        <h3 className="text-2xl ">{name}</h3>
-      </div>
+  const buttonStyles = "w-1/2 md:w-1/3 lg:w-1/5";
 
-      <div className="panel-item">
+  return (
+    <div className="flex flex-wrap w-full bg-white ">
+      <div className={buttonStyles}>
         <p className="uppercase mb-2">Abierto</p>
         <Button
           value={openNow}
@@ -64,7 +62,7 @@ const ShopPanel = ({
           shopId={_id}
         />
       </div>
-      <div className="panel-item">
+      <div className={buttonStyles}>
         <p className="uppercase mb-2">HighLight</p>
         <Button
           value={highLight}
@@ -74,7 +72,7 @@ const ShopPanel = ({
           shopId={_id}
         />
       </div>
-      <div className="panel-item">
+      <div className={buttonStyles}>
         <p className="uppercase mb-2">Envio gratis</p>
         <Button
           value={freeShipping}
@@ -84,7 +82,7 @@ const ShopPanel = ({
           shopId={_id}
         />
       </div>
-      <div className="panel-item">
+      <div className={buttonStyles}>
         <p className="uppercase mb-2">Promocion</p>
         <Button
           value={promo}
@@ -94,7 +92,7 @@ const ShopPanel = ({
           shopId={_id}
         />
       </div>
-      <div className="panel-item">
+      <div className={buttonStyles}>
         <p className="uppercase mb-2">Hot</p>
         <Button
           value={hot}

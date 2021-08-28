@@ -10,7 +10,6 @@ export const getShops = async () => {
       method: "GET",
       url: `${API}/all`,
     });
-    console.log(response.data.body);
     return response.data.body;
   } catch (error) {
     return error;
@@ -22,9 +21,11 @@ export const getShopByName = async (name) => {
       method: "GET",
       url: `${API}/name?name=${name}`,
     });
-    console.log(response.data.body);
     return response.data.body;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 };
 
 export const getShop = async (id) => {
@@ -33,15 +34,14 @@ export const getShop = async (id) => {
       method: "GET",
       url: `${API}/shop/${id}`,
     });
-    console.log("getshop", response.data.body);
-    return response.data.body;
+    return response?.data?.body;
   } catch (error) {
     console.log(error);
     return error;
   }
 };
 
-export const createShop = async (name, address, email, phone) => {
+export const createShop = async (name, address, phone, location) => {
   try {
     const response = await axios({
       method: "POST",
@@ -49,8 +49,8 @@ export const createShop = async (name, address, email, phone) => {
       data: {
         name,
         address,
-        email,
         phone,
+        location,
       },
     });
     return response.data.body;
@@ -73,14 +73,12 @@ export const deleteShop = async (id) => {
 };
 
 export const updateShop = async (id, update) => {
-  console.log("update", update);
   try {
     const response = await axios({
       method: "PUT",
       url: `${API}/update/${id}`,
       data: update,
     });
-    console.log("response from service", response);
     return response.data.body;
   } catch (error) {
     return error;
@@ -252,6 +250,21 @@ export const pushImageMenu = async (shopId, imageURL) => {
   try {
     const response = await axios({
       method: "PATCH",
+      url: `${API}/image-menu/${shopId}`,
+      data: {
+        imageURL: imageURL,
+      },
+    });
+    return response.data.body;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const removeImageMenu = async (shopId, imageURL) => {
+  try {
+    const response = await axios({
+      method: "DELETE",
       url: `${API}/image-menu/${shopId}`,
       data: {
         imageURL: imageURL,

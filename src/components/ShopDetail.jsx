@@ -3,45 +3,45 @@ import verifyIcon from "../static/verify.svg";
 import starIcon from "../static/star.svg";
 import timeIcon from "../static/time.svg";
 import dollarIcon from "../static/dollar.svg";
-import percentIcon from "../static/percent.svg";
-import hamburgerPic from "../static/ham.jpg";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getShop } from "../services/Shop";
 import useUser from "../hooks/useUser";
-import { getUser } from "../services/User";
 import { Helmet } from "react-helmet";
+import Spinner from "./Spinner";
 
 const ShopDetail = () => {
   const [enviosView, setEnviosView] = useState(true);
   const [resenasView, setResenasView] = useState(false);
   const [shop, setShop] = useState({});
-  const [userFetched, setUserFetched] = useState({});
-  const { user } = useUser();
-  const userParsed = JSON.parse(user);
+  const { isLogged } = useUser();
   const { id } = useParams();
 
-  useEffect(async () => {
-    const res = await getShop(id);
-    setShop(res);
-    const response = await getUser(userParsed?._id);
-    setUserFetched(response);
-  }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response_shop = await getShop(id);
+      setShop(response_shop);
+    };
+    fetchData();
+  }, [id]);
+
+  if (!shop) {
+    return <Spinner />;
+  }
 
   return (
     <div className="flex flex-col lg:w-full mx-auto">
-      <Helmet htmlAttributes>
+      <Helmet>
         <html lang="es" />
         <title>IsOpenAt - {`${shop?.name}`}</title>
         <meta name="description" content="Favorites" />
       </Helmet>
-      <div className="">
+      <div>
         <picture>
           <img
-            src={restaurantCover}
+            src={shop?.imageCover || restaurantCover}
             alt="shopCover"
             className="w-full object-cover lg:h-96"
-            loading="lazy"
           />
         </picture>
       </div>
@@ -82,7 +82,7 @@ const ShopDetail = () => {
           </div>
           <div className="flex">
             <picture>
-              <img src={timeIcon} alt="timeIcon" loading="lazy" />
+              <img src={timeIcon} alt="timeIcon" />
             </picture>
             <p>
               {" "}
@@ -94,7 +94,7 @@ const ShopDetail = () => {
           </div>
           <div className="flex">
             <picture>
-              <img src={dollarIcon} alt="dollarIcon" loading="lazy" />
+              <img src={dollarIcon} alt="dollarIcon" />
             </picture>
             {shop?.freeShipping ? <p>Envio gratis</p> : <p>Envio con costo</p>}
           </div>
@@ -104,13 +104,13 @@ const ShopDetail = () => {
           <p>Codigo "IsOpenAt" para un 5% off</p>
         </div>
 
-        <div className=" bg-veryHighOrange p-4 self-center text-white rounded-lg">
-          <Link to={`/shops/review/${id}`}>Hacer reseña</Link>
-        </div>
-
-        {userFetched?.admin && (
-          <div className="bg-veryHighOrange p-4 self-center text-white rounded-lg my-4">
-            <Link to={`/admin/edit-shop/${id}`}>Editar</Link>
+        {isLogged ? (
+          <div className=" bg-veryHighOrange p-4 self-center text-white rounded-lg">
+            <Link to={`/shops/review/${id}`}>Hacer reseña</Link>
+          </div>
+        ) : (
+          <div className="bg-veryHighOrange p-4 self-center text-white rounded-lg">
+            <Link to="/sign-in">Quiero hacer una reseña</Link>
           </div>
         )}
 
@@ -125,7 +125,7 @@ const ShopDetail = () => {
             }}
           >
             <p className="text-center border-b-2 border-veryHighOrange">
-              Envios
+              Productos
             </p>
           </div>
           <div
@@ -149,7 +149,10 @@ const ShopDetail = () => {
           }`}
         >
           {shop?.reviews?.map((review) => (
-            <div className="bg-white rounded-lg shadow-2xl sliderReviewItem p-4 max-h-96 overflow-y-scroll">
+            <div
+              className="bg-white rounded-lg shadow-2xl sliderReviewItem p-4 max-h-96 overflow-y-scroll"
+              key={review}
+            >
               <p>{review?.text}</p>
               <p className="my-2 italic font-bold">{review?.name}</p>
             </div>
@@ -163,7 +166,11 @@ const ShopDetail = () => {
         >
           {shop?.imagesMenu?.map((image) => (
             <div className="sliderProductItem" key={image}>
-              <img src={image} alt="imageMenu" className=" rounded-2xl" />
+              <img
+                src={image}
+                alt="imageMenu"
+                className=" w-64 h-64  rounded-2xl"
+              />
             </div>
           ))}
         </div>
