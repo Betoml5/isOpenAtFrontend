@@ -109,12 +109,11 @@ const ShopForm = () => {
   const fetchcoords = async (address) => {
     try {
       const response = await fetch(API + address + "&format=json");
-
       const coords = (await response.json()) || [];
       console.log(coords);
       setcoords({
-        lat: coords[0].lat || 0,
-        lng: coords[0].lon || 0,
+        lat: parseFloat(coords[0].lat) || 0,
+        lng: parseFloat(coords[0].lon) || 0,
       });
       console.log("coords", coords[0]);
     } catch (error) {
