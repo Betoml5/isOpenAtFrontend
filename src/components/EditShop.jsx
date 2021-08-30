@@ -181,59 +181,6 @@ const EditShop = () => {
         className="flex flex-col w-full max-w-lg bg-white p-6 md:max-w-full lg:flex-row lg:flex-wrap lg:gap-12"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="flex flex-col">
-          <label htmlFor="name">Nombre</label>
-          <input
-            type="text"
-            className="form-field"
-            placeholder="Nombre"
-            {...register("name", { required: true })}
-          />
-
-          {errors.name && (
-            <span className="field-required">Este campo es obligatorio</span>
-          )}
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="address">Direccion</label>
-
-          <input
-            type="text"
-            className="form-field"
-            placeholder="Direccion"
-            {...register("address", { required: true })}
-          />
-          {errors.address && (
-            <span className="field-required">Este campo es obligatorio</span>
-          )}
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="phone">Telefono</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            className="form-field"
-            placeholder="Numero del telefono"
-            pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
-            {...register("phone", { required: true })}
-          />
-          {errors.phone && (
-            <span className="field-required">Este campo es obligatorio</span>
-          )}
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="code">Codigo de descuento</label>
-          <input
-            type="text"
-            className="form-field"
-            placeholder="Codigo de descuento"
-            {...register("code", { required: true })}
-          />
-          {errors.code && (
-            <span className="field-required">Este campo es obligatorio</span>
-          )}
-        </div>
         <ControlPanel shops={shop} />
 
         <div className="foodSlider my-4">
@@ -296,7 +243,7 @@ const EditShop = () => {
           </button>
         </div>
 
-        <div>
+        <div className="w-full">
           <h4 className="my-4">Cambiar imagen de portada </h4>
           <div className="w-80">
             <img src={shop?.imageCover} alt="imageCover" className="w-full" />
@@ -352,6 +299,62 @@ const EditShop = () => {
             Editar horario
           </Link>
         </div> */}
+
+        <div className="w-full mt-4 lg:w-1/2">
+          <div className="flex flex-col">
+            <label htmlFor="name">Nombre</label>
+            <input
+              type="text"
+              className="form-field"
+              placeholder="Nombre"
+              {...register("name", { required: true })}
+            />
+
+            {errors.name && (
+              <span className="field-required">Este campo es obligatorio</span>
+            )}
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="address">Direccion</label>
+
+            <input
+              type="text"
+              className="form-field"
+              placeholder="Direccion"
+              {...register("address", { required: true })}
+            />
+            {errors.address && (
+              <span className="field-required">Este campo es obligatorio</span>
+            )}
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="phone">Telefono</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              className="form-field"
+              placeholder="Numero del telefono"
+              pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+              {...register("phone", { required: true })}
+            />
+            {errors.phone && (
+              <span className="field-required">Este campo es obligatorio</span>
+            )}
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="code">Codigo de descuento</label>
+            <input
+              type="text"
+              className="form-field"
+              placeholder="Codigo de descuento"
+              {...register("code", { required: true })}
+            />
+            {errors.code && (
+              <span className="field-required">Este campo es obligatorio</span>
+            )}
+          </div>
+        </div>
 
         <div className="flex flex-col lg:w-full">
           <h3 className="my-4">Selecciona ubicacion</h3>
