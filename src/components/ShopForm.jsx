@@ -37,8 +37,8 @@ const ShopForm = () => {
   const onSubmit = (data) => {
     console.log(data.image[0].name);
     const location = {
-      lat: coords.lat.toFixed(6),
-      lng: coords.lng.toFixed(6),
+      lat: parseFloat(coords.lat.toFixed(6)),
+      lng: parseFloat(coords.lng.toFixed(6)),
     };
 
     createShop(data.name, data.address, data.phone, location)
