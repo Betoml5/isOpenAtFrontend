@@ -14,7 +14,7 @@ import useUser from "../hooks/useUser";
 import { addShop } from "../services/OwnerService";
 
 const ShopForm = () => {
-  const API = `https://api.positionstack.com/v1/forward?access_key=ef449ba03412c67915b892fbbfd5bdad&query=`;
+  const API = `http://api.positionstack.com/v1/forward?access_key=ef449ba03412c67915b892fbbfd5bdad&query=`;
 
   const history = useHistory();
   const {
