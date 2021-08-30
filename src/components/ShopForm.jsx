@@ -14,7 +14,7 @@ import useUser from "../hooks/useUser";
 import { addShop } from "../services/OwnerService";
 
 const ShopForm = () => {
-  const API = `http://api.positionstack.com/v1/forward?access_key=ef449ba03412c67915b892fbbfd5bdad&query=`;
+  const API = `https://us1.locationiq.com/v1/search.php?key=pk.e572f808172c123c3abdefc1cbf2758e&q=`;
 
   const history = useHistory();
   const {
@@ -108,13 +108,15 @@ const ShopForm = () => {
   }
   const fetchcoords = async (address) => {
     try {
-      const response = await fetch(API + address);
+      const response = await fetch(API + address + "&format=json");
+
       const coords = (await response.json()) || [];
+      console.log(coords);
       setcoords({
-        lat: coords.data[0].latitude || 0,
-        lng: coords.data[0].longitude || 0,
+        lat: coords[0].lat || 0,
+        lng: coords[0].lon || 0,
       });
-      console.log("coords", coords.data[0]);
+      console.log("coords", coords[0]);
     } catch (error) {
       console.log(error);
     }
