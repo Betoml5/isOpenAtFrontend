@@ -14,12 +14,13 @@ import useUser from "../hooks/useUser";
 import { addShop } from "../services/OwnerService";
 
 const ShopForm = () => {
-  const API = `http://api.positionstack.com/v1/forward?access_key=ef449ba03412c67915b892fbbfd5bdad&query=`;
+  const BASE_API_LOCATION = process.env.REACT_APP_API_LOCATION_URL;
 
   const history = useHistory();
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -37,8 +38,8 @@ const ShopForm = () => {
   const onSubmit = (data) => {
     console.log(data.image[0].name);
     const location = {
-      lat: coords.lat.toFixed(6),
-      lng: coords.lng.toFixed(6),
+      lat: parseFloat(coords.lat.toFixed(6)),
+      lng: parseFloat(coords.lng.toFixed(6)),
     };
 
     createShop(data.name, data.address, data.phone, location)
@@ -108,13 +109,16 @@ const ShopForm = () => {
   }
   const fetchcoords = async (address) => {
     try {
-      const response = await fetch(API + address);
+      const response = await fetch(
+        BASE_API_LOCATION + address + "&format=json"
+      );
       const coords = (await response.json()) || [];
+      console.log(coords);
       setcoords({
-        lat: coords.data[0].latitude || 0,
-        lng: coords.data[0].longitude || 0,
+        lat: parseFloat(coords[0].lat) || 0,
+        lng: parseFloat(coords[0].lon) || 0,
       });
-      console.log("coords", coords.data[0]);
+      console.log("coords", coords[0]);
     } catch (error) {
       console.log(error);
     }
