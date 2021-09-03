@@ -14,12 +14,13 @@ import useUser from "../hooks/useUser";
 import { addShop } from "../services/OwnerService";
 
 const ShopForm = () => {
-  const API = `https://us1.locationiq.com/v1/search.php?key=pk.e572f808172c123c3abdefc1cbf2758e&q=`;
+  const BASE_API_LOCATION = process.env.REACT_APP_API_LOCATION_URL;
 
   const history = useHistory();
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -108,7 +109,9 @@ const ShopForm = () => {
   }
   const fetchcoords = async (address) => {
     try {
-      const response = await fetch(API + address + "&format=json");
+      const response = await fetch(
+        BASE_API_LOCATION + address + "&format=json"
+      );
       const coords = (await response.json()) || [];
       console.log(coords);
       setcoords({
