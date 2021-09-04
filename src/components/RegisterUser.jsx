@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import useUser from "../hooks/useUser";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import validator from "validator";
 
 const RegisterUser = () => {
   const { registerUser } = useUser();
@@ -10,18 +11,26 @@ const RegisterUser = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm();
 
   const form = useRef("");
   const onSubmit = ({ username, email, password }) => {
-    registerUser(username, email, password);
-    Swal.fire({
-      title: "Usuario registrado",
-      text: `Usuario '${username}' registrado`,
-      confirmButtonText: "Ya quedo!",
-    });
-    form.current.reset();
+    if (!validator.isEmail(email)) {
+      setError("email", {
+        type: "manual",
+        message: "El correo debe ser un correo valido",
+      });
+    } else {
+      registerUser(username, email, password);
+      Swal.fire({
+        title: "Usuario registrado",
+        text: `Usuario '${username}' registrado`,
+        confirmButtonText: "Ya quedo!",
+      });
+      form.current.reset();
+    }
   };
 
   return (
@@ -36,6 +45,7 @@ const RegisterUser = () => {
           placeholder="Nombre de usuario"
           name="username"
           className="form-field"
+          type="text"
           {...register("username", { required: true })}
         />
         {errors.username && (
@@ -46,17 +56,20 @@ const RegisterUser = () => {
           placeholder="Email"
           name="email"
           className="form-field"
+          type="email"
           {...register("email", { required: true })}
         />
         {errors.email && (
-          <span className="field-required">Este campo es obligatorio</span>
+          <span className="field-required">{errors?.email?.message}</span>
         )}
+
         <label htmlFor="password">Contraseña</label>
         <input
           placeholder="Contraseña"
           className="form-field"
           name="password"
           type="password"
+          required
           {...register("password", { required: true })}
         />
         {errors.password && (
