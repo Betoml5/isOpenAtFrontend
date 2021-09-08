@@ -4,7 +4,7 @@ import useUser from "../hooks/useUser";
 import { Link, useHistory } from "react-router-dom";
 
 const LoginUser = () => {
-  const { loginUser } = useUser();
+  const { loginUser, isLoginLoading } = useUser();
 
   const {
     register,
@@ -17,7 +17,7 @@ const LoginUser = () => {
   const form = useRef("");
   const onSubmit = ({ username, password }) => {
     loginUser(username, password).then(() => {
-      history.push('/')
+      history.push("/");
     });
   };
 
@@ -47,6 +47,7 @@ const LoginUser = () => {
           type="password"
           {...register("password", { required: true })}
         />
+        {isLoginLoading && <span>Validando credenciales</span>}
         {errors.password && (
           <span className="field-required">Este campo es obligatorio</span>
         )}
