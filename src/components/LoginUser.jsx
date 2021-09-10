@@ -54,7 +54,7 @@ const LoginUser = () => {
         <p className="text-center  my-6">
           ¿Aún no tienes cuenta?{" "}
           <Link to="sign-up" className="text-veryHighOrange">
-            Registrate
+            Registrarme
           </Link>
         </p>
         <input type="submit" value="Ingresar" className="btn cursor-pointer" />
