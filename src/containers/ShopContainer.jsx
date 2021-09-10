@@ -56,8 +56,12 @@ const ShopContainer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (shops?.length && filterShops?.length === 0) {
-    return <h2>Aun no hay negocios :(</h2>;
+  if (shops?.length === 0 && filterShops?.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p className="text-white text-4xl">Aún no hay negocios 😓</p>
+      </div>
+    );
   }
 
   return (

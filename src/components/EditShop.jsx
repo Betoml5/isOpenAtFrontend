@@ -252,7 +252,7 @@ const EditShop = () => {
                 <label class="self-center my-4 w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer   text-black ease-linear transition-all duration-150 lg:self-start">
                   <i class="fas fa-cloud-upload-alt fa-3x"></i>
                   <span class="mt-2 text-base leading-normal">
-                    Selecciona imagen
+                    Seleccionar imagen
                   </span>
                   <input
                     type="file"
@@ -315,7 +315,7 @@ const EditShop = () => {
             )}
           </div>
           <div className="flex flex-col">
-            <label htmlFor="address">Direccion</label>
+            <label htmlFor="address">Dirección</label>
 
             <input
               type="text"
@@ -328,7 +328,7 @@ const EditShop = () => {
             )}
           </div>
           <div className="flex flex-col">
-            <label htmlFor="phone">Telefono</label>
+            <label htmlFor="phone">Teléfono</label>
             <input
               type="tel"
               id="phone"
@@ -357,7 +357,7 @@ const EditShop = () => {
         </div>
 
         <div className="flex flex-col lg:w-full">
-          <h3 className="my-4">Selecciona ubicacion</h3>
+          <h3 className="my-4">Selecciona ubicación</h3>
           <div className="justify-center ">
             <input
               type="text"
