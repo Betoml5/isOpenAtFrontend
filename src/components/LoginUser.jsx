@@ -47,7 +47,7 @@ const LoginUser = () => {
           type="password"
           {...register("password", { required: true })}
         />
-        {isLoginLoading && <span>Validando credenciales</span>}
+        {isLoginLoading && <span>Validando credenciales...</span>}
         {errors.password && (
           <span className="field-required">Este campo es obligatorio</span>
         )}
