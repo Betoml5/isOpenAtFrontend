@@ -56,6 +56,14 @@ const ShopContainer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (shops?.length === 0 && filterShops?.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p className="text-white text-4xl">Aún no hay negocios 😓</p>
+      </div>
+    );
+  }
+
   return (
     <div className="grid mx-2 my-2 gap-2 min-h-screen md:grid-cols-2 md:gap-10 lg:grid-cols-3 lg:my-0  ">
       <Search setFilterShops={setFilterShops} filterShops={filterShops} />

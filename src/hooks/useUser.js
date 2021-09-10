@@ -22,8 +22,8 @@ export default function useUser() {
   const loginUser = useCallback(
     async (username, password) => {
       try {
-        const res = await signin(username, password);
         setState({ loading: true, error: false });
+        const res = await signin(username, password);
         setState({ loading: false, error: false });
         setJwt(res.data.token);
         setUser(JSON.stringify(res.data.body));
@@ -46,16 +46,19 @@ export default function useUser() {
     [setJwt, setUser]
   );
 
-  const registerUser = useCallback(async (username, email, password) => {
-    try {
-      setState({ loading: true, error: false });
-      await signup(username, email, password);
-      setState({ loading: false, error: false });
-      history.push("/sign-in");
-    } catch (error) {
-      console.log(error);
-    }
-  }, [history]);
+  const registerUser = useCallback(
+    async (username, email, password) => {
+      try {
+        setState({ loading: true, error: false });
+        await signup(username, email, password);
+        setState({ loading: false, error: false });
+        history.push("/sign-in");
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [history]
+  );
 
   const logout = useCallback(() => {
     window.localStorage.removeItem("jwt");

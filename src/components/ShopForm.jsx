@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { createShop, setImageCover } from "../services/Shop";
 import { useHistory } from "react-router-dom";
 import { getUser } from "../services/User";
 
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, useMap, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
@@ -31,6 +31,7 @@ const ShopForm = () => {
   const [url, setURL] = useState("");
   const [progress, setProgress] = useState(0);
   const [userFetched, setUserFetched] = useState({});
+  const [error, setError] = useState(false);
 
   const userParsed = JSON.parse(user);
 
@@ -113,12 +114,16 @@ const ShopForm = () => {
         BASE_API_LOCATION + address + "&format=json"
       );
       const coords = (await response.json()) || [];
-      console.log(coords);
-      setcoords({
-        lat: parseFloat(coords[0].lat) || 0,
-        lng: parseFloat(coords[0].lon) || 0,
-      });
-      console.log("coords", coords[0]);
+
+      if (coords.length > 0) {
+        setcoords({
+          lat: parseFloat(coords[0].lat) || 0,
+          lng: parseFloat(coords[0].lon) || 0,
+        });
+        setError(false);
+      } else {
+        setError(true);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -175,8 +180,11 @@ const ShopForm = () => {
       )}
 
       <label htmlFor="imageCover" className="my-4">
-        Imagen de portada
+        Imagen de portada{" "}
       </label>
+      {watch("image")?.length > 0 && (
+        <span className="text-highGreen font-bold">Imagen cargada</span>
+      )}
       <label className="self-center w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer  hover:text-veryHighOrange text-black ease-linear transition-all duration-150">
         <i className="fas fa-cloud-upload-alt fa-3x"></i>
         <span className="mt-2 text-base leading-normal text-center">
@@ -200,7 +208,9 @@ const ShopForm = () => {
         <span className="field-required">Este campo es obligatorio</span>
       )}
       <div className="flex flex-col lg:w-full">
-        <h3 className="my-4">Selecciona ubicacion</h3>
+        <h3 className="">Selecciona ubicacion</h3>
+        <p>(Calle #123, Colonia, Ciudad)</p>
+        {error && <span>No encontramos la ubicacion</span>}
         <div className="justify-center ">
           <input
             type="text"

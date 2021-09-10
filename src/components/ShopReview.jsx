@@ -98,7 +98,7 @@ const ShopReview = () => {
             <span className="field-required">Este campo es obligatorio</span>
           )}
           <label htmlFor="comment" className=" font-normal text-2xl my-2">
-            Cometarios
+            Comentarios
           </label>
           <textarea
             name="comment"
