@@ -30,7 +30,7 @@ const ShopDetail = () => {
   }
 
   return (
-    <div className="flex flex-col lg:w-full mx-auto">
+    <div className="flex flex-col lg:w-full mx-auto h-screen  bg-white">
       <Helmet>
         <html lang="es" />
         <title>IsOpenAt - {`${shop?.name}`}</title>
@@ -99,10 +99,10 @@ const ShopDetail = () => {
             {shop?.freeShipping ? <p>Envio gratis</p> : <p>Envio con costo</p>}
           </div>
         </div>
-
-        <div className="flex items-center self-center shadow-2xl my-6 p-4 rounded-lg">
+        {/*TODO*/}
+        {/* <div className="flex items-center self-center shadow-2xl my-6 p-4 rounded-lg">
           <p>Codigo "IsOpenAt" para un 5% off</p>
-        </div>
+        </div> */}
 
         {isLogged ? (
           <div className=" bg-veryHighOrange p-4 self-center text-white rounded-lg">

@@ -179,9 +179,12 @@ const ShopForm = () => {
         <span className="field-required">Este campo es obligatorio</span>
       )}
 
-      <label htmlFor="imageCover" className="my-4">
-        Imagen de portada{" "}
+      <label htmlFor="imageCover" className="mt-4">
+        Imagen de portada.
       </label>
+
+      <span>Preferiblemente 1500 x 1500 </span>
+
       {watch("image")?.length > 0 && (
         <span className="text-highGreen font-bold">Imagen cargada</span>
       )}
