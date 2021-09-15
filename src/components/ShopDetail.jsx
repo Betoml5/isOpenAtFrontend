@@ -30,7 +30,7 @@ const ShopDetail = () => {
   }
 
   return (
-    <div className="flex flex-col lg:w-full mx-auto h-screen  bg-white">
+    <div className="flex flex-col lg:w-full mx-auto  bg-white">
       <Helmet>
         <html lang="es" />
         <title>IsOpenAt - {`${shop?.name}`}</title>
@@ -100,9 +100,12 @@ const ShopDetail = () => {
           </div>
         </div>
         {/*TODO*/}
-        {/* <div className="flex items-center self-center shadow-2xl my-6 p-4 rounded-lg">
-          <p>Codigo "IsOpenAt" para un 5% off</p>
-        </div> */}
+        <div className="flex text-center items-center self-center shadow-2xl my-6 p-6 rounded-lg">
+          <p>
+            Codigo "IsOpenAt" para un 5% off <br />
+            <strong>Proximamente</strong>
+          </p>
+        </div>
 
         {isLogged ? (
           <div className=" bg-veryHighOrange p-4 self-center text-white rounded-lg">

@@ -141,9 +141,9 @@ const Shop = ({
         <div className="flex justify-center  items-center self-center shadow-2xl my-6 p-4 rounded-lg lg:justify-center">
           {/* <picture>
             <img src={percentIcon} alt="percentIcon" />
-          </picture> */}
+          </picture>  */}
           <p className="text-sm text-center lg:text-xs">
-            Codigo "IsOpenAt" para un 5% off
+            Codigo "IsOpenAt" para un 5% of <br /> <strong>Proximamente</strong>
           </p>
         </div>
 
